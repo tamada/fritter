@@ -1,0 +1,25 @@
+{
+  "name": "general",
+  "checkers": [
+    "indent_level","no_else",
+    "primitive_wrapping",
+    "dot_count_per_line",
+    "no_abbrev",
+    "lines_of_file",
+    "lines_of_method",
+    "classes_in_package",
+    "field_count",
+    "first_class_collections",
+    "no_accessor",
+    "variable_count"
+  ],
+  "parameters": {
+    "indent_level": 1,
+    "dot_count_per_line": 2,
+    "lines_of_file": 70,
+    "lines_of_method": 5,
+    "classes_in_package": 20,
+    "field_count": 3,
+    "variable_count": 3
+  }
+}

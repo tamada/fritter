@@ -1,0 +1,25 @@
+{
+  "name": "rough",
+  "checkers": [
+    "indent_level","no_else",
+    "primitive_wrapping",
+    "dot_count_per_line",
+    "no_abbrev",
+    "lines_of_file",
+    "lines_of_method",
+    "classes_in_package",
+    "field_count",
+    "first_class_collections",
+    "no_accessor",
+    "variable_count"
+  ],
+  "parameters": {
+    "indent_level": 2,
+    "dot_count_per_line": 3,
+    "lines_of_file": 100,
+    "lines_of_method": 10,
+    "classes_in_package": 30,
+    "field_count": 4,
+    "variable_count": 4
+  }
+}
