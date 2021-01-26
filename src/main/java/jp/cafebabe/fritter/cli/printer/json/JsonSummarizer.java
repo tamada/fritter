@@ -19,7 +19,7 @@ public class JsonSummarizer implements Summarizer {
     }
 
     private String summaryStringImpl(ResultSet rs) {
-        return String.format("{\"violated files\":%s,\"total files\":%s,\"violated count\":%s}",
+        return String.format("{\"violated-files\":%s,\"total-files\":%s,\"violated-file-count\":%s}",
                 violatedTargetCount(rs), targetCount(rs), violationCount(rs));
     }
 }

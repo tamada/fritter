@@ -1,0 +1,2 @@
+jp.cafebabe.fritter.validators.impl.noexit.NoSystemExitValidatorService
+jp.cafebabe.fritter.validators.impl.onedot.OneDotPerLineValidatorService

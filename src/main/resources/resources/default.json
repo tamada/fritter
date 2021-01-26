@@ -1,7 +1,8 @@
 {
   "name": "default",
   "checkers": [
-    "indent_level","no_else",
+    "indent_level",
+    "no_else",
     "primitive_wrapping",
     "dot_count_per_line",
     "no_abbrev",

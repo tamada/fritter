@@ -3,6 +3,7 @@ package jp.cafebabe.fritter.validators;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import jp.cafebabe.fritter.config.CheckerType;
+import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;
 
@@ -21,6 +22,11 @@ public class Validators implements Validator {
     @Override
     public CheckerType name() {
         return CheckerType.of("multiple");
+    }
+
+    @Override
+    public Parameter parameter() {
+        return Parameter.EMPTY;
     }
 
     @Override

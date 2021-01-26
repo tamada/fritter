@@ -11,7 +11,7 @@ public interface Summarizer {
     default Count violatedTargetCount(ResultSet rs) {
         return new Count(rs.stream()
                 .filter(pair -> pair.test(
-                        (left, right) -> right.isEmpty())).count());
+                        (left, right) -> !right.isEmpty())).count());
     }
 
     default Count targetCount(ResultSet rs) {

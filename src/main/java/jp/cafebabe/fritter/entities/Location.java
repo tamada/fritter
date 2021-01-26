@@ -7,15 +7,15 @@ import java.util.Arrays;
 public interface Location {
     <S> S accept(LocationVisitor<S> visitor);
 
-    static Location of(int number) {
+    static Location.LineNumber of(int number) {
         return new LineNumber(number);
     }
 
-    static Location of(int[] numbers) {
+    static Location.LineNumbers of(int[] numbers) {
         return new LineNumbers(numbers);
     }
 
-    static Location of(String name) {
+    static Location.PackageName of(String name) {
         return new PackageName(name);
     }
 

@@ -17,7 +17,7 @@ class ToJsonier implements ViolationsVisitor<String> {
     public void visitViolationImpl(StringBuilder sb, Location location, CheckerType type, Message message) {
         sb.append("{");
         appendEach(sb, location, type, message);
-        sb.append("\"}");
+        sb.append("}");
     }
 
     private void appendEach(StringBuilder sb, Location location, CheckerType type, Message message) {

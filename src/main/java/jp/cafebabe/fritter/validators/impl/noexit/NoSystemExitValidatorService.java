@@ -11,6 +11,6 @@ public class NoSystemExitValidatorService extends AbstractValidatorService {
 
     @Override
     public Validator build(Parameter param) {
-        return new NoSystemExitValidator(this);
+        return new NoSystemExitValidator(this, param);
     }
 }
