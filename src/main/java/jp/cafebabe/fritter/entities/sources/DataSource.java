@@ -19,6 +19,10 @@ public interface DataSource {
         return sourcePool().base();
     }
 
+    default Path relativePath() {
+        return base().relativize(path());
+    }
+
     default Name name() {
         return Name.of(base().relativize(path())
                 .toString());

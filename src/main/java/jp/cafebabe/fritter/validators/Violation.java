@@ -16,7 +16,7 @@ public class Violation {
         this.message = message;
     }
 
-    public void accept(ViolationsVisitor visitor) {
-        visitor.visitViolation(location, type, message);
+    public <S> S accept(ViolationsVisitor<S> visitor) {
+        return visitor.visitViolation(location, type, message);
     }
 }

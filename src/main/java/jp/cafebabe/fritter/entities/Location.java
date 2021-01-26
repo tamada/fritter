@@ -5,7 +5,7 @@ import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
 import java.util.Arrays;
 
 public interface Location {
-    void accept(LocationVisitor visitor);
+    <S> S accept(LocationVisitor<S> visitor);
 
     static Location of(int number) {
         return new LineNumber(number);
@@ -26,8 +26,9 @@ public interface Location {
             this.name = name;
         }
 
-        public void accept(LocationVisitor visitor) {
-            visitor.visitLocation(name);
+        @Override
+        public <S> S accept(LocationVisitor<S> visitor) {
+            return visitor.visitLocation(name);
         }
     }
 
@@ -38,8 +39,9 @@ public interface Location {
             this.numbers = numbers;
         }
 
-        public void accept(LocationVisitor visitor) {
-            visitor.visitLocation(Arrays.copyOf(numbers, numbers.length));
+        @Override
+        public <S> S accept(LocationVisitor<S> visitor) {
+            return visitor.visitLocation(Arrays.copyOf(numbers, numbers.length));
         }
     }
 
@@ -51,8 +53,8 @@ public interface Location {
         }
 
         @Override
-        public void accept(LocationVisitor visitor) {
-            visitor.visitLocation(number);
+        public <S> S accept(LocationVisitor<S> visitor) {
+            return visitor.visitLocation(number);
         }
     }
 }

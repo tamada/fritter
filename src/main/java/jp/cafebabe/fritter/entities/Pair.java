@@ -1,5 +1,6 @@
 package jp.cafebabe.fritter.entities;
 
+import java.util.Map;
 import java.util.function.*;
 
 public class Pair<L, R> {
@@ -38,6 +39,10 @@ public class Pair<L, R> {
 
     public void accept(BiConsumer<L, R> consumer) {
         consumer.accept(left, right);
+    }
+
+    public static final <L, R> Pair<L, R> of(Map.Entry<L, R> entry) {
+        return new Pair<>(entry.getKey(), entry.getValue());
     }
 
     public static final <L, R> Pair<L, R> of(L left, R right) {

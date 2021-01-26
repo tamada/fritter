@@ -26,6 +26,10 @@ public class Violations {
         this.source = source;
     }
 
+    public boolean isEmpty() {
+        return list.size() == 0;
+    }
+
     public DataSource source() {
         return source;
     }
