@@ -1,28 +1,16 @@
 package jp.cafebabe.fritter.cli.printer.json;
 
 import jp.cafebabe.fritter.cli.printer.AbstractPrinter;
-import jp.cafebabe.fritter.cli.printer.Joiner;
-import jp.cafebabe.fritter.cli.printer.Printer;
 import jp.cafebabe.fritter.cli.printer.Summarizer;
-import jp.cafebabe.fritter.entities.Pair;
+import jp.cafebabe.fritter.cli.printer.ValidatorsConverter;
 import jp.cafebabe.fritter.entities.ResultSet;
-import jp.cafebabe.fritter.entities.sources.DataSource;
-import jp.cafebabe.fritter.entities.sources.SourcePool;
-import jp.cafebabe.fritter.validators.Violation;
-import jp.cafebabe.fritter.validators.Violations;
+import jp.cafebabe.fritter.validators.Validators;
 
 import java.io.PrintWriter;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class JsonPrinter extends AbstractPrinter {
-    public JsonPrinter(Summarizer summarizer) {
-        super(summarizer);
-    }
-
-    @Override
-    public Stream<Pair<DataSource, Violations>> stream(ResultSet rs, SourcePool pool) {
-        return rs.stream(pool);
+    public JsonPrinter(ValidatorsConverter converter, Summarizer summarizer) {
+        super(converter, summarizer);
     }
 
     @Override
@@ -36,45 +24,17 @@ public class JsonPrinter extends AbstractPrinter {
     }
 
     @Override
-    public void printBody(PrintWriter out, ResultSet rs) {
-        out.print("\"results\":");
-        out.print(convert(rs));
+    public void printValidators(PrintWriter out, Validators validators) {
+        out.print(validatorsConveter().convert(validators));
     }
 
     @Override
-    public String convert(Violation violation) {
-        return violation.accept(new ToJsonier());
+    public void printSummary(PrintWriter out, ResultSet rs) {
+        out.print(summarizer().convert(rs));
     }
 
     @Override
-    public String convert(ResultSet rs) {
-        return rs.pools()
-                .map(pool -> convertResultSet(rs, pool))
-               .collect(Collectors.joining(",", "[", "]"));
-    }
-
-    @Override
-    public String convert(Violations violations) {
-        return violations.stream()
-                .map(violation -> convert(violation))
-                .collect(Collectors.joining(",", "[", "]"));
-    }
-
-    @Override
-    public String convert(DataSource source, Violations violations) {
-        return String.format("{\"file\":\"%s\",\"messages\":%s}",
-                source.relativePath(),
-                convert(violations));
-    }
-
-    private String convertStream(Stream<Pair<DataSource, Violations>> stream) {
-        return stream.map(pair -> convert(pair.reduce((l, r) -> l), pair.reduce((l, r) -> r)))
-                .collect(Collectors.joining(",", "[", "]"));
-    }
-
-    private String convertResultSet(ResultSet rs, SourcePool pool) {
-        return String.format("{\"base\":\"%s\",\"violations\":%s}",
-                pool.base(),
-                convertStream(stream(rs, pool)));
+    public void printResults(PrintWriter out, ResultSet rs) {
+        out.print(new ResultSetJsonier().convert(rs));
     }
 }

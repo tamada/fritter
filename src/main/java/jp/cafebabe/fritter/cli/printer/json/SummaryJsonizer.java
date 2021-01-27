@@ -1,15 +1,15 @@
 package jp.cafebabe.fritter.cli.printer.json;
 
-import jp.cafebabe.fritter.cli.printer.DelegatesResultSet;
+import jp.cafebabe.fritter.cli.options.DelegatesResultSet;
+import jp.cafebabe.fritter.cli.printer.Converter;
 import jp.cafebabe.fritter.cli.printer.Summarizer;
 import jp.cafebabe.fritter.entities.ResultSet;
 
-import java.io.PrintWriter;
-
-public class JsonSummarizer implements Summarizer {
+public class SummaryJsonizer implements Jsonier<ResultSet>, Summarizer {
     @Override
-    public String summary(ResultSet rs) {
-        return String.format(",\"summary\":%s", summaryString(rs));
+    public String convert(ResultSet rs) {
+        return String.format(",%s:%s",
+                string("summary"), summaryString(rs));
     }
 
     private String summaryString(ResultSet rs) {

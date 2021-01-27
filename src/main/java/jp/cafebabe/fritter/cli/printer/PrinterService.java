@@ -11,4 +11,6 @@ public interface PrinterService {
     Printer build(ResultOptions opts);
 
     Summarizer summarizer();
+
+    ValidatorsConverter validatorsConverter();
 }

@@ -23,7 +23,7 @@ public class Main implements Runnable {
     public void run() {
         Validators validator = args.createValidators();
         ResultSet rs = execute(validator, new ResultSet());
-        args.print(rs);
+        args.print(validator, rs);
     }
 
     private ResultSet execute(Validators validators, ResultSet rs) {

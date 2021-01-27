@@ -24,20 +24,28 @@ public class Validators implements Validator {
         return CheckerType.of("multiple");
     }
 
+    public Stream<Validator> validators() {
+        return validators.stream();
+    }
+
+    public Stream<CheckerType> names() {
+        return validators()
+                .map(validator -> validator.name());
+    }
+
     @Override
     public Parameter parameter() {
         return Parameter.EMPTY;
     }
 
     @Override
-    public Violations validate(DataSource source) throws ValidateException {
-        return validators.stream()
-                .map(validator -> validateImpl(validator, source))
-                .collect(Collectors.reducing(new Violations(source), (before, after) -> before.merge(after)));
+    public Violations validate(DataSource source) {
+        return validators().map(validator -> validateImpl(validator, source))
+                .collect(Collectors.reducing(new Violations(source),
+                        (before, after) -> before.merge(after)));
     }
 
-    private Violations validateImpl(Validator validator, DataSource source){
-        return Try.of(() -> validator.validate(source))
-                .getOrElseGet(exp -> new Violations(source, (ValidateException) exp));
+    private Violations validateImpl(Validator validator, DataSource source) {
+        return validator.validate(source);
     }
 }

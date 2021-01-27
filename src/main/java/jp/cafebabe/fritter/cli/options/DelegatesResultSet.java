@@ -1,4 +1,4 @@
-package jp.cafebabe.fritter.cli.printer;
+package jp.cafebabe.fritter.cli.options;
 
 import jp.cafebabe.fritter.entities.Pair;
 import jp.cafebabe.fritter.entities.ResultSet;

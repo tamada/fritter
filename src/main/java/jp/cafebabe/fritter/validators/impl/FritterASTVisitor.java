@@ -20,6 +20,7 @@ public class FritterASTVisitor extends ASTVisitor {
     private List<Violation> list = new ArrayList<>();
 
     public FritterASTVisitor(Validator validator) {
+        super();
         this.validator = validator;
     }
 

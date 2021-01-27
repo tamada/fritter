@@ -4,9 +4,8 @@ import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.entities.visitors.ViolationsVisitor;
-import jp.cafebabe.fritter.validators.Violation;
 
-class ToJsonier implements ViolationsVisitor<String> {
+class JsonViolationsVisitor implements ViolationsVisitor<String> {
     @Override
     public String visitViolation(Location location, CheckerType type, Message message) {
         StringBuilder sb = new StringBuilder();
@@ -27,7 +26,7 @@ class ToJsonier implements ViolationsVisitor<String> {
     }
 
     private void appendLocation(StringBuilder sb, Location location) {
-        sb.append(location.accept(new ToLocationJsonier()));
+        sb.append(location.accept(new JsonLocationVisitor()));
     }
 
     private void appendType(StringBuilder sb, CheckerType type) {

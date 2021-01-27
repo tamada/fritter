@@ -38,8 +38,7 @@ public class OneDotPerLineValidator extends AbstractValidator {
     }
 
     private Violation toViolation(Pair<Location.LineNumber, Integer> pair) {
-        return new Violation(pair.reduce((l, r) -> l),
-                CheckerType.of("dot_count_per_line"),
+        return new Violation(pair.reduce((l, r) -> l), name(),
                 Message.format(formatter, new Object[] { pair.reduce((l, r) -> r) }));
     }
 

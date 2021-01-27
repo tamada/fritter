@@ -19,7 +19,7 @@ public class Utils {
 
     public static boolean isName(SimpleName simpleName, String name) {
         return Objects.equals(name,
-                simpleName.toString());
+                simpleName.getIdentifier());
     }
 
     public static boolean isArgumentsStringArray(MethodDeclaration node) {

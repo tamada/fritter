@@ -1,2 +1,4 @@
 jp.cafebabe.fritter.validators.impl.noexit.NoSystemExitValidatorService
 jp.cafebabe.fritter.validators.impl.onedot.OneDotPerLineValidatorService
+jp.cafebabe.fritter.validators.impl.loc.LinesOfFileValidatorService
+jp.cafebabe.fritter.validators.impl.accessor.NoAccessorValidatorService

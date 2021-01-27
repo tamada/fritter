@@ -6,7 +6,7 @@ import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-class ToLocationJsonier implements LocationVisitor<String> {
+class JsonLocationVisitor implements LocationVisitor<String> {
     @Override
     public String visitLocation(int lineNumber) {
         StringBuilder sb = new StringBuilder();

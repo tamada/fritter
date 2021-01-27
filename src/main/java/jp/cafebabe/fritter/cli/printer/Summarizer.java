@@ -6,7 +6,7 @@ import jp.cafebabe.fritter.entities.ResultSet;
 import java.io.PrintWriter;
 
 public interface Summarizer {
-    String summary(ResultSet rs);
+    String convert(ResultSet rs);
 
     default Count violatedTargetCount(ResultSet rs) {
         return new Count(rs.stream()

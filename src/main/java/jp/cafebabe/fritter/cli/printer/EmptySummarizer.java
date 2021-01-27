@@ -4,9 +4,9 @@ import jp.cafebabe.fritter.entities.ResultSet;
 
 import java.io.PrintWriter;
 
-public class NullSummarizer implements Summarizer {
+public class EmptySummarizer implements Converter<ResultSet>, Summarizer {
     @Override
-    public String summary(ResultSet rs) {
+    public String convert(ResultSet rs) {
         return "";
     }
 }

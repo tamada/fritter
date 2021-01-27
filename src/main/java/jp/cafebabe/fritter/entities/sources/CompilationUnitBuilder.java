@@ -8,6 +8,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Collectors;
 
 class CompilationUnitBuilder {
     public CompilationUnit buildUnit(Path path) throws IOException {
@@ -18,8 +19,8 @@ class CompilationUnitBuilder {
 
     private char[] source(Path path) throws IOException {
         return Files.lines(path)
-                .map(line -> line.toCharArray())
-                .reduce(new char[0], (former, latter) -> merge(former, latter));
+                .collect(Collectors.joining(System.getProperty("line.separator")))
+                .toCharArray();
     }
 
     private char[] merge(char[] first, char[] seconds) {

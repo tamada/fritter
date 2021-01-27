@@ -27,8 +27,8 @@ public class Arguments {
         return parameters.stream();
     }
 
-    public void print(ResultSet rs) {
-        results.print(rs);
+    public void print(Validators validators, ResultSet rs) {
+        results.print(validators, rs);
     }
 
     public Stream<DataSource> createStream() {
