@@ -1,20 +1,22 @@
-package jp.cafebabe.fritter.validators.impl.accessor;
+package jp.cafebabe.fritter.validators;
 
 import io.vavr.control.Try;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.sources.DataSource;
-import jp.cafebabe.fritter.validators.AbstractValidator;
-import jp.cafebabe.fritter.validators.ValidateException;
-import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
+import jp.cafebabe.fritter.validators.impl.nort.NoReturnCodeInPrintfVisitor;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
-public class NoAccessorValidator extends AbstractValidator {
-    private AccessorChecker checker = new AccessorChecker();
+import java.util.function.Function;
 
-    public NoAccessorValidator(ValidatorService service, Parameter parameter) {
+public class VisitorAnalysisValidator extends AbstractValidator {
+    private Function<Validator, FritterASTVisitor> visitorFactory;
+
+    public VisitorAnalysisValidator(ValidatorService service, Parameter parameter,
+                                    Function<Validator, FritterASTVisitor> factory) {
         super(service, parameter);
+        this.visitorFactory = factory;
     }
 
     @Override
@@ -25,8 +27,9 @@ public class NoAccessorValidator extends AbstractValidator {
     }
 
     private Violations toViolations(CompilationUnit unit, DataSource source) {
-        FritterASTVisitor visitor = new NoAccessorVisitor(this);
+        FritterASTVisitor visitor = visitorFactory.apply(this);
         unit.accept(visitor);
         return new Violations(source, visitor.violations());
     }
+
 }

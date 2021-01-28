@@ -20,19 +20,16 @@ public class NoSystemExitVisitor extends FritterASTVisitor {
 
     @Override
     public boolean visit(MethodDeclaration node) {
-        int modifiers = node.getModifiers();
-        System.err.printf("visit(%s) main: %s%n", node.getName(), isMainMethod(node));
         return !isMainMethod(node);
     }
 
     public boolean visit(MethodInvocation node) {
         if (isSystemExitCall(node))
-            add(new Violation(location(node), name(), MESSAGE));
+            add(node, MESSAGE);
         return true;
     }
 
     private boolean isSystemExitCall(MethodInvocation node) {
-        System.err.printf("isSystemExitCall(%s) %s%n", node.getName(), node.getExpression());
         return Utils.isName(node.getName(), "exit") &&
                 isSystem(node.getExpression());
     }

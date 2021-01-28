@@ -29,7 +29,7 @@ public class LevelParserTest {
             Assertions.assertTrue(level.available(CheckerType.of("primitive_wrapping")));
             Assertions.assertTrue(level.available(CheckerType.of("dot_count_per_line")));
             Assertions.assertTrue(level.available(CheckerType.of("no_abbrev")));
-            Assertions.assertTrue(level.available(CheckerType.of("lines_of_file")));
+            Assertions.assertTrue(level.available(CheckerType.of("lines_of_class")));
             Assertions.assertTrue(level.available(CheckerType.of("lines_of_method")));
             Assertions.assertTrue(level.available(CheckerType.of("classes_in_package")));
             Assertions.assertTrue(level.available(CheckerType.of("field_count")));

@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class ValidatorsBuilder {
     private static final String[] AVAILABLE_VALIDATORS = new String[] {
             "indent_level","no_else", "primitive_wrapping", "dot_count_per_line",
-            "no_abbrev", "lines_of_file", "lines_of_method", "classes_in_package",
+            "no_abbrev", "lines_of_class", "lines_of_method", "classes_in_package",
             "field_count", "first_class_collections", "no_accessor", "variable_count",
             "no_static_method", "no_new_array", "no_system_exit", "no_return_code_in_printf"
     };

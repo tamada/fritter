@@ -1,6 +1,6 @@
 public class HelloWorld {
   public void printHello() {
-    System.out.println(getMessage());
+    System.out.printf("%s\n", getMessage());
     System.exit(0); // this call is NG in no_system_exit validator.
   }
 

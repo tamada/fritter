@@ -26,8 +26,12 @@ public class Violations {
         this.source = source;
     }
 
-    public boolean isEmpty() {
-        return list.size() == 0;
+    public boolean hasExceptions() {
+        return exceptions().count() > 0;
+    }
+
+    public boolean hasViolations() {
+        return stream().count() > 0;
     }
 
     public DataSource source() {

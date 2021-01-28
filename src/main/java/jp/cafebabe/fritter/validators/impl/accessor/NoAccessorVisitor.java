@@ -28,17 +28,16 @@ public class NoAccessorVisitor extends FritterASTVisitor {
 
     private void checkViolation(MethodDeclaration node) {
         if(checker.isPublicMethod(node))
-            checkViolation(getMethodName(node), location(node));
+            checkViolation(node, getMethodName(node));
     }
 
-    private void checkViolation(String methodName, Location lineNumbers){
-         checkViolation("get[A-Z][a-zA-Z]*$", "%s: no getter method", methodName, lineNumbers);
-         checkViolation("set[A-Z][a-zA-Z]*$", "%s: no setter method", methodName, lineNumbers);
+    private void checkViolation(MethodDeclaration method, String methodName) {
+         checkViolation("get[A-Z][a-zA-Z]*$", "%s: no getter method", methodName, method);
+         checkViolation("set[A-Z][a-zA-Z]*$", "%s: no setter method", methodName, method);
      }
 
-    private void checkViolation(String pattern, String formatter, String methodName, Location lineNumbers) {
+    private void checkViolation(String pattern, String formatter, String methodName, MethodDeclaration method) {
         if (methodName.matches(pattern))
-            add(new Violation(lineNumbers, name(),
-                    Message.format(formatter, methodName)));
+            add(method, Message.format(formatter, methodName));
     }
 }

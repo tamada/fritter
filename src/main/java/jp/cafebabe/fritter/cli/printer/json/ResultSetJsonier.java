@@ -32,6 +32,6 @@ public class ResultSetJsonier implements Jsonier<ResultSet> {
 
     private String exceptions(Stream<Pair<DataSource, Violations>> stream) {
         return toJsonArray(stream
-        .map(pair -> jsonier.convert(pair)));
+                .map(pair -> jsonier.convert(pair)));
     }
 }

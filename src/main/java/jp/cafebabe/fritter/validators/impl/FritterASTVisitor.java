@@ -1,10 +1,14 @@
 package jp.cafebabe.fritter.validators.impl;
 
 import jp.cafebabe.fritter.config.CheckerType;
+import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.Location;
+import jp.cafebabe.fritter.entities.Message;
+import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;
+import jp.cafebabe.fritter.validators.Violations;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -20,7 +24,6 @@ public class FritterASTVisitor extends ASTVisitor {
     private List<Violation> list = new ArrayList<>();
 
     public FritterASTVisitor(Validator validator) {
-        super();
         this.validator = validator;
     }
 
@@ -30,7 +33,19 @@ public class FritterASTVisitor extends ASTVisitor {
         return super.visit(unit);
     }
 
-    protected void add(Violation violation) {
+    public Parameter parameter() {
+        return validator.parameter();
+    }
+
+    protected void add(ASTNode node, Message message) {
+        this.add(new Violation(location(node), validator.name(), message));
+    }
+
+    protected void add(Location location, Message message) {
+        this.add(new Violation(location, validator.name(), message));
+    }
+
+    private void add(Violation violation) {
         list.add(violation);
     }
 
@@ -42,11 +57,11 @@ public class FritterASTVisitor extends ASTVisitor {
         return calculator.lineCount(node);
     }
 
-    public CheckerType name() {
-        return validator.name();
-    }
-
     public Stream<Violation> violations() {
         return list.stream();
+    }
+
+    public Violations createViolations(DataSource source) {
+        return new Violations(source, violations());
     }
 }

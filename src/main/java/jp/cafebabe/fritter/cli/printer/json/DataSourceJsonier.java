@@ -17,22 +17,22 @@ public class DataSourceJsonier implements Jsonier<Pair<DataSource, Violations>> 
     }
 
     public String convert(DataSource source, Violations violations) {
-        return String.format("{%s:%s,%s:%s}",
+        return String.format("{%s:%s,%s:%s%s}",
                 string("file"), string(source.relativePath()),
-                string("message"), jsonier.convert(violations));
+                string("message"), jsonier.convert(violations),
+                exceptionsIfExists(violations));
     }
 
     private String exceptionsIfExists(Violations violations) {
-        String exceptionMessages = exceptionMessages(violations);
-        return ifNotEmpty(exceptionMessages)
+        return ifHasExceptions(violations)
                 .map(message -> String.format(",%s:%s", string("exceptions"), message))
                 .orElseGet(() -> "");
     }
 
-    private Optional<String> ifNotEmpty(String message) {
-        if(message.isEmpty())
-            return Optional.empty();
-        return Optional.of(message);
+    private Optional<String> ifHasExceptions(Violations violations) {
+        if(violations.hasExceptions())
+            return Optional.of(exceptionMessages(violations));
+        return Optional.empty();
     }
 
     private String exceptionMessages(Violations violations) {

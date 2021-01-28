@@ -36,7 +36,7 @@ public class ResultOptions {
         if(showNoViolatedFiles)
             return (pair) -> true;
         return (pair) -> pair.test(
-                (ds, violations) -> !violations.isEmpty());
+                (ds, violations) -> violations.hasViolations());
     }
 
     public Printer buildPrinter() {
