@@ -1,6 +1,7 @@
-jp.cafebabe.fritter.validators.impl.noexit.NoSystemExitValidatorService
+jp.cafebabe.fritter.validators.impl.nostatic.NoStaticMethodValidatorService
 jp.cafebabe.fritter.validators.impl.onedot.OneDotPerLineValidatorService
 jp.cafebabe.fritter.validators.impl.loc.LinesOfClassValidatorService
 jp.cafebabe.fritter.validators.impl.loc.LinesOfMethodValidatorService
 jp.cafebabe.fritter.validators.impl.accessor.NoAccessorValidatorService
 jp.cafebabe.fritter.validators.impl.nort.NoReturnCodeInPrintfValidatorService
+jp.cafebabe.fritter.validators.impl.nostatic.NoStaticMethodValidatorService

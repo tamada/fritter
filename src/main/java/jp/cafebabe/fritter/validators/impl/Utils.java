@@ -18,6 +18,11 @@ public class Utils {
                 && ((PrimitiveType)type).getPrimitiveTypeCode() == PrimitiveType.VOID;
     }
 
+    public static boolean isMainMethod(MethodDeclaration node){
+        return isReturnVoid(node) && isStatic(node)
+                && isName(node.getName(), "main") && isArgumentsStringArray(node);
+    }
+
     public static boolean isName(SimpleName simpleName, String name) {
         return Objects.equals(name,
                 simpleName.getIdentifier());

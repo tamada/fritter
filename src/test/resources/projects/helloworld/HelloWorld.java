@@ -1,4 +1,8 @@
 public class HelloWorld {
+  public static void violatedMethod() { // no_static_method
+    // do nothing.
+  }
+
   public void printHello() {
     System.out.printf("%s\n", getMessage());
     System.exit(0); // this call is NG in no_system_exit validator.

@@ -37,6 +37,10 @@ public class FritterASTVisitor extends ASTVisitor {
         return validator.parameter();
     }
 
+    protected void clearViolations() {
+        list.clear();
+    }
+
     protected void add(ASTNode node, Message message) {
         this.add(new Violation(location(node), validator.name(), message));
     }

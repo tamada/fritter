@@ -20,7 +20,7 @@ public class NoSystemExitVisitor extends FritterASTVisitor {
 
     @Override
     public boolean visit(MethodDeclaration node) {
-        return !isMainMethod(node);
+        return !Utils.isMainMethod(node);
     }
 
     public boolean visit(MethodInvocation node) {
@@ -36,10 +36,5 @@ public class NoSystemExitVisitor extends FritterASTVisitor {
 
     private boolean isSystem(Expression expression) {
         return Objects.equals(expression.toString(), "System");
-    }
-
-    private boolean isMainMethod(MethodDeclaration node){
-        return Utils.isReturnVoid(node) && Utils.isStatic(node)
-                && Utils.isName(node.getName(), "main") && Utils.isArgumentsStringArray(node);
     }
 }

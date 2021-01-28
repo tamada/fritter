@@ -29,7 +29,7 @@ By the way, this tool is programed to obey above rules.
 ### Introduced rules.
 
 10. Do not use any methods with more than 2 local variables (`variable_count`),
-11. Do not use `static` method except `main` method (`no_static_method`),
+11. Do not use `static` method except `main` method (`no_static_method`), `DONE`
 12. Do not create an array (`no_new_array`),
 13. Do not use `System.exit` (`no_system_exit`) except `main` method, and `DONE`
 14. Do not use `\n` in the `printf` formatter (`no_return_code_in_printf`).　`DONE` 
