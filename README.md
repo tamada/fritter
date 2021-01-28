@@ -10,7 +10,7 @@ Chapter 6 in the book introduces object calisthenics for better software design.
 The rules shown in the book are as follows.
 
 1. Use 1 level of indentation per method (`indent_level`), `DONE` 
-2. Do not use the `else` keyword (`no_else`),
+2. Do not use the `else` keyword (`no_else`), `DONE`
 3. Wrap all primitives and strings (`primitive_wrapping`),
 4. Use only 1 dot per line (`one_dot_per_line`), `DONE`
 5. Do not abbreviate (`no_abbrev`),

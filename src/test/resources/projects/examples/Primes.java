@@ -47,7 +47,8 @@ public class Primes {
     private int parseLimit(String[] args) {
         if(args.length == 0)
             return 100;
-        return Integer.valueOf(args[0]);
+        else
+            return Integer.valueOf(args[0]);
     }
 
     public static void main(String[] args) {

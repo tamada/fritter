@@ -10,3 +10,4 @@ jp.cafebabe.fritter.validators.impl.variables.VariableCountValidatorService
 jp.cafebabe.fritter.validators.impl.fields.FieldCountValidatorService
 jp.cafebabe.fritter.validators.impl.variables.SingleCharacterNameValidator
 jp.cafebabe.fritter.validators.impl.nest.NestLevelValidatorService
+jp.cafebabe.fritter.validators.impl.elsestatement.NoElseValidatorService
