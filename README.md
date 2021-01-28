@@ -5,11 +5,11 @@ This product extends [tamada/9rules](https://github.com/tamada/9rules).
 
 ## Description
 
-A book titled '[The ThoughtWorks Anthology: Essays on Software Technology and Innovation](https://pragprog.com/book/twa/thoughtworks-anthology)' are published.
+The book titled '[The ThoughtWorks Anthology: Essays on Software Technology and Innovation](https://pragprog.com/book/twa/thoughtworks-anthology)' are published.
 Chapter 6 in the book introduces object calisthenics for better software design.
 The rules shown in the book are as follows.
 
-1. Use 1 level of indentation per method (`indent_level`),
+1. Use 1 level of indentation per method (`indent_level`), `DONE` 
 2. Do not use the `else` keyword (`no_else`),
 3. Wrap all primitives and strings (`primitive_wrapping`),
 4. Use only 1 dot per line (`one_dot_per_line`), `DONE`
