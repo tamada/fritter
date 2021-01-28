@@ -11,7 +11,7 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 
 import java.util.Objects;
 
-public class NoSystemExitVisitor extends FritterASTVisitor {
+class NoSystemExitVisitor extends FritterASTVisitor {
     private static final Message MESSAGE = Message.format("no System.exit except main method");
 
     public NoSystemExitVisitor(Validator validator) {

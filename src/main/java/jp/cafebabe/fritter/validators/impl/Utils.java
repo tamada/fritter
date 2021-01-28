@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class Utils {
-    public static boolean isStatic(MethodDeclaration node) {
+    public static boolean isStatic(BodyDeclaration node) {
         int modifier = node.getModifiers();
         return Modifier.isStatic(modifier);
     }

@@ -7,6 +7,10 @@ public class Value implements Comparable<Value> {
         this.value = value;
     }
 
+    public static Value of(long value) {
+        return new Value(value);
+    }
+
     public boolean greaterThan(Value other) {
         return compareTo(other) == 1;
     }

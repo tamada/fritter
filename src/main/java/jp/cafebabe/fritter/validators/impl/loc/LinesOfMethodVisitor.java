@@ -1,11 +1,9 @@
 package jp.cafebabe.fritter.validators.impl.loc;
 
-import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
-import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import org.eclipse.jdt.core.dom.*;
+import org.eclipse.jdt.core.dom.MethodDeclaration;
 
-public class LinesOfMethodVisitor extends LinesOfCodeVisitor {
+class LinesOfMethodVisitor extends LinesOfCodeVisitor {
     public LinesOfMethodVisitor(Validator validator) {
         super(validator);
     }

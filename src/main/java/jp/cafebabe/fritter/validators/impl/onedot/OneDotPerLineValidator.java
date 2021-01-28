@@ -58,7 +58,7 @@ public class OneDotPerLineValidator extends AbstractValidator {
     }
 
     private int countDot(String line) {
-        Pattern pattern = Pattern.compile("\\.");
+        Pattern pattern = Pattern.compile("*\\.[^0-9]]");
         return countDotImpl(pattern.matcher(line));
     }
 

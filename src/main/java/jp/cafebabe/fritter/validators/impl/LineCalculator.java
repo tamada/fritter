@@ -11,7 +11,8 @@ public class LineCalculator {
     }
 
     public int lineNumber(ASTNode node) {
-        return unit.getLineNumber(node.getStartPosition());
+        return unit.getLineNumber(
+                node.getStartPosition());
     }
 
     public int lineCount(ASTNode node) {

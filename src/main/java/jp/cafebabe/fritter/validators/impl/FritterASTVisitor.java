@@ -57,15 +57,17 @@ public class FritterASTVisitor extends ASTVisitor {
         return Location.of(calculator.lineNumber(node));
     }
 
+    public Location locations(Stream<? extends ASTNode> nodes) {
+        int[] lines = nodes.mapToInt(calculator::lineNumber)
+                .toArray();
+        return Location.of(lines);
+    }
+
     public int lineCount(ASTNode node) {
         return calculator.lineCount(node);
     }
 
     public Stream<Violation> violations() {
         return list.stream();
-    }
-
-    public Violations createViolations(DataSource source) {
-        return new Violations(source, violations());
     }
 }

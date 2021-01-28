@@ -16,7 +16,8 @@
     "no_static_method",
     "no_new_array",
     "no_system_exit",
-    "no_return_code_in_printf"
+    "no_return_code_in_printf",
+    "single_character_name"
   ],
   "parameters": {
     "indent_level": 1,

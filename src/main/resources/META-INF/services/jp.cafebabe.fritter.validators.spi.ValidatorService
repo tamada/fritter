@@ -5,3 +5,7 @@ jp.cafebabe.fritter.validators.impl.loc.LinesOfMethodValidatorService
 jp.cafebabe.fritter.validators.impl.accessor.NoAccessorValidatorService
 jp.cafebabe.fritter.validators.impl.nort.NoReturnCodeInPrintfValidatorService
 jp.cafebabe.fritter.validators.impl.nostatic.NoStaticMethodValidatorService
+jp.cafebabe.fritter.validators.impl.nonewarray.NoNewArrayValidatorService
+jp.cafebabe.fritter.validators.impl.variables.VariableCountValidatorService
+jp.cafebabe.fritter.validators.impl.fields.FieldCountValidatorService
+jp.cafebabe.fritter.validators.impl.variables.SingleCharacterNameValidator

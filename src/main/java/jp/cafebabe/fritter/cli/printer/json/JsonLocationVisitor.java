@@ -22,7 +22,7 @@ class JsonLocationVisitor implements LocationVisitor<String> {
     }
 
     private void visitLocationImpl(int[] lineNumbers, StringBuilder sb){
-        sb.append("\"line\":").append(Arrays.stream(lineNumbers)
+        sb.append("\"lines\":").append(Arrays.stream(lineNumbers)
                 .mapToObj(Integer::toString)
                 .collect(Collectors.joining(",", "[", "]")));
     }

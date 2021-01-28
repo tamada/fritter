@@ -9,7 +9,7 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.StringLiteral;
 
-public class NoReturnCodeInPrintfVisitor extends FritterASTVisitor {
+class NoReturnCodeInPrintfVisitor extends FritterASTVisitor {
     private static enum State {
         InPrintf,
         Other

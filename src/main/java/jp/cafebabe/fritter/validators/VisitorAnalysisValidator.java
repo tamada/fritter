@@ -4,7 +4,6 @@ import io.vavr.control.Try;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import jp.cafebabe.fritter.validators.impl.nort.NoReturnCodeInPrintfVisitor;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
