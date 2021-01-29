@@ -1,1 +1,2 @@
 jp.cafebabe.fritter.cli.printer.json.JsonPrinterService
+jp.cafebabe.fritter.cli.printer.markdown.MarkdownPrinterService

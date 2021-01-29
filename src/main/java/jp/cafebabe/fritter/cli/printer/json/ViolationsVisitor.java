@@ -36,7 +36,7 @@ class ViolationsVisitor implements jp.cafebabe.fritter.entities.visitors.Violati
 
     @Override
     public String visitEnd() {
-        return String.format("{\"base\":%s,\"violations\":%s%s}", string(source),
+        return String.format("{\"file\":%s,\"messages\":%s%s}", string(source),
                 toJsonArray(violations.stream()),
                 exceptionsString());
     }
