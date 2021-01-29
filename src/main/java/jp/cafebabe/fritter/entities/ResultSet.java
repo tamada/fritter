@@ -3,6 +3,7 @@ package jp.cafebabe.fritter.entities;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.entities.sources.SourcePool;
 import jp.cafebabe.fritter.validators.Violations;
+import jp.cafebabe.fritter.validators.ViolationsMerger;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -42,9 +43,9 @@ public class ResultSet {
         map.put(pool, value);
     }
 
-    private void updateValue(Violations violations, DataSource source, Map<DataSource, Violations> value) {
-        Violations violationsInMap = value.getOrDefault(source, new Violations(source));
-        violationsInMap.merge(violations);
-        value.put(source, violationsInMap);
+    private void updateValue(Violations v1, DataSource source, Map<DataSource, Violations> value) {
+        Violations v2 = value.getOrDefault(source, new Violations(source));
+        value.put(source,
+                new ViolationsMerger().merge(v1, v2));
     }
 }

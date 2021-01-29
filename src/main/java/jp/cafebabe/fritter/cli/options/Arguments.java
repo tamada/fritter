@@ -5,7 +5,6 @@ import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.entities.sources.SourcePool;
 import jp.cafebabe.fritter.entities.sources.SourcePoolFactory;
 import jp.cafebabe.fritter.validators.Validators;
-import jp.cafebabe.fritter.validators.ValidatorsBuilder;
 import picocli.CommandLine.Mixin;
 import picocli.CommandLine.Parameters;
 

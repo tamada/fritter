@@ -1,14 +1,12 @@
 package jp.cafebabe.fritter.validators;
 
-import io.vavr.control.Either;
-import io.vavr.control.Try;
 import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.sources.DataSource;
-import jp.cafebabe.fritter.validators.spi.ValidatorService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,8 +39,13 @@ public class Validators implements Validator {
     @Override
     public Violations validate(DataSource source) {
         return validators().map(validator -> validateImpl(validator, source))
-                .collect(Collectors.reducing(new Violations(source),
-                        (before, after) -> before.merge(after)));
+                .collect(merger(source));
+    }
+
+    private Collector<Violations, ?, Violations> merger(DataSource source) {
+        ViolationsMerger merger = new ViolationsMerger();
+        return Collectors.reducing(new Violations(source),
+                (before, after) -> merger.merge(before, after));
     }
 
     private Violations validateImpl(Validator validator, DataSource source) {

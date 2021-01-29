@@ -2,6 +2,7 @@ package jp.cafebabe.fritter.entities;
 
 import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 
 public interface Location {
@@ -17,6 +18,11 @@ public interface Location {
 
     static Location.PackageName of(String name) {
         return new PackageName(name);
+    }
+
+    static Location.PackageName of(Path path) {
+        return new PackageName(path.toString()
+                .replaceAll("/", "."));
     }
 
     public static class PackageName implements Location {

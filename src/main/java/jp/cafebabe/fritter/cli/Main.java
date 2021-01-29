@@ -10,8 +10,6 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Mixin;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Command(name="fritter", versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,

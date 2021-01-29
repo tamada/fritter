@@ -3,8 +3,6 @@ package jp.cafebabe.fritter.cli.printer;
 import jp.cafebabe.fritter.entities.Count;
 import jp.cafebabe.fritter.entities.ResultSet;
 
-import java.io.PrintWriter;
-
 public interface Summarizer {
     String convert(ResultSet rs);
 
@@ -21,7 +19,8 @@ public interface Summarizer {
     default Count violationCount(ResultSet rs) {
         return new Count(rs.stream()
                 .map(pair -> pair.reduce((left, right) -> right))
-                .mapToLong(violations -> violations.stream().count())
+                .mapToLong(violations -> violations.accept(new ViolationCounter()))
                 .sum());
     }
+
 }

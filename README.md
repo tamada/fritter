@@ -11,7 +11,7 @@ The rules shown in the book are as follows.
 
 1. Use 1 level of indentation per method (`indent_level`), `DONE` 
 2. Do not use the `else` keyword (`no_else`), `DONE`
-3. Wrap all primitives and strings (`primitive_wrapping`),
+3. Wrap all primitives and strings (`primitive_wrapping`), `DONE`
 4. Use only 1 dot per line (`one_dot_per_line`), `DONE`
 5. Do not abbreviate (`no_abbrev`),
 6. Keep all entities small,
@@ -19,7 +19,7 @@ The rules shown in the book are as follows.
     * 3 lines in a method (`lines_of_method`), and `DONE`
     * 10 classses in a package (`classes_in_package`).
 7. Do not use any classes with more than 2 instance variables (`field_count`), `DONE`
-8. Use first-class collections (`first_class_collection`), and
+8. Use first-class collections (`first_class_collection`), and `DONE`
 9. Do not use any getters/setters/properties (`no_accessor`) `DONE`
 
 Unfortunately, to confirm obeying the rules is by a human eye.

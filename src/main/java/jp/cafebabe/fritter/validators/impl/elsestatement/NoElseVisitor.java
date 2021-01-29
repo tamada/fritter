@@ -13,6 +13,7 @@ import java.util.Optional;
 
 class NoElseVisitor extends FritterASTVisitor {
     private static final Message MESSAGE = Message.format("no else statement");
+
     public NoElseVisitor(Validator validator) {
         super(validator);
     }

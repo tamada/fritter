@@ -1,4 +1,4 @@
-package jp.cafebabe.fritter.validators.impl.loc;
+package jp.cafebabe.fritter.validators.impl.smallentities;
 
 import jp.cafebabe.fritter.entities.Value;
 

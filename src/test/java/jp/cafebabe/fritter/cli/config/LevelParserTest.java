@@ -34,7 +34,7 @@ public class LevelParserTest {
             Assertions.assertTrue(level.available(CheckerType.of("classes_in_package")));
             Assertions.assertTrue(level.available(CheckerType.of("field_count")));
             Assertions.assertTrue(level.available(CheckerType.of("variable_count")));
-            Assertions.assertTrue(level.available(CheckerType.of("first_class_collections")));
+            Assertions.assertTrue(level.available(CheckerType.of("first_class_collection")));
             Assertions.assertTrue(level.available(CheckerType.of("no_accessor")));
             Assertions.assertTrue(level.available(CheckerType.of("no_static_method")));
             Assertions.assertTrue(level.available(CheckerType.of("no_system_exit")));

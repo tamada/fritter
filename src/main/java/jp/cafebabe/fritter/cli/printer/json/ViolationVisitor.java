@@ -3,9 +3,8 @@ package jp.cafebabe.fritter.cli.printer.json;
 import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Message;
-import jp.cafebabe.fritter.entities.visitors.ViolationVisitor;
 
-class JsonViolationVisitor implements ViolationVisitor<String> {
+class ViolationVisitor implements jp.cafebabe.fritter.entities.visitors.ViolationVisitor<String> {
     @Override
     public String visitViolation(Location location, CheckerType type, Message message) {
         StringBuilder sb = new StringBuilder();
@@ -26,7 +25,7 @@ class JsonViolationVisitor implements ViolationVisitor<String> {
     }
 
     private void appendLocation(StringBuilder sb, Location location) {
-        sb.append(location.accept(new JsonLocationVisitor()));
+        sb.append(location.accept(new LocationVisitor()));
     }
 
     private void appendType(StringBuilder sb, CheckerType type) {

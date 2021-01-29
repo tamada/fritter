@@ -8,7 +8,6 @@ import jp.cafebabe.fritter.cli.printer.ValidatorsConverter;
 import jp.cafebabe.fritter.config.Format;
 
 public class JsonPrinterService implements PrinterService {
-
     @Override
     public Format format() {
         return Format.Json;

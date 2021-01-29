@@ -1,12 +1,9 @@
 package jp.cafebabe.fritter.cli.printer.json;
 
-import jp.cafebabe.fritter.entities.Location;
-import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-class JsonLocationVisitor implements LocationVisitor<String> {
+class LocationVisitor implements jp.cafebabe.fritter.entities.visitors.LocationVisitor<String> {
     @Override
     public String visitLocation(int lineNumber) {
         StringBuilder sb = new StringBuilder();
