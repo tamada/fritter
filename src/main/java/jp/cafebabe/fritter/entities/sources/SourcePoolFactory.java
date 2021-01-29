@@ -1,7 +1,6 @@
 package jp.cafebabe.fritter.entities.sources;
 
 import jp.cafebabe.fritter.utils.PathHelper;
-import org.eclipse.core.internal.runtime.DevClassPathHelper;
 
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;

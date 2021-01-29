@@ -1,8 +1,5 @@
-package jp.cafebabe.fritter.cli.config;
+package jp.cafebabe.fritter.config;
 
-import jp.cafebabe.fritter.config.CheckerType;
-import jp.cafebabe.fritter.config.Level;
-import jp.cafebabe.fritter.config.LevelParser;
 import jp.cafebabe.fritter.entities.Name;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
