@@ -1,21 +1,25 @@
 package jp.cafebabe.fritter.validators.impl.accessor;
 
-import java.util.stream.Stream;
+import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.body.MethodDeclaration;
 
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.Modifier;
+import java.util.stream.Stream;
 
 class AccessorChecker {
     public boolean isPublicMethod(MethodDeclaration node){
         return stream(node)
-                .filter(modifier -> ((Modifier)modifier).isPublic())
+                .filter(modifier -> modifier == Modifier.publicModifier())
                 .count() == 1;
     }
 
-    @SuppressWarnings("unchecked")
-    private Stream<Object> stream(MethodDeclaration node){
-        return node.modifiers()
-                .stream()
-                .filter(modifier -> modifier instanceof Modifier);
+    private Stream<Modifier> stream(MethodDeclaration node) {
+        return node.getModifiers()
+                .stream();
+    }
+
+    public boolean isTarget(MethodDeclaration node, String pattern) {
+        String name = node.getNameAsString();
+        return isPublicMethod(node)
+                && name.matches(pattern);
     }
 }

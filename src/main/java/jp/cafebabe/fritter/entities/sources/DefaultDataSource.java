@@ -1,9 +1,9 @@
 package jp.cafebabe.fritter.entities.sources;
 
+import com.github.javaparser.ast.CompilationUnit;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Pair;
 import com.google.common.collect.Streams;
-import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import java.io.IOException;
 import java.nio.file.Files;

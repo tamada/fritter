@@ -1,73 +1,43 @@
 package jp.cafebabe.fritter.validators.impl;
 
-import jp.cafebabe.fritter.config.CheckerType;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Message;
-import jp.cafebabe.fritter.entities.sources.DataSource;
-import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
-import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.MethodInvocation;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
-public class FritterASTVisitor extends ASTVisitor {
+public class FritterASTVisitor extends VoidVisitorAdapter<Violations> {
     private Validator validator;
-    private LineCalculator calculator;
-    private List<Violation> list = new ArrayList<>();
 
     public FritterASTVisitor(Validator validator) {
         this.validator = validator;
-    }
-
-    @Override
-    public boolean visit(CompilationUnit unit) {
-        calculator = new LineCalculator(unit);
-        return super.visit(unit);
     }
 
     public Parameter parameter() {
         return validator.parameter();
     }
 
-    protected void clearViolations() {
-        list.clear();
+    protected Violation createViolation(Node node, Message message) {
+        return new Violation(location(node), validator.name(), message);
     }
 
-    protected void add(ASTNode node, Message message) {
-        this.add(new Violation(location(node), validator.name(), message));
+    protected Violation createViolation(Location location, Message message) {
+        return new Violation(location, validator.name(), message);
     }
 
-    protected void add(Location location, Message message) {
-        this.add(new Violation(location, validator.name(), message));
+    public Location location(Node node) {
+        return Location.of(
+                LineCalculator.lineNumber(node));
     }
 
-    private void add(Violation violation) {
-        list.add(violation);
-    }
-
-    public Location location(ASTNode node) {
-        return Location.of(calculator.lineNumber(node));
-    }
-
-    public Location locations(Stream<? extends ASTNode> nodes) {
-        int[] lines = nodes.mapToInt(calculator::lineNumber)
+    public Location locations(Stream<? extends Node> nodes) {
+        int[] lines = nodes.mapToInt(LineCalculator::lineNumber)
                 .toArray();
         return Location.of(lines);
-    }
-
-    public int lineCount(ASTNode node) {
-        return calculator.lineCount(node);
-    }
-
-    public Stream<Violation> violations() {
-        return list.stream();
     }
 }

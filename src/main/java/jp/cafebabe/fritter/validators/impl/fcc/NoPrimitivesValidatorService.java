@@ -1,4 +1,4 @@
-package jp.cafebabe.fritter.validators.impl.primitives;
+package jp.cafebabe.fritter.validators.impl.fcc;
 
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.validators.Validator;

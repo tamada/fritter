@@ -1,13 +1,12 @@
 package jp.cafebabe.fritter.validators.impl.nort;
 
+import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.StringLiteralExpr;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 import jp.cafebabe.fritter.validators.impl.Utils;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.MethodInvocation;
-import org.eclipse.jdt.core.dom.SimpleName;
-import org.eclipse.jdt.core.dom.StringLiteral;
 
 class NoReturnCodeInPrintfVisitor extends FritterASTVisitor {
     private static enum State {
@@ -21,35 +20,25 @@ class NoReturnCodeInPrintfVisitor extends FritterASTVisitor {
     }
 
     @Override
-    public boolean visit(MethodInvocation node) {
+    public void visit(MethodCallExpr node, Violations violations) {
         if(isPrintfCall(node))
             state = State.InPrintf;
-        return super.visit(node);
-    }
-
-    @Override
-    public void endVisit(MethodInvocation node) {
+        super.visit(node, violations);
         state = State.Other;
     }
 
     @Override
-    public boolean visit(StringLiteral literal) {
-        if(state == State.InPrintf)
-            checkViolation(literal, literal.getEscapedValue());
-        return super.visit(literal);
+    public void visit(StringLiteralExpr literal, Violations violations) {
+        if(state == State.InPrintf && isViolate(literal.getValue()))
+            violations.add(createViolation(literal, Message.format("no \'\\n\', use \'%%n\' in printf")));
+        super.visit(literal, violations);
     }
 
-    private void checkViolation(StringLiteral literal, String str) {
-        if(str.contains("\\n"))
-            add(literal, Message.format("no \'\\n\', use \'%%n\' in printf"));
+    private boolean isViolate(String str) {
+        return str.contains("\\n");
     }
 
-    private boolean isPrintfCall(MethodInvocation node) {
+    private boolean isPrintfCall(MethodCallExpr node) {
         return Utils.isName(node.getName(), "printf");
-    }
-
-    private String getMethodName(MethodDeclaration node) {
-        SimpleName name = node.getName();
-        return name.getIdentifier();
     }
 }

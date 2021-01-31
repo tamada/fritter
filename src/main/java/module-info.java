@@ -1,8 +1,9 @@
+import jp.cafebabe.fritter.validators.impl.fcc.NoPrimitivesValidatorService;
+
 module jp.cafebabe.fritter {
-    requires transitive org.eclipse.jdt.core;
+    requires transitive com.github.javaparser.core;
     requires transitive io.vavr;
     requires info.picocli;
-    requires org.eclipse.equinox.common;
     requires com.google.gson;
     requires com.google.common;
 
@@ -22,7 +23,7 @@ module jp.cafebabe.fritter {
             jp.cafebabe.fritter.validators.impl.nort.NoReturnCodeInPrintfValidatorService,
             jp.cafebabe.fritter.validators.impl.nostatic.NoStaticMethodValidatorService,
             jp.cafebabe.fritter.validators.impl.onedot.OneDotPerLineValidatorService,
-            jp.cafebabe.fritter.validators.impl.primitives.NoPrimitivesValidatorService,
+            NoPrimitivesValidatorService,
             jp.cafebabe.fritter.validators.impl.smallentities.LinesOfMethodValidatorService,
             jp.cafebabe.fritter.validators.impl.smallentities.LinesOfClassValidatorService,
             jp.cafebabe.fritter.validators.impl.variables.VariableCountValidatorService,

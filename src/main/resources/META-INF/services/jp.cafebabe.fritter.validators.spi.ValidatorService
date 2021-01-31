@@ -1,6 +1,6 @@
 jp.cafebabe.fritter.validators.impl.nest.NestLevelValidatorService
 jp.cafebabe.fritter.validators.impl.elsestatement.NoElseValidatorService
-jp.cafebabe.fritter.validators.impl.primitives.NoPrimitivesValidatorService
+jp.cafebabe.fritter.validators.impl.fcc.NoPrimitivesValidatorService
 jp.cafebabe.fritter.validators.impl.onedot.OneDotPerLineValidatorService
 jp.cafebabe.fritter.validators.impl.smallentities.LinesOfClassValidatorService
 jp.cafebabe.fritter.validators.impl.smallentities.LinesOfMethodValidatorService

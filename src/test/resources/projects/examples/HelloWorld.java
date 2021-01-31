@@ -3,6 +3,10 @@ public class HelloWorld {
     // do nothing.
   }
 
+  public static HelloWorld of() { // this is generate method, not violated.
+    return new HelloWorld();
+  }
+
   public void printHello() {
     System.out.printf("%s\n", getMessage());
     System.exit(0); // this call is NG in no_system_exit validator.

@@ -1,13 +1,12 @@
 package jp.cafebabe.fritter.validators.impl.variables;
 
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.entities.Value;
 import jp.cafebabe.fritter.validators.Validator;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import jp.cafebabe.fritter.validators.impl.Utils;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 
 class VariableCountVisitor extends FritterASTVisitor {
     private static final String FORMATTER = "local variable count is %d, more than %s";
@@ -18,21 +17,22 @@ class VariableCountVisitor extends FritterASTVisitor {
     }
 
     @Override
-    public boolean visit(MethodDeclaration node) {
+    public void visit(MethodDeclaration node, Violations violations) {
         localVariableCount = 0;
-        return super.visit(node);
+        super.visit(node, violations);
+        checkViolation(node, violations);
     }
 
     @Override
-    public boolean visit(VariableDeclarationStatement node) {
+    public void visit(VariableDeclarationExpr node, Violations violations) {
         localVariableCount++;
-        return super.visit(node);
+        super.visit(node, violations);
     }
 
-    @Override
-    public void endVisit(MethodDeclaration node) {
+    private void checkViolation(MethodDeclaration node, Violations violations) {
         if(parameter().lessThan(Value.of(localVariableCount)))
-            add(node, Message.format(FORMATTER, localVariableCount, parameter()));
+            violations.add(createViolation(node,
+                    Message.format(FORMATTER, localVariableCount, parameter())));
     }
 
 }

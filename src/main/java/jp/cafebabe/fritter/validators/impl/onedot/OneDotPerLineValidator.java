@@ -27,14 +27,16 @@ public class OneDotPerLineValidator extends AbstractValidator {
     }
 
     @Override
-    public Violations validate(DataSource source) {
+    public Violations validate(DataSource source, Violations violations) {
         return Try.withResources(() -> dotCountStream(source))
-                .of(stream -> toViolations(source, stream))
-                .getOrElse(() -> new Violations(source));
+                .of(stream -> addTo(violations, stream))
+                .getOrElse(() -> violations);
     }
 
-    private Violations toViolations(DataSource source, Stream<Pair<Location.LineNumber, Integer>> stream) {
-        return new Violations(source, stream.map(this::toViolation));
+    private Violations addTo(Violations violations, Stream<Pair<Location.LineNumber, Integer>> stream) {
+        stream.map(this::toViolation)
+                .forEach(violation -> violations.add(violation));
+        return violations;
     }
 
     private Violation toViolation(Pair<Location.LineNumber, Integer> pair) {
@@ -58,7 +60,7 @@ public class OneDotPerLineValidator extends AbstractValidator {
     }
 
     private int countDot(String line) {
-        Pattern pattern = Pattern.compile("*\\.[^0-9]]");
+        Pattern pattern = Pattern.compile("[^.]\\.[^0-9]]");
         return countDotImpl(pattern.matcher(line));
     }
 

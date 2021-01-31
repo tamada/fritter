@@ -3,7 +3,7 @@ package jp.cafebabe.fritter.cli.options;
 import jp.cafebabe.fritter.cli.printer.*;
 import jp.cafebabe.fritter.config.Format;
 import jp.cafebabe.fritter.entities.Pair;
-import jp.cafebabe.fritter.entities.ResultSet;
+import jp.cafebabe.fritter.entities.ResultsSet;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.validators.Validators;
 import jp.cafebabe.fritter.validators.Violations;
@@ -27,7 +27,7 @@ public class ResultOptions {
             converter = FormatConverter.class)
     private Format format = Format.Json;
 
-    public void print(Validators validators, ResultSet rs) {
+    public void print(Validators validators, ResultsSet rs) {
         buildPrinter()
                 .print(validators, new DelegatesResultSet(rs, createFilter(showNoViolatedFiles)));
     }

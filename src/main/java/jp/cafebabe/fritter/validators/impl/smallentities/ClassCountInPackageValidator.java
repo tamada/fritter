@@ -27,7 +27,7 @@ public class ClassCountInPackageValidator extends AbstractValidator {
     }
 
     @Override
-    public Violations validate(DataSource source) {
+    public Violations validate(DataSource source, Violations violations) {
         Path packagePath = source.relativePath().getParent();
         Optional<Violations> opts = Optional.empty();
         if(!classCount.containsKey(packagePath))

@@ -1,14 +1,13 @@
 package jp.cafebabe.fritter.validators.impl.elsestatement;
 
+import com.github.javaparser.ast.stmt.IfStmt;
+import com.github.javaparser.ast.stmt.Statement;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import jp.cafebabe.fritter.validators.impl.Utils;
-import org.eclipse.jdt.core.dom.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 class NoElseVisitor extends FritterASTVisitor {
@@ -19,19 +18,13 @@ class NoElseVisitor extends FritterASTVisitor {
     }
 
     @Override
-    public boolean visit(IfStatement node) {
-        checkViolation(node, node.getElseStatement());
-        return super.visit(node);
+    public void visit(IfStmt node, Violations violations) {
+        checkViolation(node, node.getElseStmt(), violations);
+        super.visit(node, violations);
     }
 
-    private void checkViolation(IfStatement node, Statement statement) {
-        if(isExist(Optional.ofNullable(statement)))
-            add(statement, MESSAGE);
-    }
-
-    private boolean isExist(Optional<Statement> elseStatement) {
-        return elseStatement
-                .map(statement -> statement.getNodeType() != ASTNode.IF_STATEMENT)
-                .orElse(false);
+    private void checkViolation(IfStmt node, Optional<Statement> optional, Violations violations) {
+        optional.map(statement -> createViolation(statement, MESSAGE))
+                .ifPresent(violations::add);
     }
 }

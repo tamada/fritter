@@ -1,17 +1,11 @@
 package jp.cafebabe.fritter.validators.impl.nonewarray;
 
+import com.github.javaparser.ast.expr.ArrayCreationExpr;
+import com.github.javaparser.ast.expr.ArrayInitializerExpr;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
-import jp.cafebabe.fritter.validators.Violation;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import jp.cafebabe.fritter.validators.impl.Utils;
-import org.eclipse.jdt.core.dom.ArrayCreation;
-import org.eclipse.jdt.core.dom.ArrayInitializer;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 class NoNewArrayVisitor extends FritterASTVisitor {
     private static final Message MESSAGE = Message.format("do not use array, use List instead");
@@ -21,14 +15,14 @@ class NoNewArrayVisitor extends FritterASTVisitor {
     }
 
     @Override
-    public boolean visit(ArrayCreation node) {
-        add(node, MESSAGE);
-        return super.visit(node);
+    public void visit(ArrayCreationExpr node, Violations violations) {
+        violations.add(createViolation(node, MESSAGE));
+        super.visit(node, violations);
     }
 
     @Override
-    public boolean visit(ArrayInitializer node) {
-        add(node, MESSAGE);
-        return super.visit(node);
+    public void visit(ArrayInitializerExpr node, Violations violations) {
+        violations.add(createViolation(node, MESSAGE));
+        super.visit(node, violations);
     }
 }

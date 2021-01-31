@@ -1,6 +1,6 @@
 package jp.cafebabe.fritter.cli.options;
 
-import jp.cafebabe.fritter.entities.ResultSet;
+import jp.cafebabe.fritter.entities.ResultsSet;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.entities.sources.SourcePool;
 import jp.cafebabe.fritter.entities.sources.SourcePoolFactory;
@@ -26,7 +26,7 @@ public class Arguments {
         return parameters.stream();
     }
 
-    public void print(Validators validators, ResultSet rs) {
+    public void print(Validators validators, ResultsSet rs) {
         results.print(validators, rs);
     }
 

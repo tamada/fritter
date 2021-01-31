@@ -1,9 +1,10 @@
 package jp.cafebabe.fritter.validators.impl.smallentities;
 
+import com.github.javaparser.ast.body.AnnotationDeclaration;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.EnumDeclaration;
 import jp.cafebabe.fritter.validators.Validator;
-import org.eclipse.jdt.core.dom.AnnotationTypeDeclaration;
-import org.eclipse.jdt.core.dom.EnumDeclaration;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
+import jp.cafebabe.fritter.validators.Violations;
 
 class LinesOfClassVisitor extends LinesOfCodeVisitor {
     public LinesOfClassVisitor(Validator validator) {
@@ -11,20 +12,20 @@ class LinesOfClassVisitor extends LinesOfCodeVisitor {
     }
 
     @Override
-    public boolean visit(TypeDeclaration type) {
-        checkViolation(type, "class");
-        return super.visit(type);
+    public void visit(ClassOrInterfaceDeclaration type, Violations v) {
+        checkViolation(type, "class", v);
+        super.visit(type, v);
     }
 
     @Override
-    public boolean visit(EnumDeclaration declaration) {
-        checkViolation(declaration, "enum");
-        return super.visit(declaration);
+    public void visit(EnumDeclaration declaration, Violations v) {
+        checkViolation(declaration, "enum", v);
+        super.visit(declaration, v);
     }
 
     @Override
-    public boolean visit(AnnotationTypeDeclaration declaration) {
-        checkViolation(declaration, "annotation");
-        return super.visit(declaration);
+    public void visit(AnnotationDeclaration declaration, Violations v) {
+        checkViolation(declaration, "annotation", v);
+        super.visit(declaration, v);
     }
 }

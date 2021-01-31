@@ -1,29 +1,25 @@
 package jp.cafebabe.fritter.validators.impl;
 
-import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.CompilationUnit;
+import com.github.javaparser.Position;
+import com.github.javaparser.ast.Node;
+
+import java.util.Optional;
 
 public class LineCalculator {
-    private CompilationUnit unit;
-
-    public LineCalculator(CompilationUnit unit) {
-        this.unit = unit;
+    public static int lineNumber(Node node) {
+        Optional<Position> position = node.getBegin();
+        return findLineNumber(position);
     }
 
-    public int lineNumber(ASTNode node) {
-        return unit.getLineNumber(
-                node.getStartPosition());
+    private static int findLineNumber(Optional<Position> position) {
+        return position.stream()
+                .mapToInt(p -> p.line)
+                .findFirst().orElseGet(() -> -1);
     }
 
-    public int lineCount(ASTNode node) {
-        int startLine = unit.getLineNumber(node.getStartPosition());
-        int endLine = calculateEndLine(node);
+    public static int lineCount(Node node) {
+        int startLine = findLineNumber(node.getBegin());
+        int endLine = findLineNumber(node.getEnd());
         return endLine - startLine + 1;
-    }
-
-    private int calculateEndLine(ASTNode node) {
-        int start = node.getStartPosition();
-        int end = start + node.getLength();
-        return unit.getLineNumber(end);
     }
 }

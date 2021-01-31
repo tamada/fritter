@@ -1,11 +1,11 @@
 package jp.cafebabe.fritter.validators;
 
+import com.github.javaparser.ast.CompilationUnit;
 import io.vavr.control.Try;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;
-import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import java.util.function.Function;
 
@@ -19,16 +19,16 @@ public class VisitorAnalysisValidator extends AbstractValidator {
     }
 
     @Override
-    public Violations validate(DataSource source) {
+    public Violations validate(DataSource source, Violations violations) {
         return Try.of(() -> source.ast())
-                .map(unit -> toViolations(unit, source))
+                .map(unit -> toViolations(unit, violations))
                 .getOrElseGet(throwable -> new Violations(source, new ValidateException(throwable.getMessage())));
     }
 
-    private Violations toViolations(CompilationUnit unit, DataSource source) {
+    private Violations toViolations(CompilationUnit unit, Violations violations) {
         FritterASTVisitor visitor = visitorFactory.apply(this);
-        unit.accept(visitor);
-        return new Violations(source, visitor.violations());
+        unit.accept(visitor, violations);
+        return violations;
     }
 
 }

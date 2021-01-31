@@ -1,12 +1,12 @@
 package jp.cafebabe.fritter.validators.impl.accessor;
 
-import jp.cafebabe.fritter.entities.Location;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.SimpleName;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.SimpleName;
 
 public class NoAccessorVisitor extends FritterASTVisitor {
     private AccessorChecker checker = new AccessorChecker();
@@ -16,9 +16,9 @@ public class NoAccessorVisitor extends FritterASTVisitor {
     }
 
     @Override
-    public boolean visit(MethodDeclaration node) {
-        checkViolation(node);
-        return super.visit(node);
+    public void visit(MethodDeclaration node, Violations violations) {
+        checkViolation(node, violations);
+        super.visit(node, violations);
     }
 
     private String getMethodName(MethodDeclaration node) {
@@ -26,18 +26,17 @@ public class NoAccessorVisitor extends FritterASTVisitor {
         return name.getIdentifier();
     }
 
-    private void checkViolation(MethodDeclaration node) {
-        if(checker.isPublicMethod(node))
-            checkViolation(node, getMethodName(node));
+    private void checkViolation(MethodDeclaration node, Violations violations) {
+        checkViolationImpl(violations, node, "get[A-Z][a-zA-Z0-9]*$", "%s: no getter method");
+        checkViolationImpl(violations, node, "get[A-Z][a-zA-Z0-9]*$", "%s: no getter method");
     }
 
-    private void checkViolation(MethodDeclaration method, String methodName) {
-         checkViolation("get[A-Z][a-zA-Z]*$", "%s: no getter method", methodName, method);
-         checkViolation("set[A-Z][a-zA-Z]*$", "%s: no setter method", methodName, method);
-     }
+    private void checkViolationImpl(Violations violations, MethodDeclaration node, String pattern, String formatter) {
+        if(checker.isTarget(node, pattern))
+            addTarget(violations, createViolation(node, Message.format(formatter, node.getNameAsString())));
+    }
 
-    private void checkViolation(String pattern, String formatter, String methodName, MethodDeclaration method) {
-        if (methodName.matches(pattern))
-            add(method, Message.format(formatter, methodName));
+    private void addTarget(Violations violations, Violation violation) {
+        violations.add(violation);
     }
 }

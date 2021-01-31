@@ -1,10 +1,12 @@
 package jp.cafebabe.fritter.validators.impl.variables;
 
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import jp.cafebabe.fritter.entities.Message;
-import jp.cafebabe.fritter.entities.Value;
 import jp.cafebabe.fritter.validators.Validator;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import org.eclipse.jdt.core.dom.*;
 
 class SingleCharacterNameVisitor extends FritterASTVisitor {
     private static final String FORMATTER = "%s: do not use only single character in variable name";
@@ -16,42 +18,28 @@ class SingleCharacterNameVisitor extends FritterASTVisitor {
     }
 
     @Override
-    public boolean visit(FieldDeclaration node) {
+    public void visit(FieldDeclaration node, Violations violations) {
         checkTargetFlag = true;
-        return super.visit(node);
-    }
-
-    @Override
-    public void endVisit(FieldDeclaration node) {
+        super.visit(node, violations);
         checkTargetFlag = false;
     }
 
     @Override
-    public boolean visit(VariableDeclarationFragment node){
-        String name = node.getName().toString();
+    public void visit(VariableDeclarator node, Violations violations){
+        String name = node.getName().getIdentifier();
         checkVariableName(node, name);
-        return super.visit(node);
+        super.visit(node, violations);
     }
 
-    private void checkVariableName(VariableDeclarationFragment node, String name) {
+    private void checkVariableName(VariableDeclarator node, String name) {
         if(checkTargetFlag && name.length() == 1)
-            add(node, Message.format(FORMATTER, name));
+            createViolation(node, Message.format(FORMATTER, name));
     }
 
     @Override
-    public boolean visit(VariableDeclarationStatement node){
-        checkTargetFlag = true;
-        return super.visit(node);
-    }
-
-    @Override
-    public void endVisit(VariableDeclarationStatement node){
+    public void visit(VariableDeclarationExpr node, Violations violations){
         checkTargetFlag = false;
-    }
-
-    @Override
-    public boolean visit(VariableDeclarationExpression node){
+        super.visit(node, violations);
         checkTargetFlag = false;
-        return super.visit(node);
     }
 }

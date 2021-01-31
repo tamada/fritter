@@ -1,13 +1,13 @@
 package jp.cafebabe.fritter.validators.impl.fcc;
 
-import static jp.cafebabe.fritter.validators.impl.fields.FieldCollectingVisitor.NOT_STATIC_FIELDS;
-
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.type.Type;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.fields.FieldCollectingVisitor;
-import org.eclipse.jdt.core.dom.FieldDeclaration;
-import org.eclipse.jdt.core.dom.Type;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 class FirstClassCollectionVisitor extends FieldCollectingVisitor {
     private static final Message MESSAGE = Message.format("not first class collection");
@@ -17,24 +17,20 @@ class FirstClassCollectionVisitor extends FieldCollectingVisitor {
     }
 
     @Override
-    public void endVisit(TypeDeclaration node) {
-        checkViolation();
+    public void visit(ClassOrInterfaceDeclaration node, Violations violations) {
+        super.visit(node, violations);
+        checkViolation(violations);
     }
 
-    private void checkViolation() {
+    private void checkViolation(Violations violations) {
         if(isViolated())
-            add(fieldLocations(), MESSAGE);
+            violations.add(createViolation(fieldLocations(NOT_STATIC_FIELDS), MESSAGE));
     }
 
     private boolean isViolated() {
         long notStaticFieldCount = countFieldCount(NOT_STATIC_FIELDS);
-        long collectionFieldCount = countFieldCount(NOT_STATIC_FIELDS.and(this::isCollection));
+        long collectionFieldCount = countFieldCount(NOT_STATIC_FIELDS.and(TypeChecker::isCollection));
         return notStaticFieldCount > 1 && collectionFieldCount > 0;
     }
 
-    private boolean isCollection(FieldDeclaration node) {
-        Type type = node.getType();
-        return type.isArrayType()
-                || CollectionTypeChecker.isCollection(type);
-    }
 }

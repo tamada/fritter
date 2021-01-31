@@ -37,18 +37,9 @@ public class Validators implements Validator {
     }
 
     @Override
-    public Violations validate(DataSource source) {
-        return validators().map(validator -> validateImpl(validator, source))
-                .collect(merger(source));
-    }
-
-    private Collector<Violations, ?, Violations> merger(DataSource source) {
-        ViolationsMerger merger = new ViolationsMerger();
-        return Collectors.reducing(new Violations(source),
-                (before, after) -> merger.merge(before, after));
-    }
-
-    private Violations validateImpl(Validator validator, DataSource source) {
-        return validator.validate(source);
+    public Violations validate(DataSource source, Violations violations) {
+        validators()
+                .forEach(validator -> validator.validate(source, violations));
+        return violations;
     }
 }

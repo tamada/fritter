@@ -1,7 +1,7 @@
 package jp.cafebabe.fritter.cli.options;
 
 import jp.cafebabe.fritter.entities.Pair;
-import jp.cafebabe.fritter.entities.ResultSet;
+import jp.cafebabe.fritter.entities.ResultsSet;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.entities.sources.SourcePool;
 import jp.cafebabe.fritter.validators.Violations;
@@ -9,20 +9,20 @@ import jp.cafebabe.fritter.validators.Violations;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class DelegatesResultSet extends ResultSet {
-    private ResultSet rs;
+public class DelegatesResultSet extends ResultsSet {
+    private ResultsSet rs;
     private Predicate<Pair<DataSource, Violations>> filter;
 
-    public DelegatesResultSet(ResultSet rs) {
+    public DelegatesResultSet(ResultsSet rs) {
         this(rs, (pair) -> true);
     }
 
-    public DelegatesResultSet(ResultSet rs, Predicate<Pair<DataSource, Violations>> filter) {
+    public DelegatesResultSet(ResultsSet rs, Predicate<Pair<DataSource, Violations>> filter) {
         this.rs = rs;
         this.filter = filter;
     }
 
-    public ResultSet delegated() {
+    public ResultsSet delegated() {
         return rs;
     }
 

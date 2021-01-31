@@ -1,6 +1,6 @@
 package jp.cafebabe.fritter.validators;
 
-public class ValidateException extends Exception {
+public class ValidateException extends RuntimeException {
     public ValidateException(Throwable throwable) {
         super(throwable);
     }

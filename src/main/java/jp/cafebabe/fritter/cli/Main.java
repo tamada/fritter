@@ -2,7 +2,7 @@ package jp.cafebabe.fritter.cli;
 
 import io.vavr.control.Try;
 import jp.cafebabe.fritter.cli.options.Arguments;
-import jp.cafebabe.fritter.entities.ResultSet;
+import jp.cafebabe.fritter.entities.ResultsSet;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.validators.Validators;
 import jp.cafebabe.fritter.validators.Violations;
@@ -20,11 +20,11 @@ public class Main implements Runnable {
 
     public void run() {
         Validators validator = args.createValidators();
-        ResultSet rs = execute(validator, new ResultSet());
+        ResultsSet rs = execute(validator, new ResultsSet());
         args.print(validator, rs);
     }
 
-    private ResultSet execute(Validators validators, ResultSet rs) {
+    private ResultsSet execute(Validators validators, ResultsSet rs) {
         validateEach(validators)
                 .forEach(violations -> rs.put(violations));
         return rs;
