@@ -8,11 +8,11 @@ import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 
-class VariableCountVisitor extends FritterASTVisitor {
+class LocalVariableCountVisitor extends FritterASTVisitor {
     private static final String FORMATTER = "local variable count is %d, more than %s";
     private int localVariableCount = 0;
 
-    public VariableCountVisitor(Validator validator) {
+    public LocalVariableCountVisitor(Validator validator) {
         super(validator);
     }
 

@@ -1,4 +1,4 @@
-package jp.cafebabe.fritter.validators.impl.onedot;
+package jp.cafebabe.fritter.validators.impl.dots;
 
 import java.util.Map;
 import java.util.Map.Entry;

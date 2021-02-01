@@ -1,4 +1,4 @@
-package jp.cafebabe.fritter.validators.impl.onedot;
+package jp.cafebabe.fritter.validators.impl.dots;
 
 import io.vavr.control.Try;
 import jp.cafebabe.fritter.entities.Pair;

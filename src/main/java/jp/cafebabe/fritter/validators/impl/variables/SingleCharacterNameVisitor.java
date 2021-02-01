@@ -2,6 +2,7 @@ package jp.cafebabe.fritter.validators.impl.variables;
 
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
@@ -26,14 +27,14 @@ class SingleCharacterNameVisitor extends FritterASTVisitor {
 
     @Override
     public void visit(VariableDeclarator node, Violations violations){
-        String name = node.getName().getIdentifier();
-        checkVariableName(node, name);
+        SimpleName name = node.getName();
+        checkVariableName(node, name.getIdentifier(), violations);
         super.visit(node, violations);
     }
 
-    private void checkVariableName(VariableDeclarator node, String name) {
+    private void checkVariableName(VariableDeclarator node, String name, Violations violations) {
         if(checkTargetFlag && name.length() == 1)
-            createViolation(node, Message.format(FORMATTER, name));
+            violations.add(createViolation(node, Message.format(FORMATTER, name)));
     }
 
     @Override

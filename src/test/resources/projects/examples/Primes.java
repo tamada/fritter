@@ -39,7 +39,7 @@ public class Primes {
     }
 
     private boolean[] initialize(int limit) {
-        boolean[] array = new boolean[limit + 1];
+        boolean[] array = new boolean[limit + 1]; // violate no_new_array
         Arrays.fill(array, true);
         return array;
     }

@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 
 public class StatsValues {
     public static final int MAX_VALUE = 1000;
+
     private List<Integer> list = new ArrayList<>();
     private Random rand = new Random();
     private Stats stats = new Stats();

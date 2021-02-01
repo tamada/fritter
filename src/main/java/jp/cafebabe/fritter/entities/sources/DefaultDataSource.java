@@ -3,7 +3,7 @@ package jp.cafebabe.fritter.entities.sources;
 import com.github.javaparser.ast.CompilationUnit;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Pair;
-import com.google.common.collect.Streams;
+import jp.cafebabe.fritter.utils.Streams;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,8 +41,7 @@ public class DefaultDataSource implements DataSource {
     @Override
     public Stream<Pair<Location.LineNumber, String>> lines() throws IOException {
         return Streams.zip(lineNumbers(),
-                Files.lines(path()),
-                (a, b) -> Pair.of(a, b));
+                Files.lines(path()));
     }
 
     private Stream<Location.LineNumber> lineNumbers() {

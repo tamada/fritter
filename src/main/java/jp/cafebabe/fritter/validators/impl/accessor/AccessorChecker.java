@@ -6,10 +6,11 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import java.util.stream.Stream;
 
 class AccessorChecker {
+    private static final Modifier PUBLIC = Modifier.publicModifier();
+
     public boolean isPublicMethod(MethodDeclaration node){
-        return stream(node)
-                .filter(modifier -> modifier == Modifier.publicModifier())
-                .count() == 1;
+        return stream(node).filter(PUBLIC::equals)
+                .count() > 0;
     }
 
     private Stream<Modifier> stream(MethodDeclaration node) {

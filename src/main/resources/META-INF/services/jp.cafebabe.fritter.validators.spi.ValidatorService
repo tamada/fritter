@@ -1,12 +1,12 @@
 jp.cafebabe.fritter.validators.impl.nest.NestLevelValidatorService
 jp.cafebabe.fritter.validators.impl.elsestatement.NoElseValidatorService
 jp.cafebabe.fritter.validators.impl.fcc.NoPrimitivesValidatorService
-jp.cafebabe.fritter.validators.impl.onedot.OneDotPerLineValidatorService
+jp.cafebabe.fritter.validators.impl.dots.DotCountPerLineValidatorService
 jp.cafebabe.fritter.validators.impl.smallentities.LinesOfClassValidatorService
 jp.cafebabe.fritter.validators.impl.smallentities.LinesOfMethodValidatorService
 jp.cafebabe.fritter.validators.impl.fields.FieldCountValidatorService
 jp.cafebabe.fritter.validators.impl.accessor.NoAccessorValidatorService
-jp.cafebabe.fritter.validators.impl.variables.VariableCountValidatorService
+jp.cafebabe.fritter.validators.impl.variables.LocalVariableCountValidatorService
 jp.cafebabe.fritter.validators.impl.nostatic.NoStaticMethodValidatorService
 jp.cafebabe.fritter.validators.impl.nonewarray.NoNewArrayValidatorService
 jp.cafebabe.fritter.validators.impl.nort.NoReturnCodeInPrintfValidatorService

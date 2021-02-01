@@ -21,22 +21,18 @@ public class NoAccessorVisitor extends FritterASTVisitor {
         super.visit(node, violations);
     }
 
-    private String getMethodName(MethodDeclaration node) {
-        SimpleName name = node.getName();
-        return name.getIdentifier();
-    }
-
     private void checkViolation(MethodDeclaration node, Violations violations) {
         checkViolationImpl(violations, node, "get[A-Z][a-zA-Z0-9]*$", "%s: no getter method");
-        checkViolationImpl(violations, node, "get[A-Z][a-zA-Z0-9]*$", "%s: no getter method");
+        checkViolationImpl(violations, node, "set[A-Z][a-zA-Z0-9]*$", "%s: no setter method");
     }
 
     private void checkViolationImpl(Violations violations, MethodDeclaration node, String pattern, String formatter) {
         if(checker.isTarget(node, pattern))
-            addTarget(violations, createViolation(node, Message.format(formatter, node.getNameAsString())));
+            violations.add(create(node, formatter));
     }
 
-    private void addTarget(Violations violations, Violation violation) {
-        violations.add(violation);
+    private Violation create(MethodDeclaration node, String formatter) {
+        return createViolation(node, Message.format(formatter,
+                node.getNameAsString()));
     }
 }
