@@ -109,18 +109,9 @@
       </plugin>
 
       <plugin>
-        <groupId>org.eluder.coveralls</groupId>
-        <artifactId>coveralls-maven-plugin</artifactId>
-        <version>4.3.0</version>
-        <configuration>
-          <sourceEncoding>utf-8</sourceEncoding>
-        </configuration>
-      </plugin>
-
-      <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.4</version>
+        <version>0.8.6</version>
         <executions>
           <execution>
             <id>prepare-agent</id>
@@ -128,7 +119,45 @@
               <goal>prepare-agent</goal>
             </goals>
           </execution>
+          <execution>
+            <id>jacoco-report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>3.1.3</version>
+        <dependencies>
+          <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>3.1.3</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eluder.coveralls</groupId>
+        <artifactId>coveralls-maven-plugin</artifactId>
+        <version>4.3.0</version>
+        <dependencies>
+          <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.2.3</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <sourceEncoding>utf-8</sourceEncoding>
+          <jacocoReports>site/static/jacoco/jacoco.xml</jacocoReports>
+        </configuration>
       </plugin>
 
       <plugin>
