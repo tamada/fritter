@@ -3,7 +3,7 @@ package jp.cafebabe.fritter.validators;
 import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.entities.Location;
-import jp.cafebabe.fritter.entities.visitors.ViolationsVisitor;
+import jp.cafebabe.fritter.entities.visitors.ViolationVisitor;
 
 public class Violation {
     private Location location;
@@ -16,7 +16,7 @@ public class Violation {
         this.message = message;
     }
 
-    public void accept(ViolationsVisitor visitor) {
-        visitor.visitViolation(location, type, message);
+    public <S> S accept(ViolationVisitor<S> visitor) {
+        return visitor.visitViolation(location, type, message);
     }
 }

@@ -2,21 +2,27 @@ package jp.cafebabe.fritter.entities;
 
 import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 
 public interface Location {
-    void accept(LocationVisitor visitor);
+    <S> S accept(LocationVisitor<S> visitor);
 
-    static Location of(int number) {
+    static Location.LineNumber of(int number) {
         return new LineNumber(number);
     }
 
-    static Location of(int[] numbers) {
+    static Location.LineNumbers of(int[] numbers) {
         return new LineNumbers(numbers);
     }
 
-    static Location of(String name) {
+    static Location.PackageName of(String name) {
         return new PackageName(name);
+    }
+
+    static Location.PackageName of(Path path) {
+        return new PackageName(path.toString()
+                .replaceAll("/", "."));
     }
 
     public static class PackageName implements Location {
@@ -26,8 +32,9 @@ public interface Location {
             this.name = name;
         }
 
-        public void accept(LocationVisitor visitor) {
-            visitor.visitLocation(name);
+        @Override
+        public <S> S accept(LocationVisitor<S> visitor) {
+            return visitor.visitLocation(name);
         }
     }
 
@@ -38,8 +45,9 @@ public interface Location {
             this.numbers = numbers;
         }
 
-        public void accept(LocationVisitor visitor) {
-            visitor.visitLocation(Arrays.copyOf(numbers, numbers.length));
+        @Override
+        public <S> S accept(LocationVisitor<S> visitor) {
+            return visitor.visitLocation(Arrays.copyOf(numbers, numbers.length));
         }
     }
 
@@ -51,8 +59,8 @@ public interface Location {
         }
 
         @Override
-        public void accept(LocationVisitor visitor) {
-            visitor.visitLocation(number);
+        public <S> S accept(LocationVisitor<S> visitor) {
+            return visitor.visitLocation(number);
         }
     }
 }

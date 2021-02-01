@@ -2,9 +2,11 @@ package jp.cafebabe.fritter.validators;
 
 import io.vavr.control.Either;
 import jp.cafebabe.fritter.entities.sources.DataSource;
+import jp.cafebabe.fritter.entities.visitors.ViolationsVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class Violations {
@@ -26,6 +28,32 @@ public class Violations {
         this.source = source;
     }
 
+    public <S> S accept(ViolationsVisitor<S> visitor) {
+        visitor.visitDataSource(source);
+        list.stream()
+                .forEach(either -> visitEither(visitor, either));
+        return visitor.visitEnd();
+    }
+
+    private void visitEither(ViolationsVisitor visitor, Either<ValidateException, Violation> either) {
+        either.peek(violation -> visitor.visitViolation(violation))
+                .orElseRun(exception -> visitor.visitValidateException(exception));
+    }
+
+    public boolean hasExceptions() {
+        return count(either -> either.isLeft()) > 0;
+    }
+
+    public boolean hasViolations() {
+        return count(either -> either.isRight()) > 0;
+    }
+
+    private long count(Predicate<Either<ValidateException, Violation>> predicate) {
+        return list.stream()
+                .filter(predicate)
+                .count();
+    }
+
     public DataSource source() {
         return source;
     }
@@ -36,28 +64,5 @@ public class Violations {
 
     public void add(ValidateException exception) {
         list.add(Either.left(exception));
-    }
-
-    public Stream<ValidateException> exceptions() {
-        return list.stream()
-                .filter(either -> either.isLeft())
-                .map(either -> either.getLeft());
-    }
-
-    public Stream<Violation> stream() {
-        return list.stream()
-                .filter(either -> either.isRight())
-                .map(either -> either.get());
-    }
-
-    public Violations merge(Violations violations) {
-        if(source.isSame(violations.source))
-            return mergeImpl(violations);
-        throw new IllegalArgumentException("different DataSource: " + source.path());
-    }
-
-    private Violations mergeImpl(Violations other) {
-        list.addAll(other.list);
-        return this;
     }
 }

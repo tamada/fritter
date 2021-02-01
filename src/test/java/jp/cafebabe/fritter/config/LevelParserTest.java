@@ -1,8 +1,5 @@
-package jp.cafebabe.fritter.cli.config;
+package jp.cafebabe.fritter.config;
 
-import jp.cafebabe.fritter.config.CheckerType;
-import jp.cafebabe.fritter.config.Level;
-import jp.cafebabe.fritter.config.LevelParser;
 import jp.cafebabe.fritter.entities.Name;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -29,12 +26,12 @@ public class LevelParserTest {
             Assertions.assertTrue(level.available(CheckerType.of("primitive_wrapping")));
             Assertions.assertTrue(level.available(CheckerType.of("dot_count_per_line")));
             Assertions.assertTrue(level.available(CheckerType.of("no_abbrev")));
-            Assertions.assertTrue(level.available(CheckerType.of("lines_of_file")));
+            Assertions.assertTrue(level.available(CheckerType.of("lines_of_class")));
             Assertions.assertTrue(level.available(CheckerType.of("lines_of_method")));
             Assertions.assertTrue(level.available(CheckerType.of("classes_in_package")));
             Assertions.assertTrue(level.available(CheckerType.of("field_count")));
             Assertions.assertTrue(level.available(CheckerType.of("variable_count")));
-            Assertions.assertTrue(level.available(CheckerType.of("first_class_collections")));
+            Assertions.assertTrue(level.available(CheckerType.of("first_class_collection")));
             Assertions.assertTrue(level.available(CheckerType.of("no_accessor")));
             Assertions.assertTrue(level.available(CheckerType.of("no_static_method")));
             Assertions.assertTrue(level.available(CheckerType.of("no_system_exit")));

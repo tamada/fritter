@@ -1,22 +1,28 @@
 package jp.cafebabe.fritter.entities.sources;
 
+import io.vavr.control.Try;
+import jp.cafebabe.fritter.entities.Location;
+import jp.cafebabe.fritter.entities.Name;
+import jp.cafebabe.fritter.entities.Pair;
+import org.eclipse.jdt.core.dom.CompilationUnit;
+
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import io.vavr.control.Try;
-import jp.cafebabe.fritter.entities.Name;
-import org.eclipse.jdt.core.dom.CompilationUnit;
+import java.util.stream.Stream;
 
 public interface DataSource {
     SourcePool sourcePool();
     Path path();
     CompilationUnit ast() throws IOException;
-    Reader sourceFile() throws IOException;
+    Stream<Pair<Location.LineNumber, String>> lines() throws IOException;
 
     default Path base() {
         return sourcePool().base();
+    }
+
+    default Path relativePath() {
+        return base().relativize(path());
     }
 
     default Name name() {

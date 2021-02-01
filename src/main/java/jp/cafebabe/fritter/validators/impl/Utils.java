@@ -4,9 +4,10 @@ import org.eclipse.jdt.core.dom.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Utils {
-    public static boolean isStatic(MethodDeclaration node) {
+    public static boolean isStatic(BodyDeclaration node) {
         int modifier = node.getModifiers();
         return Modifier.isStatic(modifier);
     }
@@ -17,9 +18,14 @@ public class Utils {
                 && ((PrimitiveType)type).getPrimitiveTypeCode() == PrimitiveType.VOID;
     }
 
+    public static boolean isMainMethod(MethodDeclaration node){
+        return isReturnVoid(node) && isStatic(node)
+                && isName(node.getName(), "main") && isArgumentsStringArray(node);
+    }
+
     public static boolean isName(SimpleName simpleName, String name) {
         return Objects.equals(name,
-                simpleName.toString());
+                simpleName.getIdentifier());
     }
 
     public static boolean isArgumentsStringArray(MethodDeclaration node) {
@@ -28,8 +34,9 @@ public class Utils {
     }
 
     public static boolean isArrayString(SingleVariableDeclaration node) {
-        var type = node.resolveBinding();
-        var str = type.toString();
+        var str = Optional.ofNullable(node.getType())
+                .map(type -> type.toString())
+                .orElse("");
         return Objects.equals(str, "String[]") || Objects.equals(str, "String...");
     }
 }

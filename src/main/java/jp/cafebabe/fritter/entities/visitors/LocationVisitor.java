@@ -1,9 +1,9 @@
 package jp.cafebabe.fritter.entities.visitors;
 
-public interface LocationVisitor {
-    void visitLocation(int lineNumber);
+public interface LocationVisitor<S> {
+    S visitLocation(int lineNumber);
 
-    void visitLocation(int[] lineNumbers);
+    S visitLocation(int[] lineNumbers);
 
-    void visitLocation(String packageName);
+    S visitLocation(String packageName);
 }

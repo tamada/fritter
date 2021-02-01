@@ -1,10 +1,14 @@
 package jp.cafebabe.fritter.entities;
 
 public class Value implements Comparable<Value> {
-    private int value;
+    private long value;
 
-    public Value(int value) {
+    public Value(long value) {
         this.value = value;
+    }
+
+    public static Value of(long value) {
+        return new Value(value);
     }
 
     public boolean greaterThan(Value other) {
@@ -25,7 +29,11 @@ public class Value implements Comparable<Value> {
         return 1;
     }
 
-    public int value() {
+    public long value() {
         return value;
+    }
+
+    public String toString() {
+        return Long.toString(value());
     }
 }

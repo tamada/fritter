@@ -5,7 +5,6 @@ import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.entities.sources.SourcePool;
 import jp.cafebabe.fritter.entities.sources.SourcePoolFactory;
 import jp.cafebabe.fritter.validators.Validators;
-import jp.cafebabe.fritter.validators.ValidatorsBuilder;
 import picocli.CommandLine.Mixin;
 import picocli.CommandLine.Parameters;
 
@@ -27,8 +26,8 @@ public class Arguments {
         return parameters.stream();
     }
 
-    public void print(ResultSet rs) {
-        results.print(rs);
+    public void print(Validators validators, ResultSet rs) {
+        results.print(validators, rs);
     }
 
     public Stream<DataSource> createStream() {

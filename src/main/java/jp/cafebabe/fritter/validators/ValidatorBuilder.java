@@ -21,7 +21,7 @@ public class ValidatorBuilder {
     }
 
     public Optional<Validator> build(CheckerType type, Parameter param) {
-        return Optional.of(map.get(type))
+        return Optional.ofNullable(map.get(type))
                 .map(service -> service.build(param));
     }
 }

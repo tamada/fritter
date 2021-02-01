@@ -10,8 +10,6 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Mixin;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Command(name="fritter", versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
@@ -23,7 +21,7 @@ public class Main implements Runnable {
     public void run() {
         Validators validator = args.createValidators();
         ResultSet rs = execute(validator, new ResultSet());
-        args.print(rs);
+        args.print(validator, rs);
     }
 
     private ResultSet execute(Validators validators, ResultSet rs) {

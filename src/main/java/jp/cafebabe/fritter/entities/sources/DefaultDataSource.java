@@ -1,11 +1,15 @@
 package jp.cafebabe.fritter.entities.sources;
 
+import jp.cafebabe.fritter.entities.Location;
+import jp.cafebabe.fritter.entities.Pair;
+import com.google.common.collect.Streams;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class DefaultDataSource implements DataSource {
     private SourcePool base;
@@ -35,8 +39,15 @@ public class DefaultDataSource implements DataSource {
     }
 
     @Override
-    public Reader sourceFile() throws IOException {
-        return Files.newBufferedReader(path());
+    public Stream<Pair<Location.LineNumber, String>> lines() throws IOException {
+        return Streams.zip(lineNumbers(),
+                Files.lines(path()),
+                (a, b) -> Pair.of(a, b));
+    }
+
+    private Stream<Location.LineNumber> lineNumbers() {
+        return IntStream.iterate(1, i -> i + 1)
+                .mapToObj(number -> Location.of(number));
     }
 
     private CompilationUnit buildUnit(Path path) throws IOException {

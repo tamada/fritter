@@ -11,7 +11,7 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 
 import java.util.Objects;
 
-public class NoSystemExitVisitor extends FritterASTVisitor {
+class NoSystemExitVisitor extends FritterASTVisitor {
     private static final Message MESSAGE = Message.format("no System.exit except main method");
 
     public NoSystemExitVisitor(Validator validator) {
@@ -20,13 +20,12 @@ public class NoSystemExitVisitor extends FritterASTVisitor {
 
     @Override
     public boolean visit(MethodDeclaration node) {
-        int modifiers = node.getModifiers();
-        return !isMainMethod(node);
+        return !Utils.isMainMethod(node);
     }
 
     public boolean visit(MethodInvocation node) {
         if (isSystemExitCall(node))
-            add(new Violation(location(node), name(), MESSAGE));
+            add(node, MESSAGE);
         return true;
     }
 
@@ -36,12 +35,6 @@ public class NoSystemExitVisitor extends FritterASTVisitor {
     }
 
     private boolean isSystem(Expression expression) {
-        return Objects.equals(
-                expression.resolveTypeBinding().toString(), "System");
-    }
-
-    private boolean isMainMethod(MethodDeclaration node){
-        return Utils.isReturnVoid(node) && Utils.isStatic(node)
-                && Utils.isName(node.getName(), "main") && Utils.isArgumentsStringArray(node);
+        return Objects.equals(expression.toString(), "System");
     }
 }
