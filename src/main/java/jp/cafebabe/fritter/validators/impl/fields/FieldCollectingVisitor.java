@@ -1,11 +1,13 @@
 package jp.cafebabe.fritter.validators.impl.fields;
 
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.validators.Validator;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 import jp.cafebabe.fritter.validators.impl.Utils;
-import org.eclipse.jdt.core.dom.FieldDeclaration;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +23,23 @@ public class FieldCollectingVisitor extends FritterASTVisitor {
     }
 
     @Override
-    public boolean visit(TypeDeclaration node) {
+    public void visit(ClassOrInterfaceDeclaration node, Violations violations) {
         fields.clear();
-        return super.visit(node);
+        super.visit(node, violations);
     }
 
     @Override
-    public boolean visit(FieldDeclaration node) {
+    public void visit(FieldDeclaration node, Violations violations) {
         fields.add(node);
-        return super.visit(node);
     }
 
     public Location fieldLocations() {
-        return locations(fields.stream());
+        return fieldLocations(field -> true);
+    }
+
+    public Location fieldLocations(Predicate<FieldDeclaration> predicate) {
+        return locations(fields.stream()
+                .filter(predicate));
     }
 
     public long countFieldCount(Predicate<FieldDeclaration> predicate) {

@@ -5,6 +5,7 @@ import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.ValidateException;
 
+@FunctionalInterface
 public interface ViolationVisitor<S> {
     S visitViolation(Location location, CheckerType type, Message message);
 }

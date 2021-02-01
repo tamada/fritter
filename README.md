@@ -28,7 +28,7 @@ By the way, this tool is programed to obey above rules.
 
 ### Introduced rules.
 
-10. Do not use any methods with more than 2 local variables (`variable_count`), `DONE`
+10. Do not use any methods with more than 2 local variables (`local_variable_count`), `DONE`
 11. Do not use `static` method except `main` method (`no_static_method`), `DONE`
 12. Do not create an array (`no_new_array`), `DONE`
 13. Do not use `System.exit` (`no_system_exit`) except `main` method, `DONE`

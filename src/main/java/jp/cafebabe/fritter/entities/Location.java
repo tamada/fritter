@@ -36,6 +36,10 @@ public interface Location {
         public <S> S accept(LocationVisitor<S> visitor) {
             return visitor.visitLocation(name);
         }
+
+        public String toString() {
+            return name;
+        }
     }
 
     public static class LineNumbers implements Location {
@@ -49,6 +53,10 @@ public interface Location {
         public <S> S accept(LocationVisitor<S> visitor) {
             return visitor.visitLocation(Arrays.copyOf(numbers, numbers.length));
         }
+
+        public String toString() {
+            return Arrays.toString(numbers);
+        }
     }
 
     public static class LineNumber implements Location {
@@ -61,6 +69,10 @@ public interface Location {
         @Override
         public <S> S accept(LocationVisitor<S> visitor) {
             return visitor.visitLocation(number);
+        }
+
+        public String toString() {
+            return Integer.toString(number);
         }
     }
 }

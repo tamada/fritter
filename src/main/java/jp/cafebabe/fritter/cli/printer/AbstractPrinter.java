@@ -1,7 +1,7 @@
 package jp.cafebabe.fritter.cli.printer;
 
 import jp.cafebabe.fritter.cli.options.DelegatesResultSet;
-import jp.cafebabe.fritter.entities.ResultSet;
+import jp.cafebabe.fritter.entities.ResultsSet;
 import jp.cafebabe.fritter.validators.Validators;
 
 import java.io.PrintWriter;
@@ -28,11 +28,11 @@ public abstract class AbstractPrinter implements Printer {
     }
 
     @Override
-    public final void printSummary(PrintWriter out, ResultSet rs) {
+    public final void printSummary(PrintWriter out, ResultsSet rs) {
         out.print(summarizer().convert(stripResultSet(rs)));
     }
 
-    private ResultSet stripResultSet(ResultSet rs) {
+    private ResultsSet stripResultSet(ResultsSet rs) {
         if(rs instanceof DelegatesResultSet)
             return ((DelegatesResultSet)rs).delegated();
         return rs;

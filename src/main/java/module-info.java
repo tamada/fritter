@@ -1,10 +1,12 @@
+import jp.cafebabe.fritter.validators.impl.fcc.NoPrimitivesValidatorService;
+import jp.cafebabe.fritter.validators.impl.dots.DotCountPerLineValidatorService;
+import jp.cafebabe.fritter.validators.impl.variables.LocalVariableCountValidatorService;
+
 module jp.cafebabe.fritter {
-    requires transitive org.eclipse.jdt.core;
+    requires transitive com.github.javaparser.core;
     requires transitive io.vavr;
     requires info.picocli;
-    requires org.eclipse.equinox.common;
     requires com.google.gson;
-    requires com.google.common;
 
     provides jp.cafebabe.fritter.cli.printer.PrinterService with
             jp.cafebabe.fritter.cli.printer.json.JsonPrinterService,
@@ -21,11 +23,11 @@ module jp.cafebabe.fritter {
             jp.cafebabe.fritter.validators.impl.nonewarray.NoNewArrayValidatorService,
             jp.cafebabe.fritter.validators.impl.nort.NoReturnCodeInPrintfValidatorService,
             jp.cafebabe.fritter.validators.impl.nostatic.NoStaticMethodValidatorService,
-            jp.cafebabe.fritter.validators.impl.onedot.OneDotPerLineValidatorService,
-            jp.cafebabe.fritter.validators.impl.primitives.NoPrimitivesValidatorService,
+            DotCountPerLineValidatorService,
+            NoPrimitivesValidatorService,
             jp.cafebabe.fritter.validators.impl.smallentities.LinesOfMethodValidatorService,
             jp.cafebabe.fritter.validators.impl.smallentities.LinesOfClassValidatorService,
-            jp.cafebabe.fritter.validators.impl.variables.VariableCountValidatorService,
+            LocalVariableCountValidatorService,
             jp.cafebabe.fritter.validators.impl.variables.SingleCharacterNameValidatorService,
             jp.cafebabe.fritter.validators.impl.smallentities.ClassCountInPackageValidatorService;
 
@@ -41,10 +43,10 @@ module jp.cafebabe.fritter {
     exports jp.cafebabe.fritter.validators.spi;
 
     opens jp.cafebabe.fritter.cli.printer;
-    opens jp.cafebabe.fritter.config;
-    opens jp.cafebabe.fritter.utils;
     opens jp.cafebabe.fritter.cli.options;
+    opens jp.cafebabe.fritter.config;
     opens jp.cafebabe.fritter.entities;
     opens jp.cafebabe.fritter.validators;
     opens jp.cafebabe.fritter.validators.spi;
+    opens jp.cafebabe.fritter.utils;
 }

@@ -1,10 +1,10 @@
 package jp.cafebabe.fritter.entities.sources;
 
+import com.github.javaparser.ast.CompilationUnit;
 import io.vavr.control.Try;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Name;
 import jp.cafebabe.fritter.entities.Pair;
-import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import java.io.IOException;
 import java.nio.file.Files;

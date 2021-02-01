@@ -1,7 +1,8 @@
 package jp.cafebabe.fritter.validators.impl.smallentities;
 
+import com.github.javaparser.ast.body.MethodDeclaration;
 import jp.cafebabe.fritter.validators.Validator;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
+import jp.cafebabe.fritter.validators.Violations;
 
 class LinesOfMethodVisitor extends LinesOfCodeVisitor {
     public LinesOfMethodVisitor(Validator validator) {
@@ -9,8 +10,8 @@ class LinesOfMethodVisitor extends LinesOfCodeVisitor {
     }
 
     @Override
-    public boolean visit(MethodDeclaration type) {
-        checkViolation(type, "method");
-        return super.visit(type);
+    public void visit(MethodDeclaration node, Violations violations) {
+        checkViolation(node, "method", violations);
+        super.visit(node, violations);
     }
 }

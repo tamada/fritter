@@ -10,5 +10,9 @@ public interface Validator {
 
     Parameter parameter();
 
-    Violations validate(DataSource source);
+    default Violations validate(DataSource source) {
+        return validate(source, new Violations(source));
+    }
+
+    Violations validate(DataSource source, Violations violations);
 }

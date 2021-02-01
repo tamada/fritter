@@ -1,15 +1,16 @@
 package jp.cafebabe.fritter.validators.impl.noexit;
 
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.MethodCallExpr;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
-import jp.cafebabe.fritter.validators.Violation;
+import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 import jp.cafebabe.fritter.validators.impl.Utils;
-import org.eclipse.jdt.core.dom.Expression;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.MethodInvocation;
 
 import java.util.Objects;
+import java.util.Optional;
 
 class NoSystemExitVisitor extends FritterASTVisitor {
     private static final Message MESSAGE = Message.format("no System.exit except main method");
@@ -19,22 +20,25 @@ class NoSystemExitVisitor extends FritterASTVisitor {
     }
 
     @Override
-    public boolean visit(MethodDeclaration node) {
-        return !Utils.isMainMethod(node);
+    public void visit(MethodDeclaration node, Violations violations) {
+        if(!Utils.isMainMethod(node))
+            super.visit(node, violations);
     }
 
-    public boolean visit(MethodInvocation node) {
+    @Override
+    public void visit(MethodCallExpr node, Violations violations) {
         if (isSystemExitCall(node))
-            add(node, MESSAGE);
-        return true;
+            violations.add(createViolation(node, MESSAGE));
     }
 
-    private boolean isSystemExitCall(MethodInvocation node) {
+    private boolean isSystemExitCall(MethodCallExpr node) {
         return Utils.isName(node.getName(), "exit") &&
-                isSystem(node.getExpression());
+                isSystem(node.getScope());
     }
 
-    private boolean isSystem(Expression expression) {
-        return Objects.equals(expression.toString(), "System");
+    private boolean isSystem(Optional<Expression> expression) {
+        return expression
+                .map(exp -> Objects.equals(exp.toString(), "System"))
+                .orElse(false);
     }
 }

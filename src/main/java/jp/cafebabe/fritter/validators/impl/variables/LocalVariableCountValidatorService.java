@@ -5,14 +5,14 @@ import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.VisitorAnalysisValidator;
 import jp.cafebabe.fritter.validators.spi.AbstractValidatorService;
 
-public class VariableCountValidatorService extends AbstractValidatorService {
-    public VariableCountValidatorService() {
-        super("variable_count");
+public class LocalVariableCountValidatorService extends AbstractValidatorService {
+    public LocalVariableCountValidatorService() {
+        super("local_variable_count");
     }
 
     @Override
     public Validator build(Parameter param) {
         return new VisitorAnalysisValidator(this, param,
-                (validator) -> new VariableCountVisitor(validator));
+                (validator) -> new LocalVariableCountVisitor(validator));
     }
 }

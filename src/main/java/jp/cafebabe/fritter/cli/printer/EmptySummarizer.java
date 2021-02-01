@@ -1,10 +1,10 @@
 package jp.cafebabe.fritter.cli.printer;
 
-import jp.cafebabe.fritter.entities.ResultSet;
+import jp.cafebabe.fritter.entities.ResultsSet;
 
-public class EmptySummarizer implements Converter<ResultSet>, Summarizer {
+public class EmptySummarizer implements Converter<ResultsSet>, Summarizer {
     @Override
-    public String convert(ResultSet rs) {
+    public String convert(ResultsSet rs) {
         return "";
     }
 }

@@ -2,7 +2,7 @@ package jp.cafebabe.fritter.cli.printer;
 
 import jp.cafebabe.fritter.cli.options.ResultOptions;
 import jp.cafebabe.fritter.config.Format;
-import jp.cafebabe.fritter.entities.ResultSet;
+import jp.cafebabe.fritter.entities.ResultsSet;
 import jp.cafebabe.fritter.validators.Validators;
 
 import java.io.PrintWriter;
@@ -52,7 +52,7 @@ public class ExceptionalPrinter implements Printer {
     }
 
     @Override
-    public boolean print(PrintWriter out, Validators validators, ResultSet rs) {
+    public boolean print(PrintWriter out, Validators validators, ResultsSet rs) {
         throw new UnknownFormatException("unknown format: " + format);
     }
 
@@ -61,10 +61,10 @@ public class ExceptionalPrinter implements Printer {
     }
 
     @Override
-    public void printSummary(PrintWriter out, ResultSet rs) {
+    public void printSummary(PrintWriter out, ResultsSet rs) {
     }
 
     @Override
-    public void printResults(PrintWriter out, ResultSet rs) {
+    public void printResults(PrintWriter out, ResultsSet rs) {
     }
 }

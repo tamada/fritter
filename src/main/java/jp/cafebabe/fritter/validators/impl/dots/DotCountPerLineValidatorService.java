@@ -1,16 +1,16 @@
-package jp.cafebabe.fritter.validators.impl.onedot;
+package jp.cafebabe.fritter.validators.impl.dots;
 
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.spi.AbstractValidatorService;
 
-public class OneDotPerLineValidatorService extends AbstractValidatorService {
-    public OneDotPerLineValidatorService() {
+public class DotCountPerLineValidatorService extends AbstractValidatorService {
+    public DotCountPerLineValidatorService() {
         super("dot_count_per_line");
     }
 
     @Override
     public Validator build(Parameter param) {
-        return new OneDotPerLineValidator(this, param);
+        return new DotCountPerLineValidator(this, param);
     }
 }

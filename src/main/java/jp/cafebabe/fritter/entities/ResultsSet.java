@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class ResultSet {
+public class ResultsSet {
     private Map<SourcePool, Map<DataSource, Violations>> map = new HashMap<>();
 
-    public ResultSet() {
+    public ResultsSet() {
     }
 
     public Stream<Pair<DataSource, Violations>> stream() {
