@@ -1,9 +1,10 @@
 package jp.cafebabe.fritter.utils;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CamelCaserTest {
     @Nested
@@ -11,9 +12,9 @@ public class CamelCaserTest {
     class CamelCase {
         @Test
         public void case1() {
-            Assertions.assertEquals("Json", CamelCaseUtils.upperCamelCase("json"));
-            Assertions.assertEquals("JsonString", CamelCaseUtils.upperCamelCase("jsonString"));
-            Assertions.assertEquals("jsonString", CamelCaseUtils.lowerCamelCase("JsonString"));
+            assertEquals("Json", CamelCaseUtils.upperCamelCase("json"));
+            assertEquals("JsonString", CamelCaseUtils.upperCamelCase("jsonString"));
+            assertEquals("jsonString", CamelCaseUtils.lowerCamelCase("JsonString"));
         }
     }
     @Nested
@@ -23,11 +24,11 @@ public class CamelCaserTest {
         public void case1() {
             String[] data = CamelCaseUtils.split("testDBObjectString");
 
-            Assertions.assertEquals(4, data.length);
-            Assertions.assertEquals("test", data[0]);
-            Assertions.assertEquals("DB", data[1]);
-            Assertions.assertEquals("Object", data[2]);
-            Assertions.assertEquals("String", data[3]);
+            assertEquals(4, data.length);
+            assertEquals("test", data[0]);
+            assertEquals("DB", data[1]);
+            assertEquals("Object", data[2]);
+            assertEquals("String", data[3]);
         }
     }
 }
