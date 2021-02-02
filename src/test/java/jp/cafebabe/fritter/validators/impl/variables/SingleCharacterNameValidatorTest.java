@@ -6,12 +6,13 @@ import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.Helper;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SingleCharacterNameValidatorTest {
     private static Validator validator;
@@ -27,7 +28,7 @@ public class SingleCharacterNameValidatorTest {
     public void case1() {
         DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/StatsValues.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(0, violations.accept(Helper.violationCollector()).size());
+        assertEquals(0, violations.accept(Helper.violationCollector()).size());
     }
 
     @DisplayName("SingleCharacterNameValidator Stats.java")
@@ -35,7 +36,7 @@ public class SingleCharacterNameValidatorTest {
     public void case2() {
         DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/Stats.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(1, violations.accept(Helper.violationCollector()).size());
+        assertEquals(1, violations.accept(Helper.violationCollector()).size());
     }
 
     @DisplayName("SingleCharacterNameValidator Primes.java")
@@ -43,7 +44,7 @@ public class SingleCharacterNameValidatorTest {
     public void case3() {
         DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/Primes.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(0, violations.accept(Helper.violationCollector()).size());
+        assertEquals(0, violations.accept(Helper.violationCollector()).size());
     }
 
     @DisplayName("SingleCharacterNameValidator HelloWorld.java")
@@ -51,6 +52,6 @@ public class SingleCharacterNameValidatorTest {
     public void case4() {
         DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/HelloWorld.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(0, violations.accept(Helper.violationCollector()).size());
+        assertEquals(0, violations.accept(Helper.violationCollector()).size());
     }
 }

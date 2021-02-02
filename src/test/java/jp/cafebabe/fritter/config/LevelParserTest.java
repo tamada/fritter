@@ -3,7 +3,6 @@ package jp.cafebabe.fritter.config;
 import jp.cafebabe.fritter.entities.Name;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;

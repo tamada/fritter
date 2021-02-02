@@ -7,13 +7,14 @@ import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.Helper;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LocalVariableCountValidatorTest {
     private static Validator validator;
@@ -29,7 +30,7 @@ public class LocalVariableCountValidatorTest {
     public void case1() {
         DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/StatsValues.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(0, violations.accept(Helper.violationCollector()).size());
+        assertEquals(0, violations.accept(Helper.violationCollector()).size());
     }
 
     @DisplayName("LocalVariableCountValidator Stats.java")
@@ -37,7 +38,7 @@ public class LocalVariableCountValidatorTest {
     public void case2() {
         DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/Stats.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(0, violations.accept(Helper.violationCollector()).size());
+        assertEquals(0, violations.accept(Helper.violationCollector()).size());
     }
 
     @DisplayName("LocalVariableCountValidator Primes.java")
@@ -46,13 +47,13 @@ public class LocalVariableCountValidatorTest {
         DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/Primes.java"));
         Violations violations = validator.validate(source);
         List<Violation> list = violations.accept(Helper.violationCollector());
-        Assertions.assertEquals(3, list.size());
+        assertEquals(3, list.size());
         var lines = list.stream()
                 .map(v -> v.accept((l, t, m) -> l.toString()))
                 .sorted().toArray(size -> new String[size]);
-        Assertions.assertEquals("10", lines[0]);
-        Assertions.assertEquals("26", lines[1]);
-        Assertions.assertEquals("4", lines[2]);
+        assertEquals("10", lines[0]);
+        assertEquals("26", lines[1]);
+        assertEquals("4", lines[2]);
     }
 
     @DisplayName("LocalVariableCountValidator HelloWorld.java")
@@ -60,7 +61,7 @@ public class LocalVariableCountValidatorTest {
     public void case4() {
         DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/HelloWorld.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(0, violations.accept(Helper.violationCollector()).size());
+        assertEquals(0, violations.accept(Helper.violationCollector()).size());
     }
 
 }
