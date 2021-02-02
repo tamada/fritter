@@ -95,7 +95,7 @@ class NestLevelVisitor extends FritterASTVisitor {
 
     private void unnest(Statement statement) {
         Statement poppedStatement = stack.pop();
-        if(Objects.equals(poppedStatement, statement))
+        if(poppedStatement != statement)
             throw new ValidateException("popped statement did not match, wont " + statement + ", but got " + poppedStatement);
     }
 }
