@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Helper {
+public class ViolationsHelper {
     public static DataSource dataSource(Path path) {
         return new DefaultDataSource(new SourceFilePool(path), path);
     }

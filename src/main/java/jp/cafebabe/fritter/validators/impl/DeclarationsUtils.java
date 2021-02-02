@@ -11,7 +11,7 @@ import com.github.javaparser.ast.type.Type;
 import java.util.List;
 import java.util.Objects;
 
-public class Utils {
+public class DeclarationsUtils {
     public static boolean isStatic(NodeWithModifiers<?> node) {
         List<Modifier> modifiers = node.getModifiers();
         return modifiers.contains(Modifier.staticModifier());

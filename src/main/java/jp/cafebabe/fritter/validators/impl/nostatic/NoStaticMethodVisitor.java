@@ -2,12 +2,10 @@ package jp.cafebabe.fritter.validators.impl.nostatic;
 
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.expr.SimpleName;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import jp.cafebabe.fritter.validators.impl.Utils;
 
 class NoStaticMethodVisitor extends FritterASTVisitor {
     private static final String FORMATTER = "%s: no static method except main method";

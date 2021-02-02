@@ -11,9 +11,9 @@ public class CamelCaserTest {
     class CamelCase {
         @Test
         public void case1() {
-            Assertions.assertEquals("Json", CamelCaser.upperCamelCase("json"));
-            Assertions.assertEquals("JsonString", CamelCaser.upperCamelCase("jsonString"));
-            Assertions.assertEquals("jsonString", CamelCaser.lowerCamelCase("JsonString"));
+            Assertions.assertEquals("Json", CamelCaseUtils.upperCamelCase("json"));
+            Assertions.assertEquals("JsonString", CamelCaseUtils.upperCamelCase("jsonString"));
+            Assertions.assertEquals("jsonString", CamelCaseUtils.lowerCamelCase("JsonString"));
         }
     }
     @Nested
@@ -21,7 +21,7 @@ public class CamelCaserTest {
     class Split {
         @Test
         public void case1() {
-            String[] data = CamelCaser.split("testDBObjectString");
+            String[] data = CamelCaseUtils.split("testDBObjectString");
 
             Assertions.assertEquals(4, data.length);
             Assertions.assertEquals("test", data[0]);

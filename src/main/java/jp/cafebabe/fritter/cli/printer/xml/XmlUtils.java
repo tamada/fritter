@@ -6,9 +6,9 @@ public class XmlUtils {
     }
 
     public static final String escape(String string) {
-        string = string.replaceAll("&", "&amp;");
-        string = string.replaceAll("\"", "&quot;");
-        string = string.replaceAll("<", "&lt;");
-        return string.replaceAll(">", "&gt;");
+        return string.replaceAll("&", "&amp;")
+                .replaceAll("\"", "&quot;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
     }
 }

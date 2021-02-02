@@ -12,9 +12,6 @@ import java.util.stream.Stream;
 public class ResultsSet {
     private Map<SourcePool, Map<DataSource, Violations>> map = new HashMap<>();
 
-    public ResultsSet() {
-    }
-
     public Stream<Pair<DataSource, Violations>> stream() {
         return pools().flatMap(this::stream);
     }

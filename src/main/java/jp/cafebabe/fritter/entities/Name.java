@@ -6,9 +6,7 @@ public class Name {
     private String name;
 
     protected Name(String name) {
-        if(name == null)
-            throw new NullPointerException("name must not null");
-        this.name = name;
+        this.name = Objects.requireNonNull(name);
     }
 
     @Override

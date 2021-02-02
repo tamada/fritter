@@ -1,6 +1,6 @@
 package jp.cafebabe.fritter.utils;
 
-public class CamelCaser {
+public class CamelCaseUtils {
     public static final String upperCamelCase(String name) {
         return new StringBuilder().append(firstUpperChar(name))
                 .append(name.substring(1))

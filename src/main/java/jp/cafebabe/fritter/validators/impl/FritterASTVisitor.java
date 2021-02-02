@@ -32,11 +32,11 @@ public class FritterASTVisitor extends VoidVisitorAdapter<Violations> {
 
     public Location location(Node node) {
         return Location.of(
-                LineCalculator.lineNumber(node));
+                LineCalculatorUtils.lineNumber(node));
     }
 
     public Location locations(Stream<? extends Node> nodes) {
-        int[] lines = nodes.mapToInt(LineCalculator::lineNumber)
+        int[] lines = nodes.mapToInt(LineCalculatorUtils::lineNumber)
                 .toArray();
         return Location.of(lines);
     }

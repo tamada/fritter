@@ -11,7 +11,6 @@ import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Stack;
 
@@ -81,16 +80,16 @@ class NestLevelVisitor extends FritterASTVisitor {
         unnest(node);
     }
 
-    private void nest(Statement statement) {
-        stack.push(statement);
-        if(parameter().lessThan(Value.of(stack.size())))
-            violation = Optional.of(create(statement));
-    }
-
     private Violation create(Statement statement) {
         return createViolation(statement,
                 Message.format(FORMATTER, name,
                         stack.size(), parameter()));
+    }
+
+    private void nest(Statement statement) {
+        stack.push(statement);
+        if(parameter().lessThan(Value.of(stack.size())))
+            violation = Optional.of(create(statement));
     }
 
     private void unnest(Statement statement) {

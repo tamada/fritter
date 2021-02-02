@@ -6,7 +6,7 @@ import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import jp.cafebabe.fritter.validators.impl.Utils;
+import jp.cafebabe.fritter.validators.impl.DeclarationsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 public class FieldCollectingVisitor extends FritterASTVisitor {
     private List<FieldDeclaration> fields = new ArrayList<>();
 
-    public static final Predicate<FieldDeclaration> NOT_STATIC_FIELDS = node -> !Utils.isStatic(node);
+    public static final Predicate<FieldDeclaration> NOT_STATIC_FIELDS = node -> !DeclarationsUtils.isStatic(node);
 
     public FieldCollectingVisitor(Validator validator) {
         super(validator);

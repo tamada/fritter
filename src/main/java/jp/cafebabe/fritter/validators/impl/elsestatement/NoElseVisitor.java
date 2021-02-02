@@ -18,11 +18,11 @@ class NoElseVisitor extends FritterASTVisitor {
 
     @Override
     public void visit(IfStmt node, Violations violations) {
-        checkViolation(node, node.getElseStmt(), violations);
+        checkViolation(node.getElseStmt(), violations);
         super.visit(node, violations);
     }
 
-    private void checkViolation(IfStmt node, Optional<Statement> optional, Violations violations) {
+    private void checkViolation(Optional<Statement> optional, Violations violations) {
         optional.map(statement -> createViolation(statement, MESSAGE))
                 .ifPresent(violations::add);
     }

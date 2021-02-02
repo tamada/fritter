@@ -5,7 +5,7 @@ import com.github.javaparser.ast.Node;
 
 import java.util.Optional;
 
-public class LineCalculator {
+public class LineCalculatorUtils {
     public static int lineNumber(Node node) {
         Optional<Position> position = node.getBegin();
         return findLineNumber(position);
