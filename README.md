@@ -14,19 +14,19 @@ Small object programming/Object oriented exercise checker.
 This product extends [tamada/9rules](https://github.com/tamada/9rules).
 The superior points of `fritter` than 9rules are as follows.
 
-* Simplify the class relationships from 9rules.
-   * In the case of `9rules`, it becomes to complicated relationships among classes to satisfy the 9rules itself.
-   * Then, `fritter` prioritizes the understandability of the source codes even if to not satisfy the rules of itself.
-* Introduce more rules, and ease to add more rules.
-   * This is the side effect of the above point.
-   * To introduce the new rule, we provide only two classes which are subclasses of `Validator` and `ValidatorService`.
-* Ease to customize the parameters for validators.
-   * Every parameters are read from configuration files.
-   * The configuration files are given by `--level` option or `--config` option.  `fritter` defines the parameters by json formatted config file also `level`.
-* Enable to select the output formats.
-   * `fritter` provides `json`, `xml`, and `markdown` format as result.
+*  Simplify the class relationships from 9rules.
+   *  In the case of `9rules`, it becomes to complicated relationships among classes to satisfy the 9rules itself.
+   *  Then, `fritter` prioritizes the understandability of the source codes even if to not satisfy the rules of itself.
+*  Introduce more rules, and ease to add more rules.
+   *  This is the side effect of the above point.
+   *  To introduce the new rule, we provide only two classes which are subclasses of `Validator` and `ValidatorService`.
+*  Ease to customize the parameters for validators.
+   *  All parameters are read from configuration files.
+   *  The configuration files are given by `--level` option or `--config` option.  `fritter` defines the parameters by json formatted config file also `level`.
+*  Enable to select the output formats.
+   *  `fritter` provides `json`, `xml`, and `markdown` format as result.
 * Thread supports.
-   * `fritter` uses the threads by user requests for each analyzing target.
+   *  `fritter` uses the threads by user requests for each analyzing target.
 
 ## Description
 
@@ -337,4 +337,3 @@ Date: 2021-02-01T23:47:02.609847
 * total files: 1
 * violated file count: 8
 ```
-
