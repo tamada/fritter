@@ -29,8 +29,8 @@ public class LevelParser {
     }
 
     private Optional<Level> load(ExceptionableSupplier<BufferedReader, IOException> supplier) {
-        return Try.withResources(() -> supplier.get())
-                .of(reader -> loadImpl(reader))
+        return Try.withResources(supplier::get)
+                .of(this::loadImpl)
                 .toJavaOptional();
     }
 

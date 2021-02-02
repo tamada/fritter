@@ -18,7 +18,7 @@ class LevelJsonParser {
     }
 
     private List<Pair<CheckerType, Parameter>> createParameters(JsonObject object) {
-        List<String> names = findCheckerTypes(object.getAsJsonArray("checkers"));
+        List<String> names = findCheckerTypes(object.getAsJsonArray("validators"));
         return findParameters(names, object.getAsJsonObject("parameters"));
     }
 

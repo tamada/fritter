@@ -85,6 +85,44 @@ Small object programming checker.
   -V, --version             Print version information and exit.
 ```
 
+## Config format
+
+The format of config file must be JSON, like as follows.
+
+```json
+{
+  "name": "default",
+  "validators": [
+    "indent_level",
+    "no_else",
+    "primitive_wrapping",
+    "dot_count_per_line",
+    "no_abbrev",
+    "lines_of_class",
+    "lines_of_method",
+    "classes_in_package",
+    "field_count",
+    "first_class_collection",
+    "no_accessor",
+    "variable_count",
+    "no_static_method",
+    "no_new_array",
+    "no_system_exit",
+    "no_return_code_in_printf",
+    "single_character_name"
+  ],
+  "parameters": {
+    "indent_level": 1,
+    "dot_count_per_line": 1,
+    "lines_of_class": 50,
+    "lines_of_method": 3,
+    "classes_in_package": 10,
+    "field_count": 2,
+    "variable_count": 2
+  }
+}
+```
+
 ## Result example
 
 ### Json

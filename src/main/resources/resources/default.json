@@ -1,6 +1,6 @@
 {
   "name": "default",
-  "checkers": [
+  "validators": [
     "indent_level",
     "no_else",
     "primitive_wrapping",
