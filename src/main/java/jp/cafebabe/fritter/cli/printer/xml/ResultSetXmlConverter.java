@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ResultSetXmlConverter implements Converter<ResultsSet> {
-    private Converter<Violations> converter = violations -> violations.accept(new XmlViolationsVisitor());
+    private Converter<Violations> converter = violations -> violations.accept(new ViolationsVisitor());
 
     @Override
     public String convert(ResultsSet item) {

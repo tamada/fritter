@@ -2,7 +2,6 @@ package jp.cafebabe.fritter.validators.impl.fields;
 
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;

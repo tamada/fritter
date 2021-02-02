@@ -11,6 +11,7 @@ import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Stack;
 
@@ -94,7 +95,7 @@ class NestLevelVisitor extends FritterASTVisitor {
 
     private void unnest(Statement statement) {
         Statement poppedStatement = stack.pop();
-        if(poppedStatement != statement)
+        if(Objects.equals(poppedStatement, statement))
             throw new ValidateException("popped statement did not match, wont " + statement + ", but got " + poppedStatement);
     }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class CamelCaserTest {
     @Nested
     @DisplayName("to camel case")
-    class camelCase {
+    class CamelCase {
         @Test
         public void case1() {
             Assertions.assertEquals("Json", CamelCaser.upperCamelCase("json"));
@@ -18,7 +18,7 @@ public class CamelCaserTest {
     }
     @Nested
     @DisplayName("split")
-    class split {
+    class Split {
         @Test
         public void case1() {
             String[] data = CamelCaser.split("testDBObjectString");

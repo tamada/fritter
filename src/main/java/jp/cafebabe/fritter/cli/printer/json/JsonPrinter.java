@@ -1,13 +1,13 @@
 package jp.cafebabe.fritter.cli.printer.json;
 
-import static jp.cafebabe.fritter.cli.printer.json.Jsonier.string;
-
 import jp.cafebabe.fritter.cli.printer.AbstractPrinter;
 import jp.cafebabe.fritter.cli.printer.Summarizer;
 import jp.cafebabe.fritter.cli.printer.ValidatorsConverter;
 import jp.cafebabe.fritter.entities.ResultsSet;
 
 import java.io.PrintWriter;
+
+import static jp.cafebabe.fritter.cli.printer.json.Jsonier.string;
 
 public class JsonPrinter extends AbstractPrinter {
     public JsonPrinter(ValidatorsConverter converter, Summarizer summarizer) {

@@ -2,16 +2,15 @@ package jp.cafebabe.fritter.utils;
 
 import jp.cafebabe.fritter.entities.Pair;
 
-import static java.util.Spliterator.NONNULL;
-import static java.util.Spliterator.ORDERED;
-
 import java.util.Iterator;
 import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import static java.util.Spliterator.NONNULL;
+import static java.util.Spliterator.ORDERED;
+
 /**
- *
  * @see <a href="http://d.hatena.ne.jp/nowokay/20140321">http://d.hatena.ne.jp/nowokay/20140321</a>
  */
 public class Streams {
@@ -27,6 +26,6 @@ public class Streams {
     private static <T, U> Iterator<Pair<T, U>> iterator(Stream<T> f, Stream<U> s){
         Iterator<T> fitesIterator = f.iterator();
         Iterator<U> sitesIterator = s.iterator();
-        return new PairIterator<>(fitesIterator, sitesIterator);
+        return new IteratorPair<>(fitesIterator, sitesIterator);
     }
 }

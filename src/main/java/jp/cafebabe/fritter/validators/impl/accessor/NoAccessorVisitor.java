@@ -1,7 +1,6 @@
 package jp.cafebabe.fritter.validators.impl.accessor;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.expr.SimpleName;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;

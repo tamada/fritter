@@ -2,7 +2,6 @@ package jp.cafebabe.fritter.cli.printer.xml;
 
 import jp.cafebabe.fritter.cli.printer.Converter;
 import jp.cafebabe.fritter.entities.sources.DataSource;
-import jp.cafebabe.fritter.entities.visitors.ViolationsVisitor;
 import jp.cafebabe.fritter.validators.ValidateException;
 import jp.cafebabe.fritter.validators.Violation;
 
@@ -10,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class XmlViolationsVisitor implements ViolationsVisitor<String> {
-    private Converter<Violation> converter = violation -> violation.accept(new XmlViolationVisitor());
+class ViolationsVisitor implements jp.cafebabe.fritter.entities.visitors.ViolationsVisitor<String> {
+    private Converter<Violation> converter = violation -> violation.accept(new ViolationVisitor());
     private StringBuilder sb = new StringBuilder();
     private List<Exception> exceptions = new ArrayList<>();
 

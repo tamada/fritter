@@ -2,8 +2,6 @@ package jp.cafebabe.fritter.validators.impl;
 
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
-import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.SimpleName;
@@ -12,7 +10,6 @@ import com.github.javaparser.ast.type.Type;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Utils {
     public static boolean isStatic(NodeWithModifiers<?> node) {

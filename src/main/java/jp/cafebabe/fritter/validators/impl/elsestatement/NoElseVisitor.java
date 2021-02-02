@@ -4,7 +4,6 @@ import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
-import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 

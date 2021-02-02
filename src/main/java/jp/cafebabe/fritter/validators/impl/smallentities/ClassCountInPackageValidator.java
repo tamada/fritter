@@ -6,7 +6,6 @@ import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.entities.sources.DefaultDataSource;
 import jp.cafebabe.fritter.validators.AbstractValidator;
-import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;

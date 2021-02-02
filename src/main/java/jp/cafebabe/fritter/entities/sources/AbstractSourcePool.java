@@ -1,7 +1,6 @@
 package jp.cafebabe.fritter.entities.sources;
 
 import java.nio.file.Path;
-import java.util.stream.Stream;
 
 public abstract class AbstractSourcePool implements SourcePool {
     private Path base;

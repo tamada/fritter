@@ -1,7 +1,6 @@
 package jp.cafebabe.fritter.validators.spi;
 
 import jp.cafebabe.fritter.config.CheckerType;
-import jp.cafebabe.fritter.config.Parameter;
 
 public abstract class AbstractValidatorService implements ValidatorService {
     private CheckerType name;

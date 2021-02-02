@@ -1,8 +1,5 @@
 package jp.cafebabe.fritter.cli.printer.json;
 
-import static jp.cafebabe.fritter.cli.printer.json.Jsonier.string;
-import static jp.cafebabe.fritter.cli.printer.json.Jsonier.toJsonArray;
-
 import jp.cafebabe.fritter.entities.Pair;
 import jp.cafebabe.fritter.entities.ResultsSet;
 import jp.cafebabe.fritter.entities.sources.DataSource;
@@ -10,6 +7,9 @@ import jp.cafebabe.fritter.entities.sources.SourcePool;
 import jp.cafebabe.fritter.validators.Violations;
 
 import java.util.stream.Stream;
+
+import static jp.cafebabe.fritter.cli.printer.json.Jsonier.string;
+import static jp.cafebabe.fritter.cli.printer.json.Jsonier.toJsonArray;
 
 public class ResultSetJsonier implements Jsonier<ResultsSet> {
     private Jsonier<Violations> jsonier = violations -> violations.accept(new ViolationsVisitor());

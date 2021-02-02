@@ -1,6 +1,5 @@
 package jp.cafebabe.fritter.config;
 
-import com.google.gson.JsonObject;
 import jp.cafebabe.fritter.entities.Name;
 import jp.cafebabe.fritter.entities.Pair;
 
