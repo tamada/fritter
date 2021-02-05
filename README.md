@@ -2,7 +2,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2efb1d837efe40019652723687ac9173)](https://www.codacy.com/gh/tamada/fritter/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tamada/fritter&amp;utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/tamada/fritter/badge.svg?branch=main)](https://coveralls.io/github/tamada/fritter?branch=main)
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue)](https://raw.githubusercontent.com/tamada/fritter/main/LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen)](https://raw.githubusercontent.com/tamada/fritter/main/LICENSE)
 
 [![Discussion](https://img.shields.io/badge/GitHub-Discussion-orange?logo=github)](https://github.com/tamada/fritter/discussions)
 [![Docker](https://img.shields.io/badge/Docker-ghcr.io%2Ftamada%2Ffritter%3A1.0.0-orange?logo=docker)](https://github.com/users/tamada/packages/container/package/fritter)
@@ -15,18 +15,18 @@ This product extends [tamada/9rules](https://github.com/tamada/9rules).
 The superior points of `fritter` than 9rules are as follows.
 
 *  Simplify the class relationships from 9rules.
-   *  In the case of `9rules`, it becomes to complicated relationships among classes to satisfy the 9rules itself.
-   *  Then, `fritter` prioritizes the understandability of the source codes even if to not satisfy the rules of itself.
+    *  In the case of `9rules`, it becomes to complicated relationships among classes to satisfy the 9rules itself.
+    *  Then, `fritter` prioritizes the understandability of the source codes even if to not satisfy the rules of itself.
 *  Introduce more rules, and ease to add more rules.
-   *  This is the side effect of the above point.
-   *  To introduce the new rule, we provide only two classes which are subclasses of `Validator` and `ValidatorService`.
+    *  This is the side effect of the above point.
+    *  To introduce the new rule, we provide only two classes which are subclasses of `Validator` and `ValidatorService`.
 *  Ease to customize the parameters for validators.
-   *  All parameters are read from configuration files.
-   *  The configuration files are given by `--level` option or `--config` option.  `fritter` defines the parameters by json formatted config file also `level`.
+    *  All parameters are read from configuration files.
+    *  The configuration files are given by `--level` option or `--config` option.  `fritter` defines the parameters by json formatted config file also `level`.
 *  Enable to select the output formats.
-   *  `fritter` provides `json`, `xml`, and `markdown` format as result.
+    *  `fritter` provides `json`, `xml`, and `markdown` format as result.
 * Thread supports.
-   *  `fritter` uses the threads by user requests for each analyzing target.
+    *  `fritter` uses the threads by user requests for each analyzing target.
 
 ## Description
 
@@ -34,7 +34,7 @@ The book titled '[The ThoughtWorks Anthology: Essays on Software Technology and 
 Chapter 6 in the book introduces object calisthenics for better software design.
 The rules shown in the book are as follows.
 
-1.  Use 1 level of indentation per method (`indent_level`), `DONE` 
+1.  Use 1 level of indentation per method (`indent_level`), `DONE`
 2.  Do not use the `else` keyword (`no_else`), `DONE`
 3.  Wrap all primitives and strings (`primitive_wrapping`), `DONE`
 4.  Use only 1 dot per line (`one_dot_per_line`), `DONE`
@@ -51,7 +51,9 @@ Unfortunately, to confirm obeying the rules is by a human eye.
 Therefore, this tool was developed to validate the rules automatically by analyzing given Java source codes.
 By the way, this tool is programed to obey above rules.
 
-### Introduced rules
+### Additional rules
+
+The following rules are the additional rules for more analysis.
 
 10.  Do not use any methods with more than 2 local variables (`local_variable_count`), `DONE`
 11.  Do not use `static` method except `main` method (`no_static_method`), `DONE`
