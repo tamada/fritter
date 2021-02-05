@@ -1,17 +1,11 @@
 package jp.cafebabe.fritter.validators.impl;
 
 import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.ConstructorDeclaration;
-import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
-import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithAnnotations;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import io.vavr.control.Option;
 import jp.cafebabe.fritter.annotation.Ignore;
 import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.config.Parameter;
@@ -21,11 +15,9 @@ import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
 
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.stream.Stream;
 
 public class FritterASTVisitor extends VoidVisitorAdapter<Violations> {
     private Validator validator;
@@ -46,7 +38,7 @@ public class FritterASTVisitor extends VoidVisitorAdapter<Violations> {
         return new Violation(location, validator.name(), message);
     }
 
-    private <T extends NodeWithAnnotations<? extends Node>> Optional<AnnotationExpr> ifIgnore(T node, Violations violations) {
+    private <T extends NodeWithAnnotations<? extends Node>> Optional<AnnotationExpr> ifIgnore(T node) {
         Optional<AnnotationExpr> optional = node.getAnnotationByClass(Ignore.class);
         return optional.map(expr ->
                 contains(expr.asSingleMemberAnnotationExpr(), validator.name()));
@@ -66,7 +58,7 @@ public class FritterASTVisitor extends VoidVisitorAdapter<Violations> {
 
     public <T extends NodeWithAnnotations<? extends Node>> void performIfTarget(T node, Violations violations,
                                                                                 BiConsumer<T, Violations> consumer) {
-        ifIgnore(node, violations)
+        ifIgnore(node)
                 .ifPresentOrElse(expr -> {}, () -> consumer.accept(node, violations));
     }
 }

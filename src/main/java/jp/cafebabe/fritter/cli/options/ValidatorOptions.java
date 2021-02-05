@@ -25,6 +25,11 @@ public class ValidatorOptions {
     private Level loadLevel() {
         LevelParser parser = new LevelParser();
         return fileName.map(path -> parser.parse(path))
+                .orElseGet(() -> findLevel(parser));
+    }
+
+    private Level findLevel(LevelParser parser) {
+        return Optional.of(level)
                 .orElseGet(() -> defaultLevel(parser));
     }
 
