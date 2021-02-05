@@ -3,11 +3,11 @@ package jp.cafebabe.fritter.validators;
 import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.config.Parameter;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidatorBuilderTest {
@@ -23,7 +23,7 @@ public class ValidatorBuilderTest {
     @Test
     @DisplayName("unknown type of validator")
     public void case2() {
-        Optional<Validator> validator = builder.build(CheckerType.of("unknown_type"), Parameter.EMPTY);
-        assertTrue(validator.isEmpty());
+        assertThrows(IllegalArgumentException.class, () ->
+                builder.build(CheckerType.of("unknown_type"), Parameter.EMPTY));
     }
 }

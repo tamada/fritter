@@ -16,7 +16,7 @@ class FirstClassCollectionVisitor extends FieldCollectingVisitor {
     @Override
     public void visit(ClassOrInterfaceDeclaration node, Violations violations) {
         super.visit(node, violations);
-        checkViolation(violations);
+        performIfTarget(node, violations, (n, v) -> checkViolation(v));
     }
 
     private void checkViolation(Violations violations) {

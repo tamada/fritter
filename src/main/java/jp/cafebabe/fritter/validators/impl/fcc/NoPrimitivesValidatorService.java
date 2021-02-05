@@ -1,13 +1,14 @@
 package jp.cafebabe.fritter.validators.impl.fcc;
 
+import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.validators.Validator;
-import jp.cafebabe.fritter.validators.VisitorAnalysisValidator;
+import jp.cafebabe.fritter.validators.impl.VisitorAnalysisValidator;
 import jp.cafebabe.fritter.validators.spi.AbstractValidatorService;
 
 public class NoPrimitivesValidatorService extends AbstractValidatorService {
     public NoPrimitivesValidatorService() {
-        super("primitive_wrapping");
+        super(CheckerType.PRIMITIVE_WRAPPING);
     }
 
     @Override

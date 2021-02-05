@@ -16,7 +16,7 @@ public class NoAccessorVisitor extends FritterASTVisitor {
 
     @Override
     public void visit(MethodDeclaration node, Violations violations) {
-        checkViolation(node, violations);
+        performIfTarget(node, violations, (n, v) -> checkViolation(n, v));
         super.visit(node, violations);
     }
 

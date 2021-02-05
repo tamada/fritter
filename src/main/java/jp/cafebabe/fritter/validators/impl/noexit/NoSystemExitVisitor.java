@@ -21,6 +21,10 @@ class NoSystemExitVisitor extends FritterASTVisitor {
 
     @Override
     public void visit(MethodDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> checkViolation(n, v));
+    }
+
+    private void checkViolation(MethodDeclaration node, Violations violations) {
         if(!DeclarationsUtils.isMainMethod(node))
             super.visit(node, violations);
     }

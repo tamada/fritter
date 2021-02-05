@@ -47,7 +47,7 @@ public class LinesOfMethodValidatorTest {
         DataSource source = ViolationsHelper.dataSource(Paths.get("src/test/resources/projects/examples/Primes.java"));
         Violations violations = validator.validate(source);
         List<Violation> list = violations.accept(ViolationsHelper.violationCollector());
-        assertEquals(6, list.size());
+        assertEquals(5, list.size());
     }
 
     @DisplayName("LinesOfMethodValidator HelloWorld.java")

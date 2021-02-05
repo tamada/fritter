@@ -7,6 +7,7 @@ import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
 import jp.cafebabe.fritter.validators.impl.DeclarationsUtils;
+import jp.cafebabe.fritter.validators.impl.LineCalculatorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +25,12 @@ public class FieldCollectingVisitor extends FritterASTVisitor {
     @Override
     public void visit(ClassOrInterfaceDeclaration node, Violations violations) {
         fields.clear();
-        super.visit(node, violations);
+        performIfTarget(node, violations, (n, v) -> super.visit(n, v));
     }
 
     @Override
     public void visit(FieldDeclaration node, Violations violations) {
-        fields.add(node);
+        performIfTarget(node, violations, (n, v) -> fields.add(n));
     }
 
     public Location fieldLocations() {
@@ -37,8 +38,9 @@ public class FieldCollectingVisitor extends FritterASTVisitor {
     }
 
     public Location fieldLocations(Predicate<FieldDeclaration> predicate) {
-        return locations(fields.stream()
-                .filter(predicate));
+        return LineCalculatorUtils.locations(
+                fields.stream()
+                        .filter(predicate));
     }
 
     public long countFieldCount(Predicate<FieldDeclaration> predicate) {

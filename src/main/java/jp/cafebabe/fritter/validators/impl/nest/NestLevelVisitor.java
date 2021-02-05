@@ -35,7 +35,7 @@ class NestLevelVisitor extends FritterASTVisitor {
     public void visit(MethodDeclaration node, Violations violations) {
         initialize(node);
         super.visit(node, violations);
-        violation.ifPresent(v -> violations.add(v));
+        performIfTarget(node, violations, (n, v) -> violation.ifPresent(vv -> violations.add(vv)));
     }
 
     @Override

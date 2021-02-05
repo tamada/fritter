@@ -1,5 +1,6 @@
 package jp.cafebabe.fritter.validators.impl.nort;
 
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.StringLiteralExpr;
 import jp.cafebabe.fritter.entities.Message;
@@ -17,6 +18,11 @@ class NoReturnCodeInPrintfVisitor extends FritterASTVisitor {
 
     public NoReturnCodeInPrintfVisitor(Validator validator) {
         super(validator);
+    }
+
+    @Override
+    public void visit(MethodDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> super.visit(n, v));
     }
 
     @Override

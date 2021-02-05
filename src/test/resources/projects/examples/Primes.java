@@ -23,7 +23,8 @@ public class Primes {
             System.out.println();
     }
 
-    private boolean[] sieves(int limit) {
+    @Ignore(CheckerType.LINES_OF_METHOD)
+    private boolean[] sieves(int limit) { // too long method, but ignore it.
         boolean[] array = initialize(limit);
         for(int i = 2; i < array.length; i++) {
             if(array[i])

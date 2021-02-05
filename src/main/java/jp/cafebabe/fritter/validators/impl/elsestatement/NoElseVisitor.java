@@ -1,5 +1,6 @@
 package jp.cafebabe.fritter.validators.impl.elsestatement;
 
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import jp.cafebabe.fritter.entities.Message;
@@ -14,6 +15,10 @@ class NoElseVisitor extends FritterASTVisitor {
 
     public NoElseVisitor(Validator validator) {
         super(validator);
+    }
+
+    public void visit(MethodDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> super.visit(n, v));
     }
 
     @Override

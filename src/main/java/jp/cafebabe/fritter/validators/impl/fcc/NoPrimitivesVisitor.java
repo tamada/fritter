@@ -23,6 +23,10 @@ class NoPrimitivesVisitor extends FieldCollectingVisitor {
     @Override
     public void visit(ClassOrInterfaceDeclaration node, Violations violations) {
         super.visit(node, violations);
+        performIfTarget(node, violations, (n, v) -> checkViolations(v));
+    }
+
+    private void checkViolations(Violations violations) {
         if (isViolated())
             violations.add(createViolation(fieldLocations(), MESSAGE));
     }

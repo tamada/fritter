@@ -1,13 +1,14 @@
 package jp.cafebabe.fritter.validators.impl.noexit;
 
+import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.validators.Validator;
-import jp.cafebabe.fritter.validators.VisitorAnalysisValidator;
+import jp.cafebabe.fritter.validators.impl.VisitorAnalysisValidator;
 import jp.cafebabe.fritter.validators.spi.AbstractValidatorService;
 
 public class NoSystemExitValidatorService extends AbstractValidatorService {
     public NoSystemExitValidatorService() {
-        super("no_system_exit");
+        super(CheckerType.NO_SYSTEM_EXIT);
     }
 
     @Override

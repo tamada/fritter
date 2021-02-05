@@ -1,12 +1,13 @@
 package jp.cafebabe.fritter.validators.impl.dots;
 
+import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.spi.AbstractValidatorService;
 
 public class DotCountPerLineValidatorService extends AbstractValidatorService {
     public DotCountPerLineValidatorService() {
-        super("dot_count_per_line");
+        super(CheckerType.DOT_COUNT_PER_LINE);
     }
 
     @Override
