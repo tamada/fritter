@@ -5,6 +5,7 @@ import io.vavr.control.Try;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
+import jp.cafebabe.fritter.validators.impl.IgnoreSupportVisitor;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;
 
 import java.util.function.Function;
@@ -27,7 +28,7 @@ public class VisitorAnalysisValidator extends AbstractValidator {
 
     private Violations toViolations(CompilationUnit unit, Violations violations) {
         FritterASTVisitor visitor = visitorFactory.apply(this);
-        unit.accept(visitor, violations);
+        unit.accept(new IgnoreSupportVisitor(visitor, this), violations);
         return violations;
     }
 

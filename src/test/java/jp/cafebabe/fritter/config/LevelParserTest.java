@@ -16,11 +16,8 @@ public class LevelParserTest {
     @Test
     public void case1() {
         LevelParser parser = new LevelParser();
-        Optional<Level> optional = parser.parse("default");
+        Level level = parser.parse("default");
 
-        assertTrue(optional.isPresent());
-
-        Level level = optional.get();
         assertNotNull(level);
         assertEquals(Name.of("default"), level.name());
         assertTrue(level.available(CheckerType.of("indent_level")));
