@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Optional;
 
 public class LevelParser {
     public final Level parse(String name) {
