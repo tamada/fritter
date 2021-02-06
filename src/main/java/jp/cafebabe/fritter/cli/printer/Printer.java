@@ -33,8 +33,10 @@ public interface Printer {
     void printResults(PrintWriter out, ResultsSet rs);
 
     default void printHeader(PrintWriter out, ResultsSet rs) {
+        // do nothing.
     }
 
     default void printFooter(PrintWriter out, ResultsSet rs) {
+        // do nothing.
     }
 }

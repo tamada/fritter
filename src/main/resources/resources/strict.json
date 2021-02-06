@@ -1,6 +1,6 @@
 {
   "name": "strict",
-  "checkers": [
+  "validators": [
     "indent_level","no_else",
     "primitive_wrapping",
     "dot_count_per_line",

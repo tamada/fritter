@@ -19,8 +19,7 @@ class LocalVariableCountVisitor extends FritterASTVisitor {
     @Override
     public void visit(MethodDeclaration node, Violations violations) {
         localVariableCount = 0;
-        super.visit(node, violations);
-        checkViolation(node, violations);
+        performIfTarget(node, violations, (n, v) -> checkViolation(n, v));
     }
 
     @Override
@@ -30,6 +29,11 @@ class LocalVariableCountVisitor extends FritterASTVisitor {
     }
 
     private void checkViolation(MethodDeclaration node, Violations violations) {
+        super.visit(node, violations);
+        checkViolationImpl(node, violations);
+    }
+
+    private void checkViolationImpl(MethodDeclaration node, Violations violations) {
         if(parameter().lessThan(Value.of(localVariableCount)))
             violations.add(createViolation(node,
                     Message.format(FORMATTER, localVariableCount, parameter())));

@@ -3,7 +3,7 @@ package jp.cafebabe.fritter.validators.impl.nostatic;
 import java.util.function.Consumer;
 
 class Flag {
-    boolean value;
+    private boolean value;
 
     private Flag(boolean flag) {
         this.value = flag;

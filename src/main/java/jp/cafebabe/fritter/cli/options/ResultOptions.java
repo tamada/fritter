@@ -23,7 +23,7 @@ public class ResultOptions {
 
     @Option(names={"-f", "--format"}, paramLabel="FORMAT",
             description={"specifies the resultant format. Default is json.",
-                    "Available values: json, markdown, yaml, and xml"},
+                    "Available values: json, markdown, and xml"},
             converter = FormatConverter.class)
     private Format format = Format.Json;
 

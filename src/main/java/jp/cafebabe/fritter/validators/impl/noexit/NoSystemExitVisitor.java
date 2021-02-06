@@ -7,7 +7,7 @@ import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import jp.cafebabe.fritter.validators.impl.Utils;
+import jp.cafebabe.fritter.validators.impl.DeclarationsUtils;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -21,7 +21,11 @@ class NoSystemExitVisitor extends FritterASTVisitor {
 
     @Override
     public void visit(MethodDeclaration node, Violations violations) {
-        if(!Utils.isMainMethod(node))
+        performIfTarget(node, violations, (n, v) -> checkViolation(n, v));
+    }
+
+    private void checkViolation(MethodDeclaration node, Violations violations) {
+        if(!DeclarationsUtils.isMainMethod(node))
             super.visit(node, violations);
     }
 
@@ -32,7 +36,7 @@ class NoSystemExitVisitor extends FritterASTVisitor {
     }
 
     private boolean isSystemExitCall(MethodCallExpr node) {
-        return Utils.isName(node.getName(), "exit") &&
+        return DeclarationsUtils.isName(node.getName(), "exit") &&
                 isSystem(node.getScope());
     }
 

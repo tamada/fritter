@@ -17,20 +17,24 @@ public class ValidatorOptions {
             description={"specifies the strict level. Default is default.",
                     "Available values: strict, general, rough, and default."},
             converter = LevelConverter.class)
-    private Optional<Level> level = Optional.empty();
+    private Level level;
 
     @Option(names={"-t", "--with-threads"}, description="use threads for validations.")
     private boolean withThread = false;
 
     private Level loadLevel() {
         LevelParser parser = new LevelParser();
-        return fileName.flatMap(path -> parser.load(path))
+        return fileName.map(path -> parser.parse(path))
+                .orElseGet(() -> findLevel(parser));
+    }
+
+    private Level findLevel(LevelParser parser) {
+        return Optional.of(level)
                 .orElseGet(() -> defaultLevel(parser));
     }
 
     private Level defaultLevel(LevelParser parser) {
-        return level.orElseGet(() ->
-                parser.parse("default").get());
+        return parser.parse("default");
     }
 
     public Validators createValidators() {

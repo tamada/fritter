@@ -1,9 +1,6 @@
 package jp.cafebabe.fritter.validators.impl.fcc;
 
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.body.VariableDeclarator;
-import com.github.javaparser.ast.type.Type;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;
@@ -19,7 +16,7 @@ class FirstClassCollectionVisitor extends FieldCollectingVisitor {
     @Override
     public void visit(ClassOrInterfaceDeclaration node, Violations violations) {
         super.visit(node, violations);
-        checkViolation(violations);
+        performIfTarget(node, violations, (n, v) -> checkViolation(v));
     }
 
     private void checkViolation(Violations violations) {

@@ -35,7 +35,7 @@ class NestLevelVisitor extends FritterASTVisitor {
     public void visit(MethodDeclaration node, Violations violations) {
         initialize(node);
         super.visit(node, violations);
-        violation.ifPresent(v -> violations.add(v));
+        performIfTarget(node, violations, (n, v) -> violation.ifPresent(vv -> violations.add(vv)));
     }
 
     @Override
@@ -80,16 +80,16 @@ class NestLevelVisitor extends FritterASTVisitor {
         unnest(node);
     }
 
-    private void nest(Statement statement) {
-        stack.push(statement);
-        if(parameter().lessThan(Value.of(stack.size())))
-            violation = Optional.of(create(statement));
-    }
-
     private Violation create(Statement statement) {
         return createViolation(statement,
                 Message.format(FORMATTER, name,
                         stack.size(), parameter()));
+    }
+
+    private void nest(Statement statement) {
+        stack.push(statement);
+        if(parameter().lessThan(Value.of(stack.size())))
+            violation = Optional.of(create(statement));
     }
 
     private void unnest(Statement statement) {

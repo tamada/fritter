@@ -1,17 +1,16 @@
 package jp.cafebabe.fritter.cli.printer.xml;
 
-import static jp.cafebabe.fritter.cli.printer.xml.XmlUtils.escape;
-
 import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
-import jp.cafebabe.fritter.entities.visitors.ViolationVisitor;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class XmlViolationVisitor implements ViolationVisitor<String>, LocationVisitor<String> {
+import static jp.cafebabe.fritter.cli.printer.xml.XmlUtils.escape;
+
+class ViolationVisitor implements jp.cafebabe.fritter.entities.visitors.ViolationVisitor<String>, LocationVisitor<String> {
     @Override
     public String visitViolation(Location location, CheckerType type, Message message) {
         return String.format("<violation><validator-type>%s</validator-type><location>%s</location><message>%s</message></violation>",

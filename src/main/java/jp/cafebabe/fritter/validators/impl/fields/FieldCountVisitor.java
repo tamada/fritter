@@ -16,7 +16,7 @@ class FieldCountVisitor extends FieldCollectingVisitor {
     @Override
     public void visit(ClassOrInterfaceDeclaration node, Violations violations) {
         super.visit(node, violations);
-        checkFieldCount(violations);
+        performIfTarget(node, violations, (n, v) -> checkFieldCount(v));
     }
 
     private void checkFieldCount(Violations violations) {

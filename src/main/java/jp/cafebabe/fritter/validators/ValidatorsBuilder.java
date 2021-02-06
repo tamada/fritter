@@ -2,9 +2,7 @@ package jp.cafebabe.fritter.validators;
 
 import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.config.Level;
-import jp.cafebabe.fritter.config.Parameter;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;

@@ -12,20 +12,20 @@ class LinesOfClassVisitor extends LinesOfCodeVisitor {
     }
 
     @Override
-    public void visit(ClassOrInterfaceDeclaration type, Violations v) {
-        checkViolation(type, "class", v);
-        super.visit(type, v);
+    public void visit(ClassOrInterfaceDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> checkViolation(n, "class", v));
+        super.visit(node, violations);
     }
 
     @Override
-    public void visit(EnumDeclaration declaration, Violations v) {
-        checkViolation(declaration, "enum", v);
-        super.visit(declaration, v);
+    public void visit(EnumDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> checkViolation(n, "enum", v));
+        super.visit(node, violations);
     }
 
     @Override
-    public void visit(AnnotationDeclaration declaration, Violations v) {
-        checkViolation(declaration, "annotation", v);
-        super.visit(declaration, v);
+    public void visit(AnnotationDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> checkViolation(n, "annotation", v));
+        super.visit(node, violations);
     }
 }

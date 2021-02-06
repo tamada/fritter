@@ -8,6 +8,42 @@ import jp.cafebabe.fritter.validators.Validators;
 import java.io.PrintWriter;
 
 public class ExceptionalPrinter implements Printer {
+    private Format format;
+
+    public ExceptionalPrinter(Format format){
+        this.format = format;
+    }
+
+    @Override
+    public Summarizer summarizer() {
+        return null;
+    }
+
+    @Override
+    public ValidatorsConverter validatorsConveter() {
+        return null;
+    }
+
+    @Override
+    public boolean print(PrintWriter out, Validators validators, ResultsSet rs) {
+        throw new UnknownFormatException("unknown format: " + format);
+    }
+
+    @Override
+    public void printValidators(PrintWriter out, Validators validators) {
+        // do nothing.
+    }
+
+    @Override
+    public void printSummary(PrintWriter out, ResultsSet rs) {
+        // do nothing.
+    }
+
+    @Override
+    public void printResults(PrintWriter out, ResultsSet rs) {
+        // do nothing.
+    }
+
     public static final class Service implements PrinterService {
         private Format format;
 
@@ -35,36 +71,6 @@ public class ExceptionalPrinter implements Printer {
             return null;
         }
     }
-    private Format format;
-
-    public ExceptionalPrinter(Format format){
-        this.format = format;
-    }
-
-    @Override
-    public Summarizer summarizer() {
-        return null;
-    }
-
-    @Override
-    public ValidatorsConverter validatorsConveter() {
-        return null;
-    }
-
-    @Override
-    public boolean print(PrintWriter out, Validators validators, ResultsSet rs) {
-        throw new UnknownFormatException("unknown format: " + format);
-    }
-
-    @Override
-    public void printValidators(PrintWriter out, Validators validators) {
-    }
-
-    @Override
-    public void printSummary(PrintWriter out, ResultsSet rs) {
-    }
-
-    @Override
-    public void printResults(PrintWriter out, ResultsSet rs) {
-    }
 }
+
+

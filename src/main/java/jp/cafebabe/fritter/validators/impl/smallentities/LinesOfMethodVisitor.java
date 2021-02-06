@@ -11,7 +11,7 @@ class LinesOfMethodVisitor extends LinesOfCodeVisitor {
 
     @Override
     public void visit(MethodDeclaration node, Violations violations) {
-        checkViolation(node, "method", violations);
+        performIfTarget(node, violations, (n, v) -> checkViolation(n, "method", v));
         super.visit(node, violations);
     }
 }

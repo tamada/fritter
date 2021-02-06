@@ -1,7 +1,13 @@
 package jp.cafebabe.fritter.validators.impl;
 
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.expr.AnnotationExpr;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
+import com.github.javaparser.ast.nodeTypes.NodeWithAnnotations;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import jp.cafebabe.fritter.annotation.Ignore;
+import jp.cafebabe.fritter.config.CheckerType;
 import jp.cafebabe.fritter.config.Parameter;
 import jp.cafebabe.fritter.entities.Location;
 import jp.cafebabe.fritter.entities.Message;
@@ -9,7 +15,9 @@ import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
 
-import java.util.stream.Stream;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.BiConsumer;
 
 public class FritterASTVisitor extends VoidVisitorAdapter<Violations> {
     private Validator validator;
@@ -18,26 +26,39 @@ public class FritterASTVisitor extends VoidVisitorAdapter<Violations> {
         this.validator = validator;
     }
 
-    public Parameter parameter() {
+    protected Parameter parameter() {
         return validator.parameter();
     }
 
     protected Violation createViolation(Node node, Message message) {
-        return new Violation(location(node), validator.name(), message);
+        return new Violation(LineCalculatorUtils.location(node), validator.name(), message);
     }
 
     protected Violation createViolation(Location location, Message message) {
         return new Violation(location, validator.name(), message);
     }
 
-    public Location location(Node node) {
-        return Location.of(
-                LineCalculator.lineNumber(node));
+    private <T extends NodeWithAnnotations<? extends Node>> Optional<AnnotationExpr> ifIgnore(T node) {
+        Optional<AnnotationExpr> optional = node.getAnnotationByClass(Ignore.class);
+        return optional.map(expr ->
+                contains(expr.asSingleMemberAnnotationExpr(), validator.name()));
     }
 
-    public Location locations(Stream<? extends Node> nodes) {
-        int[] lines = nodes.mapToInt(LineCalculator::lineNumber)
-                .toArray();
-        return Location.of(lines);
+    private AnnotationExpr contains(SingleMemberAnnotationExpr expr, CheckerType type) {
+        String value = convertToStringRepresentation(expr.getMemberValue());
+        if(Objects.equals(value, "") || value.contains(type.name()))
+            return expr;
+        return null;
+    }
+
+    private String convertToStringRepresentation(Expression expr) {
+        return expr.toString()
+                .toUpperCase();
+    }
+
+    public <T extends NodeWithAnnotations<? extends Node>> void performIfTarget(T node, Violations violations,
+                                                                                BiConsumer<T, Violations> consumer) {
+        ifIgnore(node)
+                .ifPresentOrElse(expr -> {}, () -> consumer.accept(node, violations));
     }
 }

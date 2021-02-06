@@ -5,17 +5,12 @@ import jp.cafebabe.fritter.entities.sources.SourcePool;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.ViolationsMerger;
 
-import java.nio.file.Path;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
 public class ResultsSet {
     private Map<SourcePool, Map<DataSource, Violations>> map = new HashMap<>();
-
-    public ResultsSet() {
-    }
 
     public Stream<Pair<DataSource, Violations>> stream() {
         return pools().flatMap(this::stream);

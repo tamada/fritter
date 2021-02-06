@@ -5,11 +5,12 @@ import jp.cafebabe.fritter.entities.visitors.ViolationsVisitor;
 import jp.cafebabe.fritter.validators.ValidateException;
 import jp.cafebabe.fritter.validators.Violation;
 
-public class ViolationCounter implements ViolationsVisitor<Long> {
-    long count = 0;
+class ViolationCounter implements ViolationsVisitor<Long> {
+    private long count = 0;
 
     @Override
     public void visitDataSource(DataSource source) {
+        // do nothing.
     }
 
     @Override
@@ -19,6 +20,7 @@ public class ViolationCounter implements ViolationsVisitor<Long> {
 
     @Override
     public void visitValidateException(ValidateException e) {
+        // do nothing.
     }
 
     @Override

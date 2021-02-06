@@ -8,8 +8,6 @@ import jp.cafebabe.fritter.entities.visitors.ViolationVisitor;
 import jp.cafebabe.fritter.validators.Violation;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

@@ -4,11 +4,11 @@ import jp.cafebabe.fritter.entities.Pair;
 
 import java.util.Iterator;
 
-public class PairIterator<T, U> implements Iterator<Pair<T, U>> {
+public class IteratorPair<T, U> implements Iterator<Pair<T, U>> {
     private Iterator<T> iteratorT;
     private Iterator<U> iteratorU;
 
-    public PairIterator(Iterator<T> iteratorT, Iterator<U> iteratorU){
+    public IteratorPair(Iterator<T> iteratorT, Iterator<U> iteratorU){
         this.iteratorT = iteratorT;
         this.iteratorU = iteratorU;
     }

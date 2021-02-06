@@ -1,8 +1,8 @@
 package jp.cafebabe.fritter.validators;
 
 import jp.cafebabe.fritter.config.CheckerType;
-import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.entities.Location;
+import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.entities.visitors.ViolationVisitor;
 
 public class Violation {

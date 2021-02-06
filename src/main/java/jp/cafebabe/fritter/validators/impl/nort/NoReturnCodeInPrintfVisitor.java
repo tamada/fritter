@@ -1,12 +1,13 @@
 package jp.cafebabe.fritter.validators.impl.nort;
 
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.StringLiteralExpr;
 import jp.cafebabe.fritter.entities.Message;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violations;
 import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
-import jp.cafebabe.fritter.validators.impl.Utils;
+import jp.cafebabe.fritter.validators.impl.DeclarationsUtils;
 
 class NoReturnCodeInPrintfVisitor extends FritterASTVisitor {
     private static enum State {
@@ -17,6 +18,11 @@ class NoReturnCodeInPrintfVisitor extends FritterASTVisitor {
 
     public NoReturnCodeInPrintfVisitor(Validator validator) {
         super(validator);
+    }
+
+    @Override
+    public void visit(MethodDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> super.visit(n, v));
     }
 
     @Override
@@ -39,6 +45,6 @@ class NoReturnCodeInPrintfVisitor extends FritterASTVisitor {
     }
 
     private boolean isPrintfCall(MethodCallExpr node) {
-        return Utils.isName(node.getName(), "printf");
+        return DeclarationsUtils.isName(node.getName(), "printf");
     }
 }

@@ -1,17 +1,16 @@
 package jp.cafebabe.fritter.validators.spi;
 
 import jp.cafebabe.fritter.config.CheckerType;
-import jp.cafebabe.fritter.config.Parameter;
 
 public abstract class AbstractValidatorService implements ValidatorService {
-    private CheckerType name;
+    private CheckerType checkerType;
 
-    protected AbstractValidatorService(String name) {
-        this.name = CheckerType.of(name);
+    protected AbstractValidatorService(CheckerType type) {
+        checkerType = type;
     }
 
     @Override
     public final CheckerType name(){
-        return name;
+        return checkerType;
     }
 }

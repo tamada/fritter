@@ -5,16 +5,16 @@ import jp.cafebabe.fritter.entities.sources.DataSource;
 import jp.cafebabe.fritter.validators.Validator;
 import jp.cafebabe.fritter.validators.Violation;
 import jp.cafebabe.fritter.validators.Violations;
-import jp.cafebabe.fritter.validators.impl.Helper;
-import jp.cafebabe.fritter.validators.impl.smallentities.LinesOfClassValidatorService;
+import jp.cafebabe.fritter.validators.impl.ViolationsHelper;
 import jp.cafebabe.fritter.validators.spi.ValidatorService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NoStaticMethodValidatorTest {
     private static Validator validator;
@@ -28,34 +28,34 @@ public class NoStaticMethodValidatorTest {
     @DisplayName("NoStaticMethodValidator StatsValues.java")
     @Test
     public void case1() {
-        DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/StatsValues.java"));
+        DataSource source = ViolationsHelper.dataSource(Paths.get("src/test/resources/projects/examples/StatsValues.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(0, violations.accept(Helper.violationCollector()).size());
+        assertEquals(0, violations.accept(ViolationsHelper.violationCollector()).size());
     }
 
     @DisplayName("NoStaticMethodValidator Stats.java")
     @Test
     public void case2() {
-        DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/Stats.java"));
+        DataSource source = ViolationsHelper.dataSource(Paths.get("src/test/resources/projects/examples/Stats.java"));
         Violations violations = validator.validate(source);
-        Assertions.assertEquals(0, violations.accept(Helper.violationCollector()).size());
+        assertEquals(0, violations.accept(ViolationsHelper.violationCollector()).size());
     }
 
     @DisplayName("NoStaticMethodValidator Primes.java")
     @Test
     public void case3() {
-        DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/Primes.java"));
+        DataSource source = ViolationsHelper.dataSource(Paths.get("src/test/resources/projects/examples/Primes.java"));
         Violations violations = validator.validate(source);
-        List<Violation> list = violations.accept(Helper.violationCollector());
-        Assertions.assertEquals(0, list.size());
+        List<Violation> list = violations.accept(ViolationsHelper.violationCollector());
+        assertEquals(0, list.size());
     }
 
     @DisplayName("NoStaticMethodValidator Primes.java")
     @Test
     public void case4() {
-        DataSource source = Helper.dataSource(Paths.get("src/test/resources/projects/examples/HelloWorld.java"));
+        DataSource source = ViolationsHelper.dataSource(Paths.get("src/test/resources/projects/examples/HelloWorld.java"));
         Violations violations = validator.validate(source);
-        List<Violation> list = violations.accept(Helper.violationCollector());
-        Assertions.assertEquals(1, list.size());
+        List<Violation> list = violations.accept(ViolationsHelper.violationCollector());
+        assertEquals(1, list.size());
     }
 }

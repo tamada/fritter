@@ -1,5 +1,7 @@
 package jp.cafebabe.fritter.validators.impl.nonewarray;
 
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.ArrayCreationExpr;
 import com.github.javaparser.ast.expr.ArrayInitializerExpr;
 import jp.cafebabe.fritter.entities.Message;
@@ -12,6 +14,16 @@ class NoNewArrayVisitor extends FritterASTVisitor {
 
     public NoNewArrayVisitor(Validator validator) {
         super(validator);
+    }
+
+    @Override
+    public void visit(MethodDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> super.visit(n, v));
+    }
+
+    @Override
+    public void visit(FieldDeclaration node, Violations violations) {
+        performIfTarget(node, violations, (n, v) -> super.visit(n, v));
     }
 
     @Override
