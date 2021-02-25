@@ -25,7 +25,7 @@ public class ResultSetMarkdowner extends Markdowner<ResultsSet> {
     }
 
     private void printPools(ResultsSet rs, Stream<SourcePool> pools) {
-        pools.peek(pool -> out.printf("### %s%n%n", pool.base()))
+        pools.peek(pool -> out.printf("### %s%n", pool.base()))
                 .forEach(pool -> printViolations(rs.stream(pool)));
     }
 
