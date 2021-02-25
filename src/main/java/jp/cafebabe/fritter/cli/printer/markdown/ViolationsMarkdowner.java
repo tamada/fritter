@@ -27,7 +27,7 @@ public class ViolationsMarkdowner extends Markdowner<Violations> implements Viol
 
     @Override
     public void visitDataSource(DataSource source) {
-        out.printf("%n#### %s%n%n##### Violations%n%n", source.relativePath());
+        out.printf("%n#### %s%n%n", source.relativePath());
     }
 
     @Override

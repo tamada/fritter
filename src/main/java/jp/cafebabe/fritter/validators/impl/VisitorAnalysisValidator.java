@@ -33,5 +33,4 @@ public class VisitorAnalysisValidator extends AbstractValidator {
         unit.accept(visitor, violations);
         return violations;
     }
-
 }

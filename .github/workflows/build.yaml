@@ -37,3 +37,7 @@ jobs:
             - name: send coverage to coveralls
               if: matrix.os == 'ubuntu-latest'
               run:  mvn -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }} verify coveralls:report
+
+            - name: send data to codecov
+              if: matrix.os == 'ubuntu-latest'
+              run: bash <(curl -s https://codecov.io/bash)

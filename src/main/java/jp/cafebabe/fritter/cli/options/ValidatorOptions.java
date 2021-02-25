@@ -29,7 +29,7 @@ public class ValidatorOptions {
     }
 
     private Level findLevel(LevelParser parser) {
-        return Optional.of(level)
+        return Optional.ofNullable(level)
                 .orElseGet(() -> defaultLevel(parser));
     }
 
