@@ -102,6 +102,26 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/distribution.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+            <phase>package</phase> <!-- bind to the packaging phase -->
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.6</version>
@@ -183,7 +203,7 @@
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <outputDirectory>${project.build.directory}</outputDirectory>
               <includeScope>runtime</includeScope>
             </configuration>
           </execution>
@@ -199,7 +219,6 @@
             <manifest>
               <mainClass>jp.cafebabe.fritter.cli.Main</mainClass>
               <addClasspath>true</addClasspath>
-              <classpathPrefix>lib</classpathPrefix>
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
           </archive>
@@ -218,21 +237,35 @@
             <goals>
               <goal>exec</goal>
             </goals>
+            <configuration>
+              <executable>java</executable>
+              <arguments>
+                <argument>-Dpicocli.autocomplete.systemExitOnError</argument>
+                <argument>-cp</argument>
+                <classpath/>
+                <argument>picocli.AutoComplete</argument>
+                <argument>--force</argument>
+                <argument>--completionScript</argument>
+                <argument>${project.build.directory}/completions</argument>
+                <argument>jp.cafebabe.fritter.cli.Main</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution><!-- Run our version calculation script -->
+            <id>generate_site</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>make</executable>
+              <arguments>
+                <argument>-C</argument>
+                <argument>src/site</argument>
+              </arguments>
+            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <executable>java</executable>
-          <arguments>
-            <argument>-Dpicocli.autocomplete.systemExitOnError</argument>
-            <argument>-cp</argument>
-            <classpath/>
-            <argument>picocli.AutoComplete</argument>
-            <argument>--force</argument>
-            <argument>--completionScript</argument>
-            <argument>${project.build.directory}/fritter_completion</argument>
-            <argument>jp.cafebabe.fritter.cli.Main</argument>
-          </arguments>
-        </configuration>
       </plugin>
     </plugins>
   </build>

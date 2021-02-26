@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/tamada/fritter/badge.svg?branch=main)](https://coveralls.io/github/tamada/fritter?branch=main)
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue)](https://raw.githubusercontent.com/tamada/fritter/main/LICENSE)
-[![version](https://img.shields.io/badge/Version-1.0.0)-blue)](https://github.com/tamada/fritter/releases/tag/v1.0.0)
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/tamada/fritter/releases/tag/v1.0.0)
 
 [![Docker](https://img.shields.io/badge/Docker-ghcr.io%2Ftamada%2Ffritter%3A1.0.0-green?logo=docker)](https://github.com/users/tamada/packages/container/package/fritter)
 [![Homebrew](https://img.shields.io/badage/Homebrew-tamada/brew/fritter?logo=homebrew)](https://github.com/tamada/homebrew-brew)

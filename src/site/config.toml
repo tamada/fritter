@@ -1,0 +1,41 @@
+baseURL = "https://tamada.github.io/fritter/"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+title = "fritter"
+theme = "cayman-hugo-theme"
+googleAnalytics = "UA-62401730-2"
+
+pygmentsCodefences = true
+pygmentsStyle = "pygments"
+
+[params]
+    project_name = "fritter"
+    project_logo = "images/logo.svg"
+    project_tagline = "Checking tool of small object programming for the Java language."
+    dateFormat = "2006-01-02"
+
+    footer = "[![GitHub](https://img.shields.io/badge/GitHub-tamada/fritter-blueviolet.svg?logo=github)](https://github.com/tamada/fritter) Made with [Hugo](https://gohugo.io/). Theme by [Cayman](https://github.com/zwbetz-gh/cayman-hugo-theme). Deployed to [GitHub Pages](https://pages.github.com/)."
+
+    katex = true
+
+[menu]
+  [[menu.nav]]
+    name = ":house: Home"
+    url = "/"
+    weight = 1
+  [[menu.nav]]
+    name = ":page_facing_up: Description"
+    url = "/description/"
+    weight = 2
+  [[menu.nav]]
+    name = ":anchor: Install"
+    url = "/install/"
+    weight = 3
+  [[menu.nav]]
+    name = ":running: Usage"
+    url = "/usage/"
+    weight = 4
+  [[menu.nav]]
+    name = ":smile: About"
+    url = "/about/"
+    weight = 5
