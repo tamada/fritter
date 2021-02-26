@@ -9,7 +9,7 @@
 [![Version](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/tamada/fritter/releases/tag/v1.0.0)
 
 [![Docker](https://img.shields.io/badge/Docker-ghcr.io%2Ftamada%2Ffritter%3A1.0.0-green?logo=docker)](https://github.com/users/tamada/packages/container/package/fritter)
-[![Homebrew](https://img.shields.io/badage/Homebrew-tamada/brew/fritter?logo=homebrew)](https://github.com/tamada/homebrew-brew)
+[![Homebrew](https://img.shields.io/badage/Homebrew-tamada/brew/fritter-green?logo=homebrew)](https://github.com/tamada/homebrew-brew)
 
 [![Discussion](https://img.shields.io/badge/GitHub-Discussion-orange?logo=github)](https://github.com/tamada/fritter/discussions)
 

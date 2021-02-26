@@ -18,6 +18,7 @@ build: ${DEST}/index.html
 	rm ${DEST}/favicon* ${DEST}/apple-touch-icon.png
 
 ${DEST}/index.html:
+	git worktree prune
 	git worktree add ${DEST} gh-pages
 
 start:
