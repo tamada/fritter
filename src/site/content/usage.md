@@ -2,7 +2,7 @@
 title: ":runner: Usage"
 ---
 
-## Usage
+### :bicyclist: CLI
 
 ```shell
 Usage: fritter [-hinstV] [-c=CONFIG] [-f=FORMAT] [-l=LEVEL]
@@ -27,7 +27,22 @@ Small object programming checker.
   -V, --version             Print version information and exit.
 ```
 
-## Config format
+### :whale: Docker
+
+The docker container images are provided at GitHub Container Image Registry as the following repository.
+
+* [`ghcr.io/tamada/fritter`](https://github.com/users/tamada/packages/container/package/fritter)
+    * `1.0.0`, `latest`
+
+To run `fritter` on the docker container, type the following command.
+
+```shell
+docker run -it -v $PWD:/home/fritter ghcr.io/tamada/fritter:1.0.0 [OPTIONS] <ARGUMENTS> 
+```
+
+options and arguments are same as CLI mode.
+
+## :shoe: Config format
 
 The format of config file must be JSON, like as follows.
 
@@ -65,7 +80,7 @@ The format of config file must be JSON, like as follows.
 }
 ```
 
-## Result example
+## :tshirt: Result example
 
 ### Json
 
@@ -315,3 +330,4 @@ Date: 2021-02-01T23:47:02.609847
 * total files: 1
 * violated file count: 8
 ```
+

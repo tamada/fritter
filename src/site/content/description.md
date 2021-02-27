@@ -6,6 +6,8 @@ The book titled '[The ThoughtWorks Anthology: Essays on Software Technology and 
 Chapter 6 in the book introduces object calisthenics for better software design.
 The rules shown in the book are as follows.
 
+### :straight_ruler: Rules
+
 1.  Use 1 level of indentation per method (`indent_level`), `DONE`
 2.  Do not use the `else` keyword (`no_else`), `DONE`
 3.  Wrap all primitives and strings (`primitive_wrapping`), `DONE`
@@ -23,7 +25,7 @@ Unfortunately, to confirm obeying the rules is by a human eye.
 Therefore, this tool was developed to validate the rules automatically by analyzing given Java source codes.
 By the way, this tool is programed to obey above rules.
 
-### Additional rules
+### :triangular_ruler: Additional rules
 
 The following rules are the additional rules for more analysis.
 

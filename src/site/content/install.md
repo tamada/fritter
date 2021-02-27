@@ -23,7 +23,7 @@ $ docker pull ghcr.io/tamada/fritter:1.0.0
 
 ## :muscle: Install yourself
 
-[![tamada/fritter](https://img.shields.io/badge/GitHub-tamada%2Ffritter-blueviolet?logo=github)](https://github.com/tamada/fritter)
+[![tamada/fritter](https://img.shields.io/badge/GitHub-tamada%2Ffritter-orange?logo=github)](https://github.com/tamada/fritter)
 
 
 ```shell
@@ -35,13 +35,13 @@ $ mvn package
 ## :brief: Requirements
 
 * Runtime environment
-    * Java 11 or later
+  * Java 11 or later
 * Build tools
-    * Maven 3.x
+  * Maven 3.x
 * Dependencies
-    * [JavaParser](https://github.com/javaparser/javaparser)
-    * [vavr.io 0.10.0](https://www.vavr.io)
-    * [picocli](https://picocli.info/)
-    * [gson](https://github.com/google/gson)
+  * [JavaParser](https://github.com/javaparser/javaparser)
+  * [vavr.io 0.10.0](https://www.vavr.io)
+  * [picocli](https://picocli.info/)
+  * [gson](https://github.com/google/gson)
 * Dependencies (for Unit Tests)
-    * [JUnit 5](https://junit.org/junit5/)
+  * [JUnit 5](https://junit.org/junit5/)

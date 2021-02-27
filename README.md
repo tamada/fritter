@@ -1,4 +1,4 @@
-# fritter
+# :fried_shrimp: fritter
 
 [![build](https://github.com/tamada/fritter/workflows/build/badge.svg)](https://github.com/tamada/fritter/actions?query=workflow%3Abuild)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2efb1d837efe40019652723687ac9173)](https://www.codacy.com/gh/tamada/fritter/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tamada/fritter&amp;utm_campaign=Badge_Grade)
@@ -14,6 +14,8 @@
 [![Discussion](https://img.shields.io/badge/GitHub-Discussion-orange?logo=github)](https://github.com/tamada/fritter/discussions)
 
 Small object programming/Object oriented exercise checker.
+
+## :speaking_head: Overview
 
 This product extends [tamada/9rules](https://github.com/tamada/9rules).
 The superior points of `fritter` than 9rules are as follows.
@@ -32,11 +34,13 @@ The superior points of `fritter` than 9rules are as follows.
 * Thread supports.
     *  `fritter` uses the threads by user requests for each analyzing target.
 
-## Description
+## :page_facing_up: Description
 
 The book titled '[The ThoughtWorks Anthology: Essays on Software Technology and Innovation](https://pragprog.com/book/twa/thoughtworks-anthology)' are published.
 Chapter 6 in the book introduces object calisthenics for better software design.
 The rules shown in the book are as follows.
+
+### :straight_ruler: ​Rules
 
 1.  Use 1 level of indentation per method (`indent_level`), `DONE`
 2.  Do not use the `else` keyword (`no_else`), `DONE`
@@ -55,7 +59,7 @@ Unfortunately, to confirm obeying the rules is by a human eye.
 Therefore, this tool was developed to validate the rules automatically by analyzing given Java source codes.
 By the way, this tool is programed to obey above rules.
 
-### Additional rules
+### :triangular_ruler: Additional rules
 
 The following rules are the additional rules for more analysis.
 
@@ -66,7 +70,9 @@ The following rules are the additional rules for more analysis.
 14.  Do not use `\n` in the `printf` formatter (`no_return_code_in_printf`), and `DONE`
 15.  Do not use only single character in the variable name, except loop control variables (`single_character_name`). `DONE`
 
-## Usage
+## :runner: Usage
+
+### :bicyclist: CLI
 
 ```shell
 Usage: fritter [-hinstV] [-c=CONFIG] [-f=FORMAT] [-l=LEVEL]
@@ -91,7 +97,22 @@ Small object programming checker.
   -V, --version             Print version information and exit.
 ```
 
-## Config format
+### :whale: Docker
+
+The docker container images are provided at GitHub Container Image Registry as the following repository.
+
+* [`ghcr.io/tamada/fritter`](https://github.com/users/tamada/packages/container/package/fritter)
+    * 1.0.0, latest
+
+To run `fritter` on the docker container, type the following command.
+
+```shell
+docker run -it -v $PWD:/home/fritter ghcr.io/tamada/fritter:1.0.0 [OPTIONS] <ARGUMENTS> 
+```
+
+options and arguments are same as CLI mode.
+
+## :shoe: Config format
 
 The format of config file must be JSON, like as follows.
 
@@ -129,7 +150,7 @@ The format of config file must be JSON, like as follows.
 }
 ```
 
-## Result example
+## :tshirt: ​Result example
 
 ### Json
 
@@ -381,3 +402,96 @@ Date: 2021-02-01T23:47:02.609847
 * total files: 1
 * violated file count: 8
 ```
+
+## :anchor: Install
+
+### :beer: Homebrew
+
+[![tamada/brew](https://img.shields.io/badge/Homebrew-tamada%2Fbrew%2Ffritter-orange?logo=homebrew)](https://github.com/tamada/fritter)
+
+Type the following command.
+
+```shell
+$ brew tap tamada/brew
+$ brew install fritter
+```
+
+### :muscle: Install yourself
+
+[![tamada/fritter](https://img.shields.io/badge/GitHub-tamada%2Ffritter-orange?logo=github)](https://github.com/tamada/fritter)
+
+
+```shell
+$ git clone https://github.com/tamada/fritter.git
+$ cd fritter
+$ mvn package
+```
+
+### :whale: Docker
+
+[![Docker](https://img.shields.io/badge/Docker-ghcr.io%2Ftamada%2Ffritter%3A1.0.0-orange?logo=docker)](https://github.com/users/tamada/packages/container/package/fritter)
+
+```shell
+$ docker pull ghcr.io/tamada/fritter:1.0.0 
+```
+
+### :briefcase: Requirements
+
+* Runtime environment
+    * Java 11 or later
+* Build tools
+    * Maven 3.x
+* Dependencies
+    * [JavaParser](https://github.com/javaparser/javaparser)
+    * [vavr.io 0.10.0](https://www.vavr.io)
+    * [picocli](https://picocli.info/)
+    * [gson](https://github.com/google/gson)
+* Dependencies (for Unit Tests)
+    * [JUnit 5](https://junit.org/junit5/)
+
+## :smile: About
+
+### :hammer_and_wrench: How to contribute the project
+
+1. Fork the project. ([https://github.com/tamada/fritter/fork](https://github.com/tamada/fritter/fork))
+2. Create a feature branch. (`git switch -c FEATURE_BRANCH_NAME`)
+3. Edit the source files and Commit your changes.
+4. Create tests and commit them.
+5. Rebase your local changes against the master branch.
+6. Run the test suite with the `mvn package` and confirm that passes.
+7. Create a new pull request.
+8. Confirm all checks pass.
+
+### :man_office_worker: Authors :woman_office_worker:
+
+* [Haruaki Tamada](https://github.com/tamada)
+
+### :jack_o_lantern: Icons of fritter
+
+<img src="https://tamada.github.io/fritter/images/logo.svg" alt="logo" style="zoom:25%;" />
+
+This logo is obtained from the [this page](https://freesvg.org/1546917940) in [freesvg.org](https://freesvg.org/).
+
+### :speech_balloon: Discussion
+
+[![Discussion](https://img.shields.io/badge/GitHub-Discussion-orange?logo=github)](https://github.com/tamada/fritter/discussions)
+
+### :scroll: License
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue?logo=spdx)](https://github.com/tamada/fritter/blob/master/LICENSE)
+
+> Apache License, version 2.0.
+>
+> Copyright 2016, Haruaki Tamada.
+>
+> Licensed under the Apache License, Version 2.0 (the "License");
+> you may not use this file except in compliance with the License.
+> You may obtain a copy of the License at
+>
+>     http://www.apache.org/licenses/LICENSE-2.0
+>
+> Unless required by applicable law or agreed to in writing, software
+> distributed under the License is distributed on an "AS IS" BASIS,
+> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+> See the License for the specific language governing permissions and
+> limitations under the License.
