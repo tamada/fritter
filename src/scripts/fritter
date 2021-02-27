@@ -1,0 +1,29 @@
+#! /bin/sh
+
+VERSION=1.0.0
+
+function findFritterHome() {
+    for i in /opt/fritter /usr/local/opt/fritter /usr/local/fritter
+    do
+      if [ -d "$i" ]; then
+        echo $i
+        return 0
+      fi
+    done
+    return 1
+}
+
+if [ ! -d "$FRITTER_HOME" ] ; then
+  home=$(findFritterHome)
+  if [ $? -eq 0 ]; then
+    FRITTER_HOME=$home
+  fi
+fi
+
+if [ "$FRITTER_HOME" == "" ]; then
+  # development mode
+  exec java -jar target/fritter-${VERSION}.jar $@
+else
+  exec java -jar $FRITTER_HOME/lib/fritter-${VERSION}.jar $@
+fi
+

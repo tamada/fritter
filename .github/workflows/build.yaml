@@ -17,6 +17,10 @@ jobs:
               with:
                   java-version: 11
 
+            - name: setup docker
+              uses: docker-practice/actions-setup-docker@master
+              if: matrix.os == 'macOS-latest'
+
             - name: Cache local maven repository
               uses: actions/cache@v2
               with:
