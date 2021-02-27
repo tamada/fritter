@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ValidatorOptions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.cli.options</a> &gt; <span class="el_source">ValidatorOptions.java</span></div><h1>ValidatorOptions.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.cli.options;
+
+import jp.cafebabe.fritter.config.Level;
+import jp.cafebabe.fritter.config.LevelParser;
+import jp.cafebabe.fritter.validators.Validators;
+import jp.cafebabe.fritter.validators.ValidatorsBuilder;
+import picocli.CommandLine.Option;
+
+import java.nio.file.Path;
+import java.util.Optional;
+
+<span class="nc" id="L12">public class ValidatorOptions {</span>
+    @Option(names={&quot;-c&quot;, &quot;--config&quot;}, paramLabel=&quot;CONFIG&quot;, description=&quot;specifies the configuration file.&quot;)
+    private Optional&lt;Path&gt; fileName;
+
+    @Option(names={&quot;-l&quot;, &quot;--level&quot;}, paramLabel=&quot;LEVEL&quot;,
+            description={&quot;specifies the strict level. Default is default.&quot;,
+                    &quot;Available values: strict, general, rough, and default.&quot;},
+            converter = LevelConverter.class)
+    private Level level;
+
+<span class="nc" id="L22">    @Option(names={&quot;-t&quot;, &quot;--with-threads&quot;}, description=&quot;use threads for validations.&quot;)</span>
+    private boolean withThread = false;
+
+    private Level loadLevel() {
+<span class="nc" id="L26">        LevelParser parser = new LevelParser();</span>
+<span class="nc" id="L27">        return fileName.map(path -&gt; parser.parse(path))</span>
+<span class="nc" id="L28">                .orElseGet(() -&gt; findLevel(parser));</span>
+    }
+
+    private Level findLevel(LevelParser parser) {
+<span class="nc" id="L32">        return Optional.ofNullable(level)</span>
+<span class="nc" id="L33">                .orElseGet(() -&gt; defaultLevel(parser));</span>
+    }
+
+    private Level defaultLevel(LevelParser parser) {
+<span class="nc" id="L37">        return parser.parse(&quot;default&quot;);</span>
+    }
+
+    public Validators createValidators() {
+<span class="nc" id="L41">        ValidatorsBuilder builder = new ValidatorsBuilder();</span>
+<span class="nc" id="L42">        return builder.build(loadLevel());</span>
+    }
+
+    public boolean isWithThread() {
+<span class="nc" id="L46">        return withThread;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultDataSource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.entities.sources</a> &gt; <span class="el_source">DefaultDataSource.java</span></div><h1>DefaultDataSource.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.entities.sources;
+
+import com.github.javaparser.ast.CompilationUnit;
+import jp.cafebabe.fritter.entities.Location;
+import jp.cafebabe.fritter.entities.Pair;
+import jp.cafebabe.fritter.utils.Streams;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class DefaultDataSource implements DataSource {
+    private SourcePool base;
+    private Path path;
+    private CompilationUnit unit;
+
+<span class="fc" id="L19">    public DefaultDataSource(SourcePool base, Path path) {</span>
+<span class="fc" id="L20">        this.base = base;</span>
+<span class="fc" id="L21">        this.path = path;</span>
+<span class="fc" id="L22">    }</span>
+
+    @Override
+    public SourcePool sourcePool() {
+<span class="fc" id="L26">        return base;</span>
+    }
+
+    @Override
+    public Path path() {
+<span class="fc" id="L31">        return path;</span>
+    }
+
+    @Override
+    public CompilationUnit ast() throws IOException {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if(unit == null)</span>
+<span class="fc" id="L37">            unit = buildUnit(path);</span>
+<span class="fc" id="L38">        return unit;</span>
+    }
+
+    @Override
+    public Stream&lt;Pair&lt;Location.LineNumber, String&gt;&gt; lines() throws IOException {
+<span class="fc" id="L43">        return Streams.zip(lineNumbers(),</span>
+<span class="fc" id="L44">                Files.lines(path()));</span>
+    }
+
+    private Stream&lt;Location.LineNumber&gt; lineNumbers() {
+<span class="fc" id="L48">        return IntStream.iterate(1, i -&gt; i + 1)</span>
+<span class="fc" id="L49">                .mapToObj(number -&gt; Location.of(number));</span>
+    }
+
+    private CompilationUnit buildUnit(Path path) throws IOException {
+<span class="fc" id="L53">        return new CompilationUnitBuilder()</span>
+<span class="fc" id="L54">                .buildUnit(path);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

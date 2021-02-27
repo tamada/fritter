@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DelegatesResultSet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.cli.options</a> &gt; <span class="el_source">DelegatesResultSet.java</span></div><h1>DelegatesResultSet.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.cli.options;
+
+import jp.cafebabe.fritter.entities.Pair;
+import jp.cafebabe.fritter.entities.ResultsSet;
+import jp.cafebabe.fritter.entities.sources.DataSource;
+import jp.cafebabe.fritter.entities.sources.SourcePool;
+import jp.cafebabe.fritter.validators.Violations;
+
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+public class DelegatesResultSet extends ResultsSet {
+    private ResultsSet rs;
+    private Predicate&lt;Pair&lt;DataSource, Violations&gt;&gt; filter;
+
+    public DelegatesResultSet(ResultsSet rs) {
+<span class="nc" id="L17">        this(rs, (pair) -&gt; true);</span>
+<span class="nc" id="L18">    }</span>
+
+<span class="nc" id="L20">    public DelegatesResultSet(ResultsSet rs, Predicate&lt;Pair&lt;DataSource, Violations&gt;&gt; filter) {</span>
+<span class="nc" id="L21">        this.rs = rs;</span>
+<span class="nc" id="L22">        this.filter = filter;</span>
+<span class="nc" id="L23">    }</span>
+
+    public ResultsSet delegated() {
+<span class="nc" id="L26">        return rs;</span>
+    }
+
+    public void put(Violations violations) {
+<span class="nc" id="L30">        rs.put(violations);</span>
+<span class="nc" id="L31">    }</span>
+
+    public Stream&lt;SourcePool&gt; pools() {
+<span class="nc" id="L34">        return rs.pools();</span>
+    }
+
+    public Stream&lt;Pair&lt;DataSource, Violations&gt;&gt; stream() {
+<span class="nc" id="L38">        return rs.stream()</span>
+<span class="nc" id="L39">                .filter(filter);</span>
+    }
+
+    public Stream&lt;Pair&lt;DataSource, Violations&gt;&gt; stream(SourcePool pool) {
+<span class="nc" id="L43">        return rs.stream(pool)</span>
+<span class="nc" id="L44">                .filter(filter);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResultSetMarkdowner.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.cli.printer.markdown</a> &gt; <span class="el_source">ResultSetMarkdowner.java</span></div><h1>ResultSetMarkdowner.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.cli.printer.markdown;
+
+import jp.cafebabe.fritter.entities.Pair;
+import jp.cafebabe.fritter.entities.ResultsSet;
+import jp.cafebabe.fritter.entities.sources.DataSource;
+import jp.cafebabe.fritter.entities.sources.SourcePool;
+import jp.cafebabe.fritter.validators.Violations;
+
+import java.io.PrintWriter;
+import java.util.stream.Stream;
+
+public class ResultSetMarkdowner extends Markdowner&lt;ResultsSet&gt; {
+    private ViolationsMarkdowner markdowner;
+
+    public ResultSetMarkdowner(PrintWriter out) {
+<span class="nc" id="L16">        super(out);</span>
+<span class="nc" id="L17">        this.markdowner = new ViolationsMarkdowner(out);</span>
+<span class="nc" id="L18">    }</span>
+
+    @Override
+    public String convert(ResultsSet item) {
+<span class="nc" id="L22">        out.printf(&quot;## Results%n%n&quot;);</span>
+<span class="nc" id="L23">        printPools(item, item.pools());</span>
+<span class="nc" id="L24">        return &quot;&quot;;</span>
+    }
+
+    private void printPools(ResultsSet rs, Stream&lt;SourcePool&gt; pools) {
+<span class="nc" id="L28">        pools.peek(pool -&gt; out.printf(&quot;### %s%n&quot;, pool.base()))</span>
+<span class="nc" id="L29">                .forEach(pool -&gt; printViolations(rs.stream(pool)));</span>
+<span class="nc" id="L30">    }</span>
+
+    private void printViolations(Stream&lt;Pair&lt;DataSource, Violations&gt;&gt; stream) {
+<span class="nc" id="L33">        stream.map(pair -&gt; pair.reduce((left, right) -&gt; right))</span>
+<span class="nc" id="L34">                .forEach(violations -&gt; markdowner.convert(violations));</span>
+<span class="nc" id="L35">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NoSystemExitVisitor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.validators.impl.noexit</a> &gt; <span class="el_source">NoSystemExitVisitor.java</span></div><h1>NoSystemExitVisitor.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.validators.impl.noexit;
+
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.MethodCallExpr;
+import jp.cafebabe.fritter.entities.Message;
+import jp.cafebabe.fritter.validators.Validator;
+import jp.cafebabe.fritter.validators.Violations;
+import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
+import jp.cafebabe.fritter.validators.impl.DeclarationsUtils;
+
+import java.util.Objects;
+import java.util.Optional;
+
+class NoSystemExitVisitor extends FritterASTVisitor {
+<span class="fc" id="L16">    private static final Message MESSAGE = Message.format(&quot;no System.exit except main method&quot;);</span>
+
+    public NoSystemExitVisitor(Validator validator) {
+<span class="fc" id="L19">        super(validator);</span>
+<span class="fc" id="L20">    }</span>
+
+    @Override
+    public void visit(MethodDeclaration node, Violations violations) {
+<span class="fc" id="L24">        performIfTarget(node, violations, (n, v) -&gt; checkViolation(n, v));</span>
+<span class="fc" id="L25">    }</span>
+
+    private void checkViolation(MethodDeclaration node, Violations violations) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if(!DeclarationsUtils.isMainMethod(node))</span>
+<span class="fc" id="L29">            super.visit(node, violations);</span>
+<span class="fc" id="L30">    }</span>
+
+    @Override
+    public void visit(MethodCallExpr node, Violations violations) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (isSystemExitCall(node))</span>
+<span class="fc" id="L35">            violations.add(createViolation(node, MESSAGE));</span>
+<span class="fc" id="L36">    }</span>
+
+    private boolean isSystemExitCall(MethodCallExpr node) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        return DeclarationsUtils.isName(node.getName(), &quot;exit&quot;) &amp;&amp;</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">                isSystem(node.getScope());</span>
+    }
+
+    private boolean isSystem(Optional&lt;Expression&gt; expression) {
+<span class="fc" id="L44">        return expression</span>
+<span class="fc" id="L45">                .map(exp -&gt; Objects.equals(exp.toString(), &quot;System&quot;))</span>
+<span class="fc" id="L46">                .orElse(false);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

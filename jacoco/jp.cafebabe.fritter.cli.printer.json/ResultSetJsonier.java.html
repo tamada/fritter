@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResultSetJsonier.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.cli.printer.json</a> &gt; <span class="el_source">ResultSetJsonier.java</span></div><h1>ResultSetJsonier.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.cli.printer.json;
+
+import jp.cafebabe.fritter.entities.Pair;
+import jp.cafebabe.fritter.entities.ResultsSet;
+import jp.cafebabe.fritter.entities.sources.DataSource;
+import jp.cafebabe.fritter.entities.sources.SourcePool;
+import jp.cafebabe.fritter.validators.Violations;
+
+import java.util.stream.Stream;
+
+import static jp.cafebabe.fritter.cli.printer.json.Jsonier.string;
+import static jp.cafebabe.fritter.cli.printer.json.Jsonier.toJsonArray;
+
+<span class="nc" id="L14">public class ResultSetJsonier implements Jsonier&lt;ResultsSet&gt; {</span>
+<span class="nc" id="L15">    private Jsonier&lt;Violations&gt; jsonier = violations -&gt; violations.accept(new ViolationsVisitor());</span>
+
+    public String convert(ResultsSet rs) {
+<span class="nc" id="L18">        return String.format(&quot;%s:%s&quot;, string(&quot;results&quot;),</span>
+<span class="nc" id="L19">                toJsonArray(rs.pools()</span>
+<span class="nc" id="L20">                        .map(pool -&gt; convertResultSet(rs, pool))));</span>
+    }
+    private String convertResultSet(ResultsSet rs, SourcePool pool) {
+<span class="nc" id="L23">        return String.format(&quot;{%s:%s,%s:%s}&quot;,</span>
+<span class="nc" id="L24">                string(&quot;base&quot;), string(pool.base()),</span>
+<span class="nc" id="L25">                string(&quot;violations&quot;), convertStream(rs.stream(pool)));</span>
+    }
+
+    private String convertStream(Stream&lt;Pair&lt;DataSource, Violations&gt;&gt; stream) {
+<span class="nc" id="L29">        return toJsonArray(stream</span>
+<span class="nc" id="L30">                .map(pair -&gt; pair.reduce((left, right) -&gt; right))</span>
+<span class="nc" id="L31">                .map(violations -&gt; jsonier.convert(violations)));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

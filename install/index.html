@@ -22,7 +22,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 
-  <title>🏠 Home | fritter</title>
+  <title>⚓ Install | fritter</title>
 </head>
 
 <body>
@@ -74,57 +74,47 @@
 
   <section class="main-content">
     
-<h1>🏠 Home</h1>
-
-<p><a href="https://github.com/tamada/fritter/actions?query=workflow%3Abuild"><img src="https://github.com/tamada/fritter/workflows/build/badge.svg" alt="build"></a>
-<a href="https://www.codacy.com/gh/tamada/fritter/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tamada/fritter&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/2efb1d837efe40019652723687ac9173" alt="Codacy Badge"></a>
-<a href="https://codecov.io/gh/tamada/fritter"><img src="https://codecov.io/gh/tamada/fritter/branch/main/graph/badge.svg?token=P1BFSTXHH5" alt="codecov"></a>
-<a href="https://coveralls.io/github/tamada/fritter?branch=main"><img src="https://coveralls.io/repos/github/tamada/fritter/badge.svg?branch=main" alt="Coverage Status"></a></p>
-<p><a href="https://raw.githubusercontent.com/tamada/fritter/main/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License"></a>
-<a href="https://github.com/tamada/fritter/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/Version-1.0.0-blue" alt="Version"></a></p>
-<p><a href="https://github.com/users/tamada/packages/container/package/fritter"><img src="https://img.shields.io/badge/Docker-ghcr.io%2Ftamada%2Ffritter%3A1.0.0-green?logo=docker" alt="Docker"></a>
-<a href="https://github.com/tamada/homebrew-brew"><img src="https://img.shields.io/badage/Homebrew-tamada/brew/fritter?logo=homebrew" alt="Homebrew"></a></p>
-<p><a href="https://github.com/tamada/fritter/discussions"><img src="https://img.shields.io/badge/GitHub-Discussion-orange?logo=github" alt="Discussion"></a></p>
-<h2 id="overview">Overview</h2>
-<p>Small object programming/Object oriented exercise checker.</p>
-<p>This product extends <a href="https://github.com/tamada/9rules">tamada/9rules</a>.
-The superior points of <code>fritter</code> than 9rules are as follows.</p>
+  <h1>⚓ Install</h1>
+  <h2 id="beer-homebrew">🍺 Homebrew</h2>
+<p><a href="https://github.com/tamada/fritter"><img src="https://img.shields.io/badge/Homebrew-tamada%2Fbrew%2Ffritter-orange?logo=homebrew" alt="tamada/brew"></a></p>
+<p>Type the following command.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ brew tap tamada/brew
+$ brew install fritter
+</code></pre></div><h2 id="whale-docker">🐳 Docker</h2>
+<p><a href="https://github.com/users/tamada/packages/container/package/fritter"><img src="https://img.shields.io/badge/Docker-ghcr.io%2Ftamada%2Ffritter%3A1.0.0-orange?logo=docker" alt="Docker"></a></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker pull ghcr.io/tamada/fritter:1.0.0 
+</code></pre></div><h2 id="muscle-install-yourself">💪 Install yourself</h2>
+<p><a href="https://github.com/tamada/fritter"><img src="https://img.shields.io/badge/GitHub-tamada%2Ffritter-blueviolet?logo=github" alt="tamada/fritter"></a></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ git clone https://github.com/tamada/fritter.git
+$ <span style="color:#008000">cd</span> fritter
+$ mvn package
+</code></pre></div><h2 id="brief-requirements">:brief: Requirements</h2>
 <ul>
-<li>Simplify the class relationships from 9rules.
+<li>Runtime environment
 <ul>
-<li>In the case of <code>9rules</code>, it becomes to complicated relationships among classes to satisfy the 9rules itself.</li>
-<li>Then, <code>fritter</code> prioritizes the understandability of the source codes even if to not satisfy the rules of itself.</li>
+<li>Java 11 or later</li>
 </ul>
 </li>
-<li>Introduce more rules, and ease to add more rules.
+<li>Build tools
 <ul>
-<li>This is the side effect of the above point.</li>
-<li>To introduce the new rule, we provide only two classes which are subclasses of <code>Validator</code> and <code>ValidatorService</code>.</li>
+<li>Maven 3.x</li>
 </ul>
 </li>
-<li>Ease to customize the parameters for validators.
+<li>Dependencies
 <ul>
-<li>All parameters are read from configuration files.</li>
-<li>The configuration files are given by <code>--level</code> option or <code>--config</code> option.  <code>fritter</code> defines the parameters by json formatted config file also <code>level</code>.</li>
+<li><a href="https://github.com/javaparser/javaparser">JavaParser</a></li>
+<li><a href="https://www.vavr.io">vavr.io 0.10.0</a></li>
+<li><a href="https://picocli.info/">picocli</a></li>
+<li><a href="https://github.com/google/gson">gson</a></li>
 </ul>
 </li>
-<li>Enable to select the output formats.
+<li>Dependencies (for Unit Tests)
 <ul>
-<li><code>fritter</code> provides <code>json</code>, <code>xml</code>, and <code>markdown</code> format as result.</li>
-</ul>
-</li>
-<li>Thread supports.
-<ul>
-<li><code>fritter</code> uses the threads by user requests for each analyzing target.</li>
+<li><a href="https://junit.org/junit5/">JUnit 5</a></li>
 </ul>
 </li>
 </ul>
 
-
-<ul>
-
-
-</ul>
 
     <footer class="site-footer">
   <span class="site-footer-credits">

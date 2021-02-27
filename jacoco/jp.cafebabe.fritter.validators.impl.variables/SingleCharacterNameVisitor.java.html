@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SingleCharacterNameVisitor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.validators.impl.variables</a> &gt; <span class="el_source">SingleCharacterNameVisitor.java</span></div><h1>SingleCharacterNameVisitor.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.validators.impl.variables;
+
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.expr.SimpleName;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import jp.cafebabe.fritter.entities.Message;
+import jp.cafebabe.fritter.validators.Validator;
+import jp.cafebabe.fritter.validators.Violations;
+import jp.cafebabe.fritter.validators.impl.FritterASTVisitor;
+
+class SingleCharacterNameVisitor extends FritterASTVisitor {
+    private static final String FORMATTER = &quot;%s: do not use only single character in variable name&quot;;
+
+<span class="fc" id="L15">    private boolean checkTargetFlag = false;</span>
+
+    public SingleCharacterNameVisitor(Validator validator) {
+<span class="fc" id="L18">        super(validator);</span>
+<span class="fc" id="L19">    }</span>
+
+    @Override
+    public void visit(FieldDeclaration node, Violations violations) {
+<span class="fc" id="L23">        checkTargetFlag = true;</span>
+<span class="fc" id="L24">        super.visit(node, violations);</span>
+<span class="fc" id="L25">        checkTargetFlag = false;</span>
+<span class="fc" id="L26">    }</span>
+
+    @Override
+    public void visit(VariableDeclarator node, Violations violations){
+<span class="fc" id="L30">        SimpleName name = node.getName();</span>
+<span class="fc" id="L31">        checkVariableName(node, name.getIdentifier(), violations);</span>
+<span class="fc" id="L32">        super.visit(node, violations);</span>
+<span class="fc" id="L33">    }</span>
+
+    private void checkVariableName(VariableDeclarator node, String name, Violations violations) {
+<span class="fc bfc" id="L36" title="All 4 branches covered.">        if(checkTargetFlag &amp;&amp; name.length() == 1)</span>
+<span class="fc" id="L37">            violations.add(createViolation(node, Message.format(FORMATTER, name)));</span>
+<span class="fc" id="L38">    }</span>
+
+    @Override
+    public void visit(VariableDeclarationExpr node, Violations violations){
+<span class="fc" id="L42">        checkTargetFlag = false;</span>
+<span class="fc" id="L43">        super.visit(node, violations);</span>
+<span class="fc" id="L44">        checkTargetFlag = false;</span>
+<span class="fc" id="L45">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

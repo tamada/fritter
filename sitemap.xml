@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://tamada.github.io/fritter/install/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/fritter/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/fritter/description/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/fritter/usage/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/fritter/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/fritter/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/fritter/tags/</loc>
+  </url>
+  
+</urlset>

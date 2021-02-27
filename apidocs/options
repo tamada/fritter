@@ -1,0 +1,24 @@
+-classpath
+'/Users/tamada/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/Users/tamada/.m2/repository/com/github/javaparser/javaparser-core/3.18.0/javaparser-core-3.18.0.jar:/Users/tamada/.m2/repository/info/picocli/picocli/4.6.1/picocli-4.6.1.jar:/Users/tamada/.m2/repository/io/vavr/vavr/0.10.3/vavr-0.10.3.jar:/Users/tamada/.m2/repository/io/vavr/vavr-match/0.10.3/vavr-match-0.10.3.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/tamada/products/fritter/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/tamada/products/fritter/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'fritter 1.0.0 API'
+-linkoffline
+'http://docs.oracle.com/javase/8/docs/api' '/Users/tamada/products/fritter/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'fritter 1.0.0 API'

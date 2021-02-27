@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>:house: Home on fritter</title>
+    <link>https://tamada.github.io/fritter/</link>
+    <description>Recent content in :house: Home on fritter</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://tamada.github.io/fritter/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>:anchor: Install</title>
+      <link>https://tamada.github.io/fritter/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tamada.github.io/fritter/install/</guid>
+      <description>:beer: Homebrew 
+Type the following command.
+$ brew tap tamada/brew $ brew install fritter :whale: Docker 
+$ docker pull ghcr.io/tamada/fritter:1.0.0 :muscle: Install yourself 
+$ git clone https://github.com/tamada/fritter.git $ cd fritter $ mvn package :brief: Requirements  Runtime environment  Java 11 or later   Build tools  Maven 3.x   Dependencies  JavaParser vavr.io 0.10.0 picocli gson   Dependencies (for Unit Tests)  JUnit 5    </description>
+    </item>
+    
+    <item>
+      <title>:page_facing_up: Description</title>
+      <link>https://tamada.github.io/fritter/description/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tamada.github.io/fritter/description/</guid>
+      <description>The book titled &amp;lsquo;The ThoughtWorks Anthology: Essays on Software Technology and Innovation&amp;rsquo; are published. Chapter 6 in the book introduces object calisthenics for better software design. The rules shown in the book are as follows.
+ Use 1 level of indentation per method (indent_level), DONE Do not use the else keyword (no_else), DONE Wrap all primitives and strings (primitive_wrapping), DONE Use only 1 dot per line (one_dot_per_line), DONE Do not abbreviate (no_abbrev), Keep all entities small,  50 lines in a source file (lines_of_class), DONE 3 lines in a method (lines_of_method), and DONE 10 classses in a package (classes_in_package).</description>
+    </item>
+    
+    <item>
+      <title>:runner: Usage</title>
+      <link>https://tamada.github.io/fritter/usage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tamada.github.io/fritter/usage/</guid>
+      <description>Usage Usage: fritter [-hinstV] [-c=CONFIG] [-f=FORMAT] [-l=LEVEL] SOURCE_FILEs|SOURCE_DIRs... Small object programming checker. SOURCE_FILEs|SOURCE_DIRs... Java source files and/or directories containing Java source files. -c, --config=CONFIG specifies the configuration file. -f, --format=FORMAT specifies the resultant format. Default is json. Available values: json, markdown, yaml, and xml -h, --help Show this help message and exit. -i, --no-validator-info does not show the validator information for analyses. -l, --level=LEVEL specifies the strict level. Default is default.</description>
+    </item>
+    
+    <item>
+      <title>:smile: About</title>
+      <link>https://tamada.github.io/fritter/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tamada.github.io/fritter/about/</guid>
+      <description>:hammer_and_wrench: How to contribute the project  Fork the project. (https://github.com/tamada/fritter/fork) Create a feature branch. (git switch -c FEATURE_BRANCH_NAME) Edit the source files and Commit your changes. Create tests and commit them. Rebase your local changes against the master branch. Run the test suite with the mvn package and confirm that passes. Create a new pull request. Confirm all checks pass.  :man_office_worker: Authors :woman_office_worker:    Haruaki Tamada  :jack_o_lantern: Icons of fritter This logo is obtained from the this page in freesvg.</description>
+    </item>
+    
+  </channel>
+</rss>

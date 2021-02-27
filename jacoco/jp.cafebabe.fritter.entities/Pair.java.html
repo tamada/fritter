@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Pair.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.entities</a> &gt; <span class="el_source">Pair.java</span></div><h1>Pair.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.entities;
+
+import java.util.Map;
+import java.util.function.*;
+
+public class Pair&lt;L, R&gt; {
+    private L left;
+    private R right;
+
+<span class="fc" id="L10">    protected Pair(L left, R right) {</span>
+<span class="fc" id="L11">        this.left = left;</span>
+<span class="fc" id="L12">        this.right = right;</span>
+<span class="fc" id="L13">    }</span>
+
+    public Pair&lt;R, L&gt; swap() {
+<span class="nc" id="L16">        return new Pair&lt;&gt;(right, left);</span>
+    }
+
+    public boolean and(Predicate&lt;L&gt; lPredicate, Predicate&lt;R&gt; rPredicate) {
+<span class="nc bnc" id="L20" title="All 4 branches missed.">        return lPredicate.test(left) &amp;&amp; rPredicate.test(right);</span>
+    }
+
+    public boolean or(Predicate&lt;L&gt; lPredicate, Predicate&lt;R&gt; rPredicate) {
+<span class="nc bnc" id="L24" title="All 4 branches missed.">        return lPredicate.test(left) || rPredicate.test(right);</span>
+    }
+
+    public boolean test(BiPredicate&lt;L, R&gt; predicate) {
+<span class="fc" id="L28">        return predicate.test(left, right);</span>
+    }
+
+    public &lt;K&gt; K reduce(BiFunction&lt;L, R, K&gt; function) {
+<span class="nc" id="L32">        return function.apply(left, right);</span>
+    }
+
+    public &lt;LL, RR&gt; Pair&lt;LL, RR&gt; map(Function&lt;L, LL&gt; leftFunction, Function&lt;R, RR&gt; rightFunction) {
+<span class="fc" id="L36">        return new Pair&lt;&gt;(leftFunction.apply(left),</span>
+<span class="fc" id="L37">                rightFunction.apply(right));</span>
+    }
+
+    public void accept(BiConsumer&lt;L, R&gt; consumer) {
+<span class="fc" id="L41">        consumer.accept(left, right);</span>
+<span class="fc" id="L42">    }</span>
+
+    public static final &lt;L, R&gt; Pair&lt;L, R&gt; of(Map.Entry&lt;L, R&gt; entry) {
+<span class="nc" id="L45">        return new Pair&lt;&gt;(entry.getKey(), entry.getValue());</span>
+    }
+
+    public static final &lt;L, R&gt; Pair&lt;L, R&gt; of(L left, R right) {
+<span class="fc" id="L49">        return new Pair&lt;&gt;(left, right);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

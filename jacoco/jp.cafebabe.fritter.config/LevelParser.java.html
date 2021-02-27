@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LevelParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.config</a> &gt; <span class="el_source">LevelParser.java</span></div><h1>LevelParser.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.config;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.vavr.control.Either;
+import io.vavr.control.Try;
+import jp.cafebabe.fritter.utils.ExceptionableSupplier;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+<span class="fc" id="L16">public class LevelParser {</span>
+    public final Level parse(String name) {
+<span class="fc" id="L18">        return load(findResource(name))</span>
+<span class="fc" id="L19">                .getOrElseThrow(exp -&gt; new IllegalArgumentException(exp));</span>
+    }
+
+    public final Level parse(Path path) {
+<span class="nc" id="L23">        return load(path)</span>
+<span class="nc" id="L24">                .getOrElseThrow(exp -&gt; new IllegalArgumentException(exp));</span>
+    }
+
+    private Either&lt;Throwable, Level&gt; load(Path path) {
+<span class="nc" id="L28">        return load(() -&gt; Files.newBufferedReader(path));</span>
+    }
+
+    private Either&lt;Throwable, Level&gt; load(URL location) {
+<span class="fc" id="L32">        return load(() -&gt; new BufferedReader(new InputStreamReader(location.openStream())));</span>
+    }
+
+    private Either&lt;Throwable, Level&gt; load(ExceptionableSupplier&lt;BufferedReader, IOException&gt; supplier) {
+<span class="fc" id="L36">        return Try.withResources(supplier::get)</span>
+<span class="fc" id="L37">                .of(this::loadImpl)</span>
+<span class="fc" id="L38">                .toEither();</span>
+    }
+
+    private Level loadImpl(BufferedReader in) throws IOException {
+<span class="fc" id="L42">        Gson gson = new Gson();</span>
+<span class="fc" id="L43">        JsonObject object = gson.fromJson(in, JsonObject.class);</span>
+<span class="fc" id="L44">        return new LevelJsonParser().toLevel(object);</span>
+    }
+
+    private URL findResource(String name) {
+<span class="fc" id="L48">        return getClass().getResource(</span>
+<span class="fc" id="L49">                String.format(&quot;/resources/%s.json&quot;, name));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

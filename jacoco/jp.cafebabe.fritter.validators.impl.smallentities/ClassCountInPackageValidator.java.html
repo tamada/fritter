@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClassCountInPackageValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.validators.impl.smallentities</a> &gt; <span class="el_source">ClassCountInPackageValidator.java</span></div><h1>ClassCountInPackageValidator.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.validators.impl.smallentities;
+
+import jp.cafebabe.fritter.config.Parameter;
+import jp.cafebabe.fritter.entities.Location;
+import jp.cafebabe.fritter.entities.Message;
+import jp.cafebabe.fritter.entities.sources.DataSource;
+import jp.cafebabe.fritter.entities.sources.DefaultDataSource;
+import jp.cafebabe.fritter.validators.AbstractValidator;
+import jp.cafebabe.fritter.validators.Violation;
+import jp.cafebabe.fritter.validators.Violations;
+import jp.cafebabe.fritter.validators.spi.ValidatorService;
+
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+public class ClassCountInPackageValidator extends AbstractValidator {
+    private static final String FORMATTER = &quot;class count is %s, more than %s&quot;;
+
+<span class="fc" id="L22">    private Map&lt;Path, JavaSourceCount&gt; classCount = new HashMap&lt;&gt;();</span>
+
+    public ClassCountInPackageValidator(ValidatorService service, Parameter parameter) {
+<span class="fc" id="L25">        super(service, parameter);</span>
+<span class="fc" id="L26">    }</span>
+
+    @Override
+    public Violations validate(DataSource source, Violations violations) {
+<span class="fc" id="L30">        Path packagePath = source.relativePath().getParent();</span>
+<span class="fc" id="L31">        Optional&lt;Violations&gt; opts = Optional.empty();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if(!classCount.containsKey(packagePath))</span>
+<span class="fc" id="L33">            opts = checkViolation(source, packagePath);</span>
+<span class="fc" id="L34">        return opts.orElseGet(() -&gt; new Violations(new DefaultDataSource(source.sourcePool(), source.path().getParent())));</span>
+    }
+
+    private Optional&lt;Violations&gt; checkViolation(DataSource source, Path packagePath) {
+<span class="fc" id="L38">        JavaSourceCount count = countJavaSource(source.path().getParent());</span>
+<span class="fc" id="L39">        classCount.put(packagePath, count);</span>
+<span class="fc" id="L40">        return checkViolationImpl(source, packagePath, count);</span>
+    }
+
+    private JavaSourceCount countJavaSource(Path path) {
+<span class="fc" id="L44">        return new JavaSourceCount(DirectoryUtils.countJavaFiles(path));</span>
+    }
+
+    private Optional&lt;Violations&gt; checkViolationImpl(DataSource source, Path packagePath, JavaSourceCount count) {
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if(count.greaterThan(parameter()))</span>
+<span class="nc" id="L49">            return Optional.of(createViolations(source, packagePath, count));</span>
+<span class="fc" id="L50">        return Optional.empty();</span>
+    }
+
+    private Violations createViolations(DataSource source, Path packagePath, JavaSourceCount count) {
+<span class="nc" id="L54">        return new Violations(new DefaultDataSource(source.sourcePool(), source.path().getParent()),</span>
+<span class="nc" id="L55">                Stream.of(new Violation(Location.of(packagePath), name(),</span>
+<span class="nc" id="L56">                        Message.format(FORMATTER, count, parameter()))));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

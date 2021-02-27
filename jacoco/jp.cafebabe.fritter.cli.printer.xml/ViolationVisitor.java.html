@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ViolationVisitor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.cli.printer.xml</a> &gt; <span class="el_source">ViolationVisitor.java</span></div><h1>ViolationVisitor.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.cli.printer.xml;
+
+import jp.cafebabe.fritter.config.CheckerType;
+import jp.cafebabe.fritter.entities.Location;
+import jp.cafebabe.fritter.entities.Message;
+import jp.cafebabe.fritter.entities.visitors.LocationVisitor;
+
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static jp.cafebabe.fritter.cli.printer.xml.XmlUtils.escape;
+
+<span class="nc" id="L13">class ViolationVisitor implements jp.cafebabe.fritter.entities.visitors.ViolationVisitor&lt;String&gt;, LocationVisitor&lt;String&gt; {</span>
+    @Override
+    public String visitViolation(Location location, CheckerType type, Message message) {
+<span class="nc" id="L16">        return String.format(&quot;&lt;violation&gt;&lt;validator-type&gt;%s&lt;/validator-type&gt;&lt;location&gt;%s&lt;/location&gt;&lt;message&gt;%s&lt;/message&gt;&lt;/violation&gt;&quot;,</span>
+<span class="nc" id="L17">                type, location.accept(this), escape(message));</span>
+    }
+
+    @Override
+    public String visitLocation(int lineNumber) {
+<span class="nc" id="L22">        return String.format(&quot;&lt;line-number&gt;%d&lt;/line-number&gt;&quot;, lineNumber);</span>
+    }
+
+    @Override
+    public String visitLocation(int[] lineNumbers) {
+<span class="nc" id="L27">        return String.format(&quot;&lt;line-numbers&gt;%s&lt;/line-numbers&gt;&quot;, lineNumbers(lineNumbers));</span>
+    }
+
+    private String lineNumbers(int[] nums){
+<span class="nc" id="L31">        return IntStream.of(nums)</span>
+<span class="nc" id="L32">                .mapToObj(num -&gt; String.format(&quot;&lt;line-number&gt;%d&lt;/line-number&gt;&quot;, num))</span>
+<span class="nc" id="L33">                .collect(Collectors.joining());</span>
+    }
+
+    @Override
+    public String visitLocation(String packageName) {
+<span class="nc" id="L38">        return String.format(&quot;&lt;package-name&gt;%s&lt;/package-name&gt;&quot;, packageName);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

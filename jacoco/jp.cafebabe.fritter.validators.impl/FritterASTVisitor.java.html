@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FritterASTVisitor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.validators.impl</a> &gt; <span class="el_source">FritterASTVisitor.java</span></div><h1>FritterASTVisitor.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.validators.impl;
+
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.expr.AnnotationExpr;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
+import com.github.javaparser.ast.nodeTypes.NodeWithAnnotations;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import jp.cafebabe.fritter.annotation.Ignore;
+import jp.cafebabe.fritter.config.CheckerType;
+import jp.cafebabe.fritter.config.Parameter;
+import jp.cafebabe.fritter.entities.Location;
+import jp.cafebabe.fritter.entities.Message;
+import jp.cafebabe.fritter.validators.Validator;
+import jp.cafebabe.fritter.validators.Violation;
+import jp.cafebabe.fritter.validators.Violations;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.BiConsumer;
+
+public class FritterASTVisitor extends VoidVisitorAdapter&lt;Violations&gt; {
+    private Validator validator;
+
+<span class="fc" id="L25">    public FritterASTVisitor(Validator validator) {</span>
+<span class="fc" id="L26">        this.validator = validator;</span>
+<span class="fc" id="L27">    }</span>
+
+    protected Parameter parameter() {
+<span class="fc" id="L30">        return validator.parameter();</span>
+    }
+
+    protected Violation createViolation(Node node, Message message) {
+<span class="fc" id="L34">        return new Violation(LineCalculatorUtils.location(node), validator.name(), message);</span>
+    }
+
+    protected Violation createViolation(Location location, Message message) {
+<span class="fc" id="L38">        return new Violation(location, validator.name(), message);</span>
+    }
+
+    private &lt;T extends NodeWithAnnotations&lt;? extends Node&gt;&gt; Optional&lt;AnnotationExpr&gt; ifIgnore(T node) {
+<span class="fc" id="L42">        Optional&lt;AnnotationExpr&gt; optional = node.getAnnotationByClass(Ignore.class);</span>
+<span class="fc" id="L43">        return optional.map(expr -&gt;</span>
+<span class="fc" id="L44">                contains(expr.asSingleMemberAnnotationExpr(), validator.name()));</span>
+    }
+
+    private AnnotationExpr contains(SingleMemberAnnotationExpr expr, CheckerType type) {
+<span class="fc" id="L48">        String value = convertToStringRepresentation(expr.getMemberValue());</span>
+<span class="pc bpc" id="L49" title="1 of 4 branches missed.">        if(Objects.equals(value, &quot;&quot;) || value.contains(type.name()))</span>
+<span class="fc" id="L50">            return expr;</span>
+<span class="fc" id="L51">        return null;</span>
+    }
+
+    private String convertToStringRepresentation(Expression expr) {
+<span class="fc" id="L55">        return expr.toString()</span>
+<span class="fc" id="L56">                .toUpperCase();</span>
+    }
+
+    public &lt;T extends NodeWithAnnotations&lt;? extends Node&gt;&gt; void performIfTarget(T node, Violations violations,
+                                                                                BiConsumer&lt;T, Violations&gt; consumer) {
+<span class="fc" id="L61">        ifIgnore(node)</span>
+<span class="fc" id="L62">                .ifPresentOrElse(expr -&gt; {}, () -&gt; consumer.accept(node, violations));</span>
+<span class="fc" id="L63">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

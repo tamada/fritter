@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DirectoryUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.validators.impl.smallentities</a> &gt; <span class="el_source">DirectoryUtils.java</span></div><h1>DirectoryUtils.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.validators.impl.smallentities;
+
+import io.vavr.control.Try;
+
+import java.nio.file.DirectoryStream;
+import java.nio.file.Path;
+import java.nio.file.spi.FileSystemProvider;
+import java.util.stream.StreamSupport;
+
+<span class="nc" id="L10">class DirectoryUtils {</span>
+    public static long countJavaFiles(Path path) {
+<span class="fc" id="L12">        FileSystemProvider provider = path.getFileSystem()</span>
+<span class="fc" id="L13">                .provider();</span>
+<span class="fc" id="L14">        return countJavaFiles(path, provider);</span>
+    }
+
+    private static long countJavaFiles(Path path, FileSystemProvider provider) {
+<span class="fc" id="L18">        return Try.of(() -&gt; countJavaFiles(</span>
+<span class="fc" id="L19">                provider.newDirectoryStream(path, DirectoryUtils::isJavaFile)))</span>
+<span class="fc" id="L20">                .get();</span>
+    }
+
+    private static boolean isJavaFile(Path path) {
+<span class="fc" id="L24">        return path.getFileName()</span>
+<span class="fc" id="L25">                .toString().endsWith(&quot;.java&quot;);</span>
+    }
+
+    private static long countJavaFiles(DirectoryStream&lt;Path&gt; stream) {
+<span class="fc" id="L29">        return StreamSupport.stream(stream.spliterator(), false)</span>
+<span class="fc" id="L30">                .count();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

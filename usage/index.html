@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.69.0" />
+  <link rel="stylesheet" href="/fritter/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="stylesheet" href="/fritter/css/cayman.ea0e967413f3851071cc8ace3621bc4205fe8fa79b2abe3d7bf94ff2841f0d47.css">
+  
+  
+  <link rel="stylesheet" href="/fritter/style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/harry.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/harry.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/harry.png">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>🏃‍♂️ Usage | fritter</title>
+</head>
+
+<body>
+  <section class="page-header">
+  
+    <img src="https://tamada.github.io/fritter/images/logo.svg" class="avatar" alt="project_logo">
+  
+  <h1 class="project-name">
+    fritter
+  </h1>
+  <h2 class="project-tagline">
+    Checking tool of small object programming for the Java language.
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/fritter/" class="btn">🏠 Home</a>
+    
+      
+      
+      
+      
+      <a href="/fritter/description/" class="btn">📄 Description</a>
+    
+      
+      
+      
+      
+      <a href="/fritter/install/" class="btn">⚓ Install</a>
+    
+      
+      
+      
+      
+      <a href="/fritter/usage/" class="btn">🏃 Usage</a>
+    
+      
+      
+      
+      
+      <a href="/fritter/about/" class="btn">😄 About</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>🏃‍♂️ Usage</h1>
+  <h2 id="usage">Usage</h2>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Usage: fritter <span style="color:#666">[</span>-hinstV<span style="color:#666">]</span> <span style="color:#666">[</span>-c<span style="color:#666">=</span>CONFIG<span style="color:#666">]</span> <span style="color:#666">[</span>-f<span style="color:#666">=</span>FORMAT<span style="color:#666">]</span> <span style="color:#666">[</span>-l<span style="color:#666">=</span>LEVEL<span style="color:#666">]</span>
+               SOURCE_FILEs|SOURCE_DIRs...
+Small object programming checker.
+      SOURCE_FILEs|SOURCE_DIRs...
+                            Java <span style="color:#008000">source</span> files and/or directories containing
+                              Java <span style="color:#008000">source</span> files.
+  -c, --config<span style="color:#666">=</span>CONFIG       specifies the configuration file.
+  -f, --format<span style="color:#666">=</span>FORMAT       specifies the resultant format. Default is json.
+                            Available values: json, markdown, yaml, and xml
+  -h, --help                Show this <span style="color:#008000">help</span> message and exit.
+  -i, --no-validator-info   does not show the validator information <span style="color:#008000;font-weight:bold">for</span>
+                              analyses.
+  -l, --level<span style="color:#666">=</span>LEVEL         specifies the strict level. Default is default.
+                            Available values: strict, general, rough, and
+                              default.
+  -n, --no-summary          does not show the summary of analysis.
+  -s, --show-no-violated-files
+                            shows file names with no violations.
+  -t, --with-threads        use threads <span style="color:#008000;font-weight:bold">for</span> validations.
+  -V, --version             Print version information and exit.
+</code></pre></div><h2 id="config-format">Config format</h2>
+<p>The format of config file must be JSON, like as follows.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#008000;font-weight:bold">&#34;name&#34;</span>: <span style="color:#ba2121">&#34;default&#34;</span>,
+  <span style="color:#008000;font-weight:bold">&#34;validators&#34;</span>: [
+    <span style="color:#ba2121">&#34;indent_level&#34;</span>,
+    <span style="color:#ba2121">&#34;no_else&#34;</span>,
+    <span style="color:#ba2121">&#34;primitive_wrapping&#34;</span>,
+    <span style="color:#ba2121">&#34;dot_count_per_line&#34;</span>,
+    <span style="color:#ba2121">&#34;no_abbrev&#34;</span>,
+    <span style="color:#ba2121">&#34;lines_of_class&#34;</span>,
+    <span style="color:#ba2121">&#34;lines_of_method&#34;</span>,
+    <span style="color:#ba2121">&#34;classes_in_package&#34;</span>,
+    <span style="color:#ba2121">&#34;field_count&#34;</span>,
+    <span style="color:#ba2121">&#34;first_class_collection&#34;</span>,
+    <span style="color:#ba2121">&#34;no_accessor&#34;</span>,
+    <span style="color:#ba2121">&#34;variable_count&#34;</span>,
+    <span style="color:#ba2121">&#34;no_static_method&#34;</span>,
+    <span style="color:#ba2121">&#34;no_new_array&#34;</span>,
+    <span style="color:#ba2121">&#34;no_system_exit&#34;</span>,
+    <span style="color:#ba2121">&#34;no_return_code_in_printf&#34;</span>,
+    <span style="color:#ba2121">&#34;single_character_name&#34;</span>
+  ],
+  <span style="color:#008000;font-weight:bold">&#34;parameters&#34;</span>: {
+    <span style="color:#008000;font-weight:bold">&#34;indent_level&#34;</span>: <span style="color:#666">1</span>,
+    <span style="color:#008000;font-weight:bold">&#34;dot_count_per_line&#34;</span>: <span style="color:#666">1</span>,
+    <span style="color:#008000;font-weight:bold">&#34;lines_of_class&#34;</span>: <span style="color:#666">50</span>,
+    <span style="color:#008000;font-weight:bold">&#34;lines_of_method&#34;</span>: <span style="color:#666">3</span>,
+    <span style="color:#008000;font-weight:bold">&#34;classes_in_package&#34;</span>: <span style="color:#666">10</span>,
+    <span style="color:#008000;font-weight:bold">&#34;field_count&#34;</span>: <span style="color:#666">2</span>,
+    <span style="color:#008000;font-weight:bold">&#34;variable_count&#34;</span>: <span style="color:#666">2</span>
+  }
+}
+</code></pre></div><h2 id="result-example">Result example</h2>
+<h3 id="json">Json</h3>
+<p>The following json is validating <code>src/test/resources/projects/examples/HelloWorld.java</code> with no options, and formatted with <code>jq</code> command.</p>
+<pre><code class="language-json5" data-lang="json5">{
+   &quot;date&quot;: &quot;2021-02-01T23:37:08.966582&quot;,
+   &quot;validators&quot;: [
+      &quot;indent_level&quot;,
+      &quot;no_else&quot;,
+      &quot;primitive_wrapping&quot;,
+      &quot;dot_count_per_line&quot;,
+      &quot;lines_of_class&quot;,
+      &quot;lines_of_method&quot;,
+      &quot;field_count&quot;,
+      &quot;first_class_collection&quot;,
+      &quot;no_accessor&quot;,
+      &quot;no_static_method&quot;,
+      &quot;no_new_array&quot;,
+      &quot;no_system_exit&quot;,
+      &quot;no_return_code_in_printf&quot;,
+      &quot;single_character_name&quot;
+   ],
+   &quot;results&quot;: [
+      {
+         &quot;base&quot;: &quot;src/test/resources/projects/examples/HelloWorld.java&quot;,
+         &quot;violations&quot;: [
+            {
+               &quot;file&quot;: &quot;&quot;,
+               &quot;messages&quot;: [
+                  {
+                     &quot;line&quot;: 10,
+                     &quot;key&quot;: &quot;lines_of_method&quot;,
+                     &quot;message&quot;: &quot;lines of method is 4, more than 3&quot;
+                  },
+                  {
+                     &quot;line&quot;: 19,
+                     &quot;key&quot;: &quot;lines_of_method&quot;,
+                     &quot;message&quot;: &quot;lines of method is 4, more than 3&quot;
+                  },
+                  {
+                     &quot;line&quot;: 15,
+                     &quot;key&quot;: &quot;no_accessor&quot;,
+                     &quot;message&quot;: &quot;getMessage: no getter method&quot;
+                  },
+                  {
+                     &quot;line&quot;: 2,
+                     &quot;key&quot;: &quot;no_static_method&quot;,
+                     &quot;message&quot;: &quot;violatedMethod: no static method except main method&quot;
+                  },
+                  {
+                     &quot;line&quot;: 12,
+                     &quot;key&quot;: &quot;no_system_exit&quot;,
+                     &quot;message&quot;: &quot;no System.exit except main method&quot;
+                  },
+                  {
+                     &quot;line&quot;: 11,
+                     &quot;key&quot;: &quot;no_return_code_in_printf&quot;,
+                     &quot;message&quot;: &quot;no '\n', use '%n' in printf&quot;
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   &quot;summary&quot;: {
+      &quot;violated-files&quot;: 1,
+      &quot;total-files&quot;: 1,
+      &quot;violated-file-count&quot;: 6
+   }
+}
+</code></pre><h3 id="xml">Xml</h3>
+<p>The following xml is validating <code>src/test/resources/projects/examples/Primes.java</code> with <code>-f xml</code> options, and formatted with <code>xmllint</code> command (<code>xmllint --format -</code>).</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#bc7a00">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+<span style="color:#008000;font-weight:bold">&lt;fritter&gt;</span>
+   <span style="color:#008000;font-weight:bold">&lt;validators&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>indent_level<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>no_else<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>primitive_wrapping<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>dot_count_per_line<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>lines_of_class<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>lines_of_method<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>field_count<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>first_class_collection<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>no_accessor<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>no_static_method<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>no_new_array<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>no_system_exit<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>no_return_code_in_printf<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;validator&gt;</span>single_character_name<span style="color:#008000;font-weight:bold">&lt;/validator&gt;</span>
+   <span style="color:#008000;font-weight:bold">&lt;/validators&gt;</span>
+   <span style="color:#008000;font-weight:bold">&lt;results&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;result&gt;</span>
+         <span style="color:#008000;font-weight:bold">&lt;base-directory&gt;</span>src/test/resources/projects/examples/Primes.java<span style="color:#008000;font-weight:bold">&lt;/base-directory&gt;</span>
+         <span style="color:#008000;font-weight:bold">&lt;files&gt;</span>
+            <span style="color:#008000;font-weight:bold">&lt;file&gt;</span>
+               <span style="color:#008000;font-weight:bold">&lt;file-name/&gt;</span>
+               <span style="color:#008000;font-weight:bold">&lt;violations&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>indent_level<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>17<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>print: indent level is 2, more than 1<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>indent_level<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>29<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>sieves: indent level is 2, more than 1<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>no_else<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>51<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>no else statement<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>lines_of_class<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>3<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>lines of class is 55, more than 50<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>lines_of_method<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>4<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>lines of method is 5, more than 3<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>lines_of_method<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>10<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>lines of method is 15, more than 3<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>lines_of_method<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>26<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>lines of method is 8, more than 3<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>lines_of_method<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>35<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>lines of method is 5, more than 3<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>lines_of_method<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>41<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>lines of method is 5, more than 3<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>lines_of_method<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>47<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>lines of method is 6, more than 3<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;violation&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;validator-type&gt;</span>no_new_array<span style="color:#008000;font-weight:bold">&lt;/validator-type&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;location&gt;</span>
+                        <span style="color:#008000;font-weight:bold">&lt;line-number&gt;</span>42<span style="color:#008000;font-weight:bold">&lt;/line-number&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;/location&gt;</span>
+                     <span style="color:#008000;font-weight:bold">&lt;message&gt;</span>do not use array, use List instead<span style="color:#008000;font-weight:bold">&lt;/message&gt;</span>
+                  <span style="color:#008000;font-weight:bold">&lt;/violation&gt;</span>
+               <span style="color:#008000;font-weight:bold">&lt;/violations&gt;</span>
+            <span style="color:#008000;font-weight:bold">&lt;/file&gt;</span>
+         <span style="color:#008000;font-weight:bold">&lt;/files&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;/result&gt;</span>
+   <span style="color:#008000;font-weight:bold">&lt;/results&gt;</span>
+   <span style="color:#008000;font-weight:bold">&lt;summary&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;violated-file-count&gt;</span>1<span style="color:#008000;font-weight:bold">&lt;/violated-file-count&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;target-file-count&gt;</span>1<span style="color:#008000;font-weight:bold">&lt;/target-file-count&gt;</span>
+      <span style="color:#008000;font-weight:bold">&lt;violation-count&gt;</span>11<span style="color:#008000;font-weight:bold">&lt;/violation-count&gt;</span>
+   <span style="color:#008000;font-weight:bold">&lt;/summary&gt;</span>
+<span style="color:#008000;font-weight:bold">&lt;/fritter&gt;</span>
+</code></pre></div><h3 id="markdown">Markdown</h3>
+<p>The following markdown is validating <code>src/test/resources/projects/examples/StatsValues.java</code> with <code>-f markdown</code> options.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#000080;font-weight:bold"># fritter results
+</span><span style="color:#000080;font-weight:bold"></span>
+Date: 2021-02-01T23:47:02.609847
+
+<span style="color:#800080;font-weight:bold">## Validators
+</span><span style="color:#800080;font-weight:bold"></span>
+<span style="color:#008000;font-weight:bold">*</span> indent_level
+<span style="color:#008000;font-weight:bold">*</span> no_else
+<span style="color:#008000;font-weight:bold">*</span> primitive_wrapping
+<span style="color:#008000;font-weight:bold">*</span> dot_count_per_line
+<span style="color:#008000;font-weight:bold">*</span> lines_of_class
+<span style="color:#008000;font-weight:bold">*</span> lines_of_method
+<span style="color:#008000;font-weight:bold">*</span> field_count
+<span style="color:#008000;font-weight:bold">*</span> first_class_collection
+<span style="color:#008000;font-weight:bold">*</span> no_accessor
+<span style="color:#008000;font-weight:bold">*</span> no_static_method
+<span style="color:#008000;font-weight:bold">*</span> no_new_array
+<span style="color:#008000;font-weight:bold">*</span> no_system_exit
+<span style="color:#008000;font-weight:bold">*</span> no_return_code_in_printf
+<span style="color:#008000;font-weight:bold">*</span> single_character_name
+
+<span style="color:#800080;font-weight:bold">## Results
+</span><span style="color:#800080;font-weight:bold"></span>
+<span style="color:#800080;font-weight:bold">### src/test/resources/projects/examples/StatsValues.java
+</span><span style="color:#800080;font-weight:bold"></span>
+<span style="color:#800080;font-weight:bold">#### Violations
+</span><span style="color:#800080;font-weight:bold"></span>
+<span style="color:#008000;font-weight:bold">*</span> indent_level (line: 23)
+    <span style="color:#008000;font-weight:bold">*</span> print: indent level is 2, more than 1
+<span style="color:#008000;font-weight:bold">*</span> lines_of_method (line: 13)
+    <span style="color:#008000;font-weight:bold">*</span> lines of method is 5, more than 3
+<span style="color:#008000;font-weight:bold">*</span> lines_of_method (line: 19)
+    <span style="color:#008000;font-weight:bold">*</span> lines of method is 9, more than 3
+<span style="color:#008000;font-weight:bold">*</span> lines_of_method (line: 29)
+    <span style="color:#008000;font-weight:bold">*</span> lines of method is 5, more than 3
+<span style="color:#008000;font-weight:bold">*</span> lines_of_method (line: 35)
+    <span style="color:#008000;font-weight:bold">*</span> lines of method is 4, more than 3
+<span style="color:#008000;font-weight:bold">*</span> lines_of_method (line: 40)
+    <span style="color:#008000;font-weight:bold">*</span> lines of method is 5, more than 3
+<span style="color:#008000;font-weight:bold">*</span> field_count (lines: 9, 10, 11)
+    <span style="color:#008000;font-weight:bold">*</span> field count is 3, more than 2
+<span style="color:#008000;font-weight:bold">*</span> first_class_collection (lines: 9, 10, 11)
+    <span style="color:#008000;font-weight:bold">*</span> not first class collection
+
+<span style="color:#800080;font-weight:bold">## Summary
+</span><span style="color:#800080;font-weight:bold"></span>
+<span style="color:#008000;font-weight:bold">*</span> violated files: 1
+<span style="color:#008000;font-weight:bold">*</span> total files: 1
+<span style="color:#008000;font-weight:bold">*</span> violated file count: 8
+</code></pre></div>
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    <a href="https://github.com/tamada/fritter"><img src="https://img.shields.io/badge/GitHub-tamada/fritter-blueviolet.svg?logo=github" alt="GitHub"></a> Made with <a href="https://gohugo.io/">Hugo</a>. Theme by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://pages.github.com/">GitHub Pages</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-62401730-2', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+</body>
+</html>

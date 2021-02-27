@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TypeChecker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.validators.impl.fcc</a> &gt; <span class="el_source">TypeChecker.java</span></div><h1>TypeChecker.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.validators.impl.fcc;
+
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.type.Type;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+<span class="nc" id="L10">class TypeChecker {</span>
+<span class="fc" id="L11">    private static final List&lt;String&gt; COLLECTIONS = List.of(&quot;(java.util.)?([A-Z][a-zA-Z0-9]+)?List(&lt;.*&gt;)?&quot;,</span>
+            &quot;(java.util.)?([A-Z][a-zA-Z0-9]+)?Set(&lt;.*&gt;)?&quot;, &quot;(java.util.)?([A-Z][a-zA-Z0-9]+)?Map(&lt;.*&gt;)?&quot;,
+            &quot;(java.util.)?([A-Z][a-zA-Z0-9]+)?Deque(&lt;.*&gt;)?&quot;, &quot;(java.util.)?([A-Z][a-zA-Z0-9]+)?Queue(&lt;.*&gt;)?&quot;);
+
+<span class="fc" id="L15">    private static final List&lt;String&gt; PRIMITIVES = List.of(&quot;byte&quot;, &quot;short&quot;, &quot;int&quot;, &quot;long&quot;, &quot;float&quot;,</span>
+            &quot;char&quot;, &quot;double&quot;, &quot;boolean&quot;, &quot;(java.lang.)?String&quot;, &quot;(java.util.)?Date&quot;);
+
+    public static boolean isPrimitive(FieldDeclaration node) {
+<span class="fc" id="L19">        return check(node, TypeChecker::isPrimitive);</span>
+    }
+
+    public static boolean isCollection(FieldDeclaration node) {
+<span class="fc" id="L23">        return check(node, TypeChecker::isCollection);</span>
+    }
+
+    private static boolean check(FieldDeclaration node, Predicate&lt;VariableDeclarator&gt; predicate) {
+<span class="fc" id="L27">        return node.getVariables()</span>
+<span class="fc" id="L28">                .stream().filter(predicate::test)</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">                .count() &gt; 0;</span>
+    }
+
+    private static boolean contains(Type targetType, List&lt;String&gt; types) {
+<span class="fc" id="L33">        return types.stream()</span>
+<span class="fc" id="L34">                .filter(type -&gt; match(targetType, type))</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">                .count() &gt; 0;</span>
+    }
+
+    private static boolean isPrimitive(VariableDeclarator node) {
+<span class="fc" id="L39">        return contains(node.getType(), PRIMITIVES);</span>
+    }
+
+    private static boolean match(Type type, String typeRegexp) {
+<span class="fc" id="L43">        return type.toString()</span>
+<span class="fc" id="L44">                .matches(typeRegexp);</span>
+    }
+
+    private static boolean isCollection(VariableDeclarator node) {
+<span class="fc" id="L48">        Type type = node.getType();</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        return type.isArrayType()</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">                || contains(type, COLLECTIONS);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

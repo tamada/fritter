@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.cli</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.cli;
+
+import io.vavr.control.Try;
+import jp.cafebabe.fritter.cli.options.Arguments;
+import jp.cafebabe.fritter.entities.ResultsSet;
+import jp.cafebabe.fritter.entities.sources.DataSource;
+import jp.cafebabe.fritter.validators.Validators;
+import jp.cafebabe.fritter.validators.Violations;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Mixin;
+
+import java.util.stream.Stream;
+
+@Command(name=&quot;fritter&quot;, versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
+        description=&quot;Small object programming checker.&quot;)
+<span class="nc" id="L17">public class Main implements Runnable {</span>
+    @Mixin
+    private Arguments args;
+
+    public void run() {
+<span class="nc" id="L22">        Validators validator = args.createValidators();</span>
+<span class="nc" id="L23">        ResultsSet rs = execute(validator, new ResultsSet());</span>
+<span class="nc" id="L24">        args.print(validator, rs);</span>
+<span class="nc" id="L25">    }</span>
+
+    private ResultsSet execute(Validators validators, ResultsSet rs) {
+<span class="nc" id="L28">        validateEach(validators)</span>
+<span class="nc" id="L29">                .forEach(violations -&gt; rs.put(violations));</span>
+<span class="nc" id="L30">        return rs;</span>
+    }
+
+    private Stream&lt;Violations&gt; validateEach(Validators validators) {
+<span class="nc" id="L34">        return args.createStream()</span>
+<span class="nc" id="L35">                .map(source -&gt; validate(validators, source));</span>
+    }
+
+    private Violations validate(Validators validators, DataSource source){
+<span class="nc" id="L39">        return Try.of(() -&gt; validators.validate(source))</span>
+<span class="nc" id="L40">                .get();</span>
+    }
+
+    public static void main(String[] args) {
+<span class="nc" id="L44">        int exitCode = new CommandLine(new Main())</span>
+<span class="nc" id="L45">                .execute(args);</span>
+<span class="nc" id="L46">        Runtime.getRuntime().exit(exitCode);</span>
+<span class="nc" id="L47">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

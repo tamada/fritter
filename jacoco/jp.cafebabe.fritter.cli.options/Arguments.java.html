@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Arguments.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.cli.options</a> &gt; <span class="el_source">Arguments.java</span></div><h1>Arguments.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.cli.options;
+
+import jp.cafebabe.fritter.entities.ResultsSet;
+import jp.cafebabe.fritter.entities.sources.DataSource;
+import jp.cafebabe.fritter.entities.sources.SourcePool;
+import jp.cafebabe.fritter.entities.sources.SourcePoolFactory;
+import jp.cafebabe.fritter.validators.Validators;
+import picocli.CommandLine.Mixin;
+import picocli.CommandLine.Parameters;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+<span class="nc" id="L16">public class Arguments {</span>
+<span class="nc" id="L17">    @Mixin</span>
+    private ValidatorOptions validatorOpts = new ValidatorOptions();
+<span class="nc" id="L19">    @Mixin</span>
+    private ResultOptions results = new ResultOptions();
+
+<span class="nc" id="L22">    @Parameters(arity=&quot;1..*&quot;, paramLabel=&quot;SOURCE_FILEs|SOURCE_DIRs&quot;, description=&quot;Java source files and/or directories containing Java source files.&quot;)</span>
+    private List&lt;Path&gt; parameters = new ArrayList&lt;&gt;();
+
+    public Stream&lt;Path&gt; parameters() {
+<span class="nc" id="L26">        return parameters.stream();</span>
+    }
+
+    public void print(Validators validators, ResultsSet rs) {
+<span class="nc" id="L30">        results.print(validators, rs);</span>
+<span class="nc" id="L31">    }</span>
+
+    public Stream&lt;DataSource&gt; createStream() {
+<span class="nc" id="L34">        return parallelOrSequentialStream(stream()</span>
+<span class="nc" id="L35">                .flatMap(pool -&gt; pool.stream()));</span>
+    }
+
+    private Stream&lt;DataSource&gt; parallelOrSequentialStream(Stream&lt;DataSource&gt; stream) {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if(validatorOpts.isWithThread())</span>
+<span class="nc" id="L40">            return stream.parallel();</span>
+<span class="nc" id="L41">        return stream.sequential();</span>
+    }
+
+    public Validators createValidators() {
+<span class="nc" id="L45">        return validatorOpts.createValidators();</span>
+    }
+
+    public Stream&lt;SourcePool&gt; stream() {
+<span class="nc" id="L49">        SourcePoolFactory factory = new SourcePoolFactory();</span>
+<span class="nc" id="L50">        return parameters().map(path -&gt; factory.create(path));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

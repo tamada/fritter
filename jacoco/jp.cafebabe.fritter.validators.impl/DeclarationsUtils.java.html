@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DeclarationsUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fritter</a> &gt; <a href="index.source.html" class="el_package">jp.cafebabe.fritter.validators.impl</a> &gt; <span class="el_source">DeclarationsUtils.java</span></div><h1>DeclarationsUtils.java</h1><pre class="source lang-java linenums">package jp.cafebabe.fritter.validators.impl;
+
+import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.expr.SimpleName;
+import com.github.javaparser.ast.nodeTypes.NodeWithModifiers;
+import com.github.javaparser.ast.type.Type;
+
+import java.util.List;
+import java.util.Objects;
+
+<span class="nc" id="L14">public class DeclarationsUtils {</span>
+    public static boolean isStatic(NodeWithModifiers&lt;?&gt; node) {
+<span class="fc" id="L16">        List&lt;Modifier&gt; modifiers = node.getModifiers();</span>
+<span class="fc" id="L17">        return modifiers.contains(Modifier.staticModifier());</span>
+    }
+
+    public static boolean isReturnVoid(MethodDeclaration node) {
+<span class="fc" id="L21">        Type type = node.getType();</span>
+<span class="fc" id="L22">        return type.isVoidType();</span>
+    }
+
+    public static boolean isMainMethod(MethodDeclaration node) {
+<span class="fc bfc" id="L26" title="All 4 branches covered.">        return isReturnVoid(node) &amp;&amp; isStatic(node)</span>
+<span class="pc bpc" id="L27" title="1 of 4 branches missed.">                &amp;&amp; isName(node.getName(), &quot;main&quot;) &amp;&amp; isArgumentsStringArray(node);</span>
+    }
+
+    public static boolean isName(SimpleName simpleName, String name) {
+<span class="fc" id="L31">        return Objects.equals(name,</span>
+<span class="fc" id="L32">                simpleName.getIdentifier());</span>
+    }
+
+    public static boolean isArgumentsStringArray(MethodDeclaration node) {
+<span class="fc" id="L36">        NodeList&lt;Parameter&gt; list = node.getParameters();</span>
+<span class="pc bpc" id="L37" title="2 of 4 branches missed.">        return list.size() == 1 &amp;&amp; isArrayString(list.get(0));</span>
+    }
+
+    public static boolean isArrayString(Parameter node) {
+<span class="fc" id="L41">        String str = node.getType().asString();</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        return Objects.equals(str, &quot;String[]&quot;)</span>
+<span class="pc bnc" id="L43" title="All 2 branches missed.">                || Objects.equals(str, &quot;String...&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
